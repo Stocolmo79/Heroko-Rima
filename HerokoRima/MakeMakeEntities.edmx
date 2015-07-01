@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MakeMakeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MakeMakeModelStoreContainer">
+    <EntitySet Name="tCardUsages" EntityType="MakeMakeModel.Store.tCardUsages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tClasses" EntityType="MakeMakeModel.Store.tClasses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tDropIns" EntityType="MakeMakeModel.Store.tDropIns" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tMembers" EntityType="MakeMakeModel.Store.tMembers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tMonths" EntityType="MakeMakeModel.Store.tMonths" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tStaffs" EntityType="MakeMakeModel.Store.tStaffs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tTickets" EntityType="MakeMakeModel.Store.tTickets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tCards" EntityType="MakeMakeModel.Store.tCards" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="tCardUsages">
+    <Key>
+      <PropertyRef Name="CUId" />
+    </Key>
+    <Property Name="CUId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CardId" Type="bigint" Nullable="false" />
+    <Property Name="EntranceDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="tClasses">
+    <Key>
+      <PropertyRef Name="ClassId" />
+    </Key>
+    <Property Name="ClassId" Type="bigint" Nullable="false" />
+    <Property Name="TypeId" Type="int" Nullable="true" />
+    <Property Name="ClassDate" Type="datetime" Nullable="false" />
+    <Property Name="MaxAttendance" Type="int" Nullable="true" />
+    <Property Name="Attendance" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="tDropIns">
+    <Key>
+      <PropertyRef Name="DropInId" />
+    </Key>
+    <Property Name="DropInId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PriceId" Type="int" Nullable="true" />
+    <Property Name="Quantity" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="tMembers">
+    <Key>
+      <PropertyRef Name="RUT" />
+    </Key>
+    <Property Name="RUT" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="Firstname" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="Lastname" Type="varchar" Nullable="false" MaxLength="250" />
+    <Property Name="Cellphone" Type="varchar" Nullable="false" MaxLength="10" />
+    <Property Name="MemberId" Type="bigint" Nullable="true" />
+  </EntityType>
+  <EntityType Name="tMonths">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CardId" Type="bigint" Nullable="false" />
+    <Property Name="Purchased" Type="datetime" Nullable="true" />
+    <Property Name="Amount" Type="bigint" Nullable="true" />
+  </EntityType>
+  <EntityType Name="tStaffs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RUT" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="Firstname" Type="varchar" Nullable="true" MaxLength="250" />
+    <Property Name="Lastname" Type="varchar" Nullable="true" MaxLength="250" />
+    <Property Name="Area" Type="varchar" Nullable="true" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="tTickets">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CardNo" Type="bigint" Nullable="false" />
+    <Property Name="Quantity" Type="bigint" Nullable="true" />
+    <Property Name="Purchased" Type="datetime" Nullable="true" />
+    <Property Name="Amount" Type="bigint" Nullable="true" />
+  </EntityType>
+  <EntityType Name="tCards">
+    <Key>
+      <PropertyRef Name="CardId" />
+      <PropertyRef Name="Monthly" />
+      <PropertyRef Name="Changed" />
+    </Key>
+    <Property Name="CardId" Type="bigint" Nullable="false" />
+    <Property Name="Monthly" Type="bit" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="true" />
+    <Property Name="EndDate" Type="datetime" Nullable="true" />
+    <Property Name="Tickets" Type="int" Nullable="true" />
+    <Property Name="Changed" Type="datetime" Nullable="false" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MakeMakeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tCardUsage">
+          <Key>
+            <PropertyRef Name="CUId" />
+          </Key>
+          <Property Name="CUId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int64" Nullable="false" />
+          <Property Name="EntranceDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="tClass">
+          <Key>
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="ClassId" Type="Int64" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="ClassDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MaxAttendance" Type="Int32" />
+          <Property Name="Attendance" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tDropIn">
+          <Key>
+            <PropertyRef Name="DropInId" />
+          </Key>
+          <Property Name="DropInId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PriceId" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tMember">
+          <Key>
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cellphone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MemberId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="tMonth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardId" Type="Int64" Nullable="false" />
+          <Property Name="Purchased" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Int64" />
+        </EntityType>
+        <EntityType Name="tStaff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RUT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Area" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tTicket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardNo" Type="Int64" Nullable="false" />
+          <Property Name="Quantity" Type="Int64" />
+          <Property Name="Purchased" Type="DateTime" Precision="3" />
+          <Property Name="Amount" Type="Int64" />
+        </EntityType>
+        <EntityType Name="tCard">
+          <Key>
+            <PropertyRef Name="CardId" />
+            <PropertyRef Name="Monthly" />
+            <PropertyRef Name="Changed" />
+          </Key>
+          <Property Name="CardId" Type="Int64" Nullable="false" />
+          <Property Name="Monthly" Type="Boolean" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Tickets" Type="Int32" />
+          <Property Name="Changed" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="MakeMakeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tCardUsages" EntityType="Self.tCardUsage" />
+          <EntitySet Name="tClasses" EntityType="Self.tClass" />
+          <EntitySet Name="tDropIns" EntityType="Self.tDropIn" />
+          <EntitySet Name="tMembers" EntityType="Self.tMember" />
+          <EntitySet Name="tMonths" EntityType="Self.tMonth" />
+          <EntitySet Name="tStaffs" EntityType="Self.tStaff" />
+          <EntitySet Name="tTickets" EntityType="Self.tTicket" />
+          <EntitySet Name="tCards" EntityType="Self.tCard" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MakeMakeModelStoreContainer" CdmEntityContainer="MakeMakeEntities">
+    <EntitySetMapping Name="tCardUsages">
+      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tCardUsage)">
+        <MappingFragment StoreEntitySet="tCardUsages">
+          <ScalarProperty Name="CUId" ColumnName="CUId" />
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="EntranceDate" ColumnName="EntranceDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tClasses">
+      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tClass)">
+        <MappingFragment StoreEntitySet="tClasses">
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="ClassDate" ColumnName="ClassDate" />
+          <ScalarProperty Name="MaxAttendance" ColumnName="MaxAttendance" />
+          <ScalarProperty Name="Attendance" ColumnName="Attendance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tDropIns">
+      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tDropIn)">
+        <MappingFragment StoreEntitySet="tDropIns">
+          <ScalarProperty Name="DropInId" ColumnName="DropInId" />
+          <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tMembers">
+      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tMember)">
+        <MappingFragment StoreEntitySet="tMembers">
+          <ScalarProperty Name="RUT" ColumnName="RUT" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tMonths">
+      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tMonth)">
+        <MappingFragment StoreEntitySet="tMonths">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="Purchased" ColumnName="Purchased" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tStaffs">
+      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tStaff)">
+        <MappingFragment StoreEntitySet="tStaffs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RUT" ColumnName="RUT" />
+          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tTickets">
+      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tTicket)">
+        <MappingFragment StoreEntitySet="tTickets">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Purchased" ColumnName="Purchased" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tCards">
+      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tCard)">
+        <MappingFragment StoreEntitySet="tCards">
+          <ScalarProperty Name="CardId" ColumnName="CardId" />
+          <ScalarProperty Name="Monthly" ColumnName="Monthly" />
+          <ScalarProperty Name="Changed" ColumnName="Changed" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Tickets" ColumnName="Tickets" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
