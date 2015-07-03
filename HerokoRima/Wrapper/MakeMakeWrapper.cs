@@ -61,6 +61,8 @@ namespace HerokoRima.Wrapper
 
         #endregion
 
+        #region Class
+
         public long SaveClass(tClass tClass)
         {
             mmEntities.tClasses.Add(tClass);
@@ -74,5 +76,11 @@ namespace HerokoRima.Wrapper
             mmEntities.tStaffClasses.Add(tStaffClass);
             mmEntities.SaveChanges();
         }
+
+        public List<tClass> GetClasses()
+        {
+         return   mmEntities.tClasses.Select(c => c).ToList();
+        }
+        #endregion
     }
 }

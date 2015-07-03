@@ -1,19 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Windows.Forms.Calendar;
 
 using HerokoRima.Classes;
+
+using CalendarItem = System.Windows.Forms.Calendar.CalendarItem;
 
 namespace HerokoRima.Forms
 {
     public partial class FrmClasses : Form
     {
+        List<CalendarItem> calendarItems = new List<CalendarItem>();
         public tClass tClass;
         public tArea area;
         public FrmClasses()
         {
             InitializeComponent();
             LoadAreas();
+            GetCalendarItems();
             MonthViews.LoadMonthView(mvClasses);
+        }
+
+        private void GetCalendarItems()
+        {
+                
         }
 
         private void LoadAreas()
@@ -73,7 +84,7 @@ namespace HerokoRima.Forms
 
         private void calClasses_LoadItems(object sender, System.Windows.Forms.Calendar.CalendarLoadEventArgs e)
         {
-
+        
         }
     }
 }
