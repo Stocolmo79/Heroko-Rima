@@ -123,6 +123,10 @@ namespace Calendar.NET
         /// 
         /// </summary>
         string StartTime { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        string Staff  { get; set; }
       /// <summary>
         /// Set this to a custom function that will automatically determine if the event should be rendered on a given day.
         /// This is only executed if <see cref="RecurringFrequency"/> is set to custom.

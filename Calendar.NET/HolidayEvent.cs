@@ -37,6 +37,12 @@ namespace Calendar.NET
             set;
         }
 
+        public string Staff
+        {
+            get;
+            set;
+        }
+
         public CustomRecurringFrequenciesHandler CustomRecurringFunction
         {
             get;
@@ -122,6 +128,7 @@ namespace Calendar.NET
         /// </summary>
         public HolidayEvent()
         {
+            Staff = "";
             Attendance = 0;
             MaxAttendance = 0;
             EventColor = Color.FromArgb(80, 170, 255);
@@ -141,6 +148,7 @@ namespace Calendar.NET
         {
             return new HolidayEvent
                          {
+                             Staff = Staff,
                              CustomRecurringFunction = CustomRecurringFunction,
                              Date = Date,
                              Enabled = Enabled,

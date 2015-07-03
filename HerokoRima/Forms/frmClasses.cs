@@ -42,12 +42,13 @@ namespace HerokoRima.Forms
         {
             foreach (var exerciseEvent in classes.Select(clss => new CustomEvent
                                                                        {
+                                                                           Staff =  clss.tStaff.Firstname,
                                                                            Date = clss.tClass.ClassDate,
                                                                            TooltipEnabled =  true,
                                                                            EndTime = clss.tClass.EndTime,
                                                                            StartTime= clss.tClass.StartTime,
                                                                            EventLengthInHours = Int32.Parse(clss.tClass.EndTime.Substring(0, 2)) - Int32.Parse(clss.tClass.EndTime.Substring(0, 2)),
-                                                                           EventText = clss.tStaff.tStaffAreas.FirstOrDefault().tArea.AreaDescription +" " + clss.tStaff.Firstname,
+                                                                           EventText = clss.tStaff.tStaffAreas.FirstOrDefault().tArea.AreaDescription,
                                                                            EventColor = clss.tStaff.tStaffAreas.FirstOrDefault().AreaId ==1 ? Color.Gray:Color.OrangeRed
                                                                        }))
             {
@@ -76,6 +77,7 @@ namespace HerokoRima.Forms
                                 {
                                     MaxAttendance = Int32.Parse(cmbMaxAttendance.Text),
                                     TypeId = area.AreaId,
+                                    
                                     ClassDate = new DateTime(dtpClassDate.Value.Year, dtpClassDate.Value.Month, dtpClassDate.Value.Day, Convert.ToInt32(cmbStart.Text.Substring(0,2)),0,0),
                                     EndTime = cmbEnd.Text,
                                     StartTime = cmbStart.Text

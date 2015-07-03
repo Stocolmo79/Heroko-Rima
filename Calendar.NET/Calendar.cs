@@ -489,7 +489,7 @@ namespace Calendar.NET
                 {
                     _eventTip.ShouldRender = false;
                     _showingToolTip = true;
-                    _eventTip.EventToolTipText = z.Event.EventText;
+                    _eventTip.EventToolTipText = z.Event.EventText +" "+ z.Event.Staff;
                     _eventTip.EventToolTipText += "\n" + z.Event.StartTime +" - " + z.Event.EndTime;
 
                     _eventTip.Location = new Point(e.X + 5, e.Y - _eventTip.CalculateSize().Height);

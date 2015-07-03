@@ -38,6 +38,12 @@ namespace Calendar.NET
             set;
         }
 
+        public string Staff
+        {
+            get;
+            set;
+        }
+
         public CustomRecurringFrequenciesHandler CustomRecurringFunction
         {
             get;
@@ -120,6 +126,7 @@ namespace Calendar.NET
         /// </summary>
         public CustomEvent()
         {
+            Staff = "";
             StartTime = "";
             EndTime = "";
             Attendance = 0;
@@ -141,6 +148,7 @@ namespace Calendar.NET
         {
             return new CustomEvent
             {
+                Staff = Staff,
                 CustomRecurringFunction = CustomRecurringFunction,
                 Date = Date,
                 Enabled = Enabled,

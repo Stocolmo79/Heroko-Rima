@@ -27,7 +27,7 @@ namespace Calendar.NET
         public EventDetails()
         {
             InitializeComponent();
-            PopulateComboBox();
+       
         }
 
         private void EventDetailsLoad(object sender, EventArgs e)
@@ -35,19 +35,7 @@ namespace Calendar.NET
 
         }
 
-        private void PopulateComboBox()
-        {
-            cbRecurringFrequency.Items.Add("None");
-            cbRecurringFrequency.Items.Add("Custom");
-            cbRecurringFrequency.Items.Add("Daily");
-            cbRecurringFrequency.Items.Add("Every Monday, Wednesday and Friday");
-            cbRecurringFrequency.Items.Add("Every Tuesday and Thursday");
-            cbRecurringFrequency.Items.Add("Every Week Day (Mon - Fri)");
-            cbRecurringFrequency.Items.Add("Every Weekend (Sat & Sun)");
-            cbRecurringFrequency.Items.Add("Every Month");
-            cbRecurringFrequency.Items.Add("Every week");
-            cbRecurringFrequency.Items.Add("Every year");
-        }
+   
 
         private RecurringFrequencies StringToRecurringFrequencies(string f)
         {
@@ -119,15 +107,16 @@ namespace Calendar.NET
         private void FillValues()
         {
             txtEventName.Text = _event.EventText;
+            txtStaff.Text = _event.Staff;
             dtDate.Value = _event.Date;
-            dtDate.CustomFormat = _event.IgnoreTimeComponent ? "M/d/yyyy" : "M/d/yyyy h:mm tt";
-            cbRecurringFrequency.SelectedItem = RecurringFrequencyToString(_event.RecurringFrequency);
-            chkThisDayForwardOnly.Enabled = _event.RecurringFrequency != RecurringFrequencies.None;
+            dtDate.CustomFormat = "yyyy/MM/dd";
+            txtEndTime.Text = _event.EndTime;
+            txtStartTime.Text = _event.StartTime;
             chkEnabled.Checked = _event.Enabled;
             lblFont.Text = _event.EventFont.FontFamily.Name + " " + _event.EventFont.Size.ToString(CultureInfo.InvariantCulture) + "pt";
             pnlEventColor.BackColor = _event.EventColor;
             pnlTextColor.BackColor = _event.EventTextColor;
-            chkIgnoreTimeComponent.Checked = _event.IgnoreTimeComponent;
+          
             chkEnableTooltip.Checked = _event.TooltipEnabled;
 
             Text = char.ToUpper(_event.EventText[0]) + _event.EventText.Substring(1) + " Details";
@@ -151,9 +140,7 @@ namespace Calendar.NET
             _newEvent.EventText = txtEventName.Text;
             _newEvent.Date = dtDate.Value;
             _newEvent.Enabled = chkEnabled.Checked;
-            _newEvent.RecurringFrequency = StringToRecurringFrequencies(cbRecurringFrequency.SelectedItem.ToString());
-            _newEvent.ThisDayForwardOnly = chkThisDayForwardOnly.Checked;
-            _newEvent.IgnoreTimeComponent = chkIgnoreTimeComponent.Checked;
+          
             _newEvent.TooltipEnabled = chkEnableTooltip.Checked;
 
             DialogResult = DialogResult.OK;
@@ -183,15 +170,17 @@ namespace Calendar.NET
             }
         }
 
-        private void ChkIgnoreTimeComponentCheckedChanged(object sender, EventArgs e)
-        {
-            dtDate.CustomFormat = chkIgnoreTimeComponent.Checked ? "M/d/yyyy" : "M/d/yyyy h:mm tt";
-        }
+        
 
         private void BtnCancelClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
