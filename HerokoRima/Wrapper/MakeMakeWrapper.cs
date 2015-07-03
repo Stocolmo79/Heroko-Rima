@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace HerokoRima.Wrapper
@@ -14,18 +15,22 @@ namespace HerokoRima.Wrapper
             }
         }
 
-        public List<tStaff> GetStaff()
+        public List<tStaff> getStaffsList()
         {
             return mmEntities.tStaffs.Select(m => m).ToList();
         }
 
+        public tStaff GetStaff(int staffId)
+        {
+            return mmEntities.tStaffs.FirstOrDefault(s => s.Id == staffId);
+        }
         public List<tStaff> GetStaffByArea(int areaId)
         {
-            var staffs = (from s in mmEntities.tStaffs
-                          from sa in mmEntities.tStaffAreas
-                          where s.Id == sa.StaffId && sa.AreaId == areaId
-                          select s).ToList<tStaff>();
-            return staffs;
+            return (from s in mmEntities.tStaffs
+                    from sa in mmEntities.tStaffAreas
+                    where s.Id == sa.StaffId && sa.AreaId == areaId
+                    select s).ToList<tStaff>();
+
         }
 
         public void SaveStaff(tStaff staff)
@@ -66,7 +71,7 @@ namespace HerokoRima.Wrapper
         public long SaveClass(tClass tClass)
         {
             mmEntities.tClasses.Add(tClass);
-         mmEntities.SaveChanges();
+            mmEntities.SaveChanges();
             return tClass.ClassId;
 
         }
@@ -77,9 +82,16 @@ namespace HerokoRima.Wrapper
             mmEntities.SaveChanges();
         }
 
-        public List<tClass> GetClasses()
+        public DbSet<tClass> GetClasses()
         {
-         return   mmEntities.tClasses.Select(c => c).ToList();
+
+            return mmEntities.tClasses;
+        }
+
+        public DbSet<tStaffClass> GetStaffClasses()
+        {
+
+            return mmEntities.tStaffClasses;
         }
         #endregion
     }

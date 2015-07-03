@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -32,19 +33,21 @@ namespace HerokoRima.Forms
             calCalendar.CalendarView = CalendarViews.Month;
             calCalendar.AllowEditingEvents = true;
             var classes = Class.GetClasses();
-
-            PlaceItems(classes);
+            var cls = Class.GetStaffClasses();
+            PlaceItems(cls);
         }
 
-        private void PlaceItems(IEnumerable<tClass> classes)
+        private void PlaceItems(IEnumerable<tStaffClass> classes)
         {
-            foreach (var exerciseEvent in classes.Select(@class => new CustomEvent
+
+            foreach (var exerciseEvent in classes.Select(clss => new CustomEvent
                                                                        {
-                                                                           Date =@class.ClassDate,
-                                                                           TooltipEnabled =  true,
-                   
-                                                                           EventLengthInHours =2,
-                                                                           EventText = @class.MaxAttendance.ToString()
+                                                                           Date = clss.tClass.ClassDate,
+                                                                           TooltipEnabled = true,
+
+                                                                           EventLengthInHours = Int32.Parse(clss.tClass.EndTime.Substring(0, 2)) - Int32.Parse(clss.tClass.StartTime.Substring(0, 2)),
+                                                                           EventText = clss.tStaff.tStaffAreas.FirstOrDefault().tArea.AreaDescription +" " +clss.tStaff.Firstname,
+                                                                           EventColor = clss.tStaff.tStaffAreas.FirstOrDefault().tArea.AreaId == 1 ? Color.Gray: Color.OrangeRed
                                                                        }))
             {
                 calCalendar.AddEvent(exerciseEvent);

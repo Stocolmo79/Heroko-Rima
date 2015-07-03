@@ -143,7 +143,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Areas.cs" />
-    <Compile Include="Classes\CalendarItem.cs" />
     <Compile Include="Classes\Class.cs" />
     <Compile Include="Classes\Combobox.cs" />
     <Compile Include="Classes\Staffs.cs" />

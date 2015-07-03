@@ -6,22 +6,26 @@ namespace HerokoRima.Classes
 {
     public class Staffs
     {
-        readonly MakeMakeWrapper wrapper = new MakeMakeWrapper();
+        static readonly MakeMakeWrapper wrapper = new MakeMakeWrapper();
         public void SaveStaff()
         {
             wrapper.SaveStaff();
         }
 
-        public List<tStaff> GetStaffByArea(int areaId)
+        public List<tStaff> GetStaffsByArea(int areaId)
         {
             return wrapper.GetStaffByArea(areaId);
         }
 
-        public List<tStaff> GetStaff()
+        public static List<tStaff> GetStaffList()
         {
-            return wrapper.GetStaff();
+            return wrapper.getStaffsList();
         }
 
+        public static tStaff GetStaff(int staffId)
+        {
+          return  wrapper.GetStaff(staffId);
+        }
         public void SaveStaff(tStaff staff)
         {
             wrapper.SaveStaff(staff);
