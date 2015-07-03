@@ -1,4 +1,4 @@
-﻿namespace HerokoRima
+﻿namespace HerokoRima.Forms
 {
     partial class FrmMain
     {
@@ -13,9 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -32,7 +32,7 @@
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.profesoresMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuevoProfesorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miembrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miembroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +71,7 @@
             // 
             this.personalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.profesoresMenuItem,
-            this.nuevoToolStripMenuItem});
+            this.nuevoProfesorMenuItem});
             this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
             this.personalToolStripMenuItem.Size = new System.Drawing.Size(90, 24);
             this.personalToolStripMenuItem.Text = "Profesores";
@@ -79,15 +79,16 @@
             // profesoresMenuItem
             // 
             this.profesoresMenuItem.Name = "profesoresMenuItem";
-            this.profesoresMenuItem.Size = new System.Drawing.Size(147, 24);
+            this.profesoresMenuItem.Size = new System.Drawing.Size(175, 24);
             this.profesoresMenuItem.Text = "Profesores";
             this.profesoresMenuItem.Click += new System.EventHandler(this.profesoresMenuItem_Click);
             // 
-            // nuevoToolStripMenuItem
+            // nuevoProfesorMenuItem
             // 
-            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(147, 24);
-            this.nuevoToolStripMenuItem.Text = "Nuevo";
+            this.nuevoProfesorMenuItem.Name = "nuevoProfesorMenuItem";
+            this.nuevoProfesorMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.nuevoProfesorMenuItem.Text = "Nuevo";
+            this.nuevoProfesorMenuItem.Click += new System.EventHandler(this.nuevoProfesorMenuItem_Click);
             // 
             // miembrosToolStripMenuItem
             // 
@@ -143,14 +144,15 @@
             // buscarToolStripMenuItem
             // 
             this.buscarToolStripMenuItem.Name = "buscarToolStripMenuItem";
-            this.buscarToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
+            this.buscarToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.buscarToolStripMenuItem.Text = "Buscar clase";
             // 
             // nuevaClaseToolStripMenuItem
             // 
             this.nuevaClaseToolStripMenuItem.Name = "nuevaClaseToolStripMenuItem";
-            this.nuevaClaseToolStripMenuItem.Size = new System.Drawing.Size(158, 24);
+            this.nuevaClaseToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.nuevaClaseToolStripMenuItem.Text = "Nueva clase";
+            this.nuevaClaseToolStripMenuItem.Click += new System.EventHandler(this.nuevaClaseToolStripMenuItem_Click);
             // 
             // pnlMain
             // 
@@ -192,7 +194,7 @@
         private System.Windows.Forms.ToolStripMenuItem buscarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevaClaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem profesoresMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nuevoProfesorMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miembroToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem buscarTarjetaToolStripMenuItem;

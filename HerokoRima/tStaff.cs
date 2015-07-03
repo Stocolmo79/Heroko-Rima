@@ -14,10 +14,22 @@ namespace HerokoRima
     
     public partial class tStaff
     {
+        public tStaff()
+        {
+            this.tStaffAreas = new HashSet<tStaffArea>();
+            this.tStaffClasses = new HashSet<tStaffClass>();
+        }
+    
         public long Id { get; set; }
         public string RUT { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public string Area { get; set; }
+        public string Phone { get; set; }
+        public string Adress { get; set; }
+        public string City { get; set; }
+        public Nullable<bool> Active { get; set; }
+    
+        public virtual ICollection<tStaffArea> tStaffAreas { get; set; }
+        public virtual ICollection<tStaffClass> tStaffClasses { get; set; }
     }
 }

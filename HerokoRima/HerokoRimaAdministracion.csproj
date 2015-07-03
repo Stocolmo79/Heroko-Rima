@@ -128,6 +128,9 @@
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms.Calendar">
+      <HintPath>.\System.Windows.Forms.Calendar.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -136,27 +139,36 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsFormsCalendar">
-      <HintPath>.\WindowsFormsCalendar.dll</HintPath>
-    </Reference>
     <Reference Include="Zlib.Portable, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Zlib.Portable.1.10.0\lib\portable-net4+sl5+wp8+win8+wpa81+MonoTouch+MonoAndroid\Zlib.Portable.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\ComboBoxItem.cs" />
-    <Compile Include="frmMain.cs">
+    <Compile Include="Classes\Areas.cs" />
+    <Compile Include="Classes\AuthResponse.cs" />
+    <Compile Include="Classes\CalendarItem.cs" />
+    <Compile Include="Classes\Class.cs" />
+    <Compile Include="Classes\Combobox.cs" />
+    <Compile Include="Classes\MonthViews.cs" />
+    <Compile Include="Classes\Staffs.cs" />
+    <Compile Include="Forms\frmClasses.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
+    <Compile Include="Forms\frmClasses.Designer.cs">
+      <DependentUpon>frmClasses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmProfesor.cs">
+    <Compile Include="Forms\frmStaff.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmProfesor.Designer.cs">
-      <DependentUpon>frmProfesor.cs</DependentUpon>
+    <Compile Include="Forms\frmStaff.Designer.cs">
+      <DependentUpon>frmStaff.cs</DependentUpon>
     </Compile>
     <Compile Include="MakeMakeEntities.Context.cs">
       <AutoGen>True</AutoGen>
@@ -173,8 +185,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MakeMakeEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>MakeMakeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>MakeMakeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>MakeMakeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tArea.cs">
+      <DependentUpon>MakeMakeEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="tCard.cs">
       <DependentUpon>MakeMakeEntities.tt</DependentUpon>
     </Compile>
@@ -196,14 +221,24 @@
     <Compile Include="tStaff.cs">
       <DependentUpon>MakeMakeEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="tStaffArea.cs">
+      <DependentUpon>MakeMakeEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tStaffClass.cs">
+      <DependentUpon>MakeMakeEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="tTicket.cs">
       <DependentUpon>MakeMakeEntities.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frmMain.resx">
+    <Compile Include="Wrapper\MakeMakeWrapper.cs" />
+    <EmbeddedResource Include="Forms\frmClasses.resx">
+      <DependentUpon>frmClasses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmProfesor.resx">
-      <DependentUpon>frmProfesor.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmStaff.resx">
+      <DependentUpon>frmStaff.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -251,6 +286,7 @@
   <ItemGroup>
     <Content Include="MakeMakeEntities.edmx.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

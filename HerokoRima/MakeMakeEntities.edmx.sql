@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 07/01/2015 10:26:57
+-- Date Created: 07/01/2015 10:54:31
 -- Generated from EDMX file: C:\Users\Bernardo Cisternas\Documents\Visual Studio 2013\Projects\HerokoRima\HerokoRima\MakeMakeEntities.edmx
 -- --------------------------------------------------
 
@@ -22,29 +22,29 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[tCardUsage]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[tCardUsage];
+IF OBJECT_ID(N'[dbo].[tCardUsages]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[tCardUsages];
 GO
-IF OBJECT_ID(N'[dbo].[tClass]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[tClass];
+IF OBJECT_ID(N'[dbo].[tClasses]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[tClasses];
 GO
-IF OBJECT_ID(N'[dbo].[tDropIn]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[tDropIn];
+IF OBJECT_ID(N'[dbo].[tDropIns]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[tDropIns];
 GO
-IF OBJECT_ID(N'[dbo].[tMember]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[tMember];
+IF OBJECT_ID(N'[dbo].[tMembers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[tMembers];
 GO
 IF OBJECT_ID(N'[dbo].[tMonths]', 'U') IS NOT NULL
     DROP TABLE [dbo].[tMonths];
 GO
-IF OBJECT_ID(N'[dbo].[tStaff]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[tStaff];
+IF OBJECT_ID(N'[dbo].[tStaffs]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[tStaffs];
 GO
 IF OBJECT_ID(N'[dbo].[tTickets]', 'U') IS NOT NULL
     DROP TABLE [dbo].[tTickets];
 GO
-IF OBJECT_ID(N'[MakeMakeModelStoreContainer].[tCard]', 'U') IS NOT NULL
-    DROP TABLE [MakeMakeModelStoreContainer].[tCard];
+IF OBJECT_ID(N'[dbo].[tCards]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[tCards];
 GO
 
 -- --------------------------------------------------
@@ -102,7 +102,8 @@ CREATE TABLE [dbo].[tStaffs] (
     [RUT] varchar(10)  NULL,
     [Firstname] varchar(250)  NULL,
     [Lastname] varchar(250)  NULL,
-    [Area] varchar(250)  NULL
+    [Area] varchar(250)  NULL,
+    [Phone] varchar(12)  NOT NULL
 );
 GO
 

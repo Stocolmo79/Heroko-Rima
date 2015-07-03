@@ -61,9 +61,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HerokoRima\HerokoRima.csproj">
+    <ProjectReference Include="..\HerokoRima\HerokoRimaAdministracion.csproj">
       <Project>{488fc6b4-46ac-4976-ad94-c6dbd14f2ebe}</Project>
-      <Name>HerokoRima</Name>
+      <Name>HerokoRimaAdministracion</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

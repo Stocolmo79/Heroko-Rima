@@ -4,9 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using HerokoRima.Forms;
-
-namespace HerokoRima
+namespace HerokoRimaEntrada
 {
     static class Program
     {
@@ -18,7 +16,7 @@ namespace HerokoRima
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FrmMain());
+            Application.Run(new Form1());
         }
     }
 }

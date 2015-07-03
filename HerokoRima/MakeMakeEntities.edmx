@@ -4,99 +4,338 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MakeMakeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="MakeMakeModelStoreContainer">
-    <EntitySet Name="tCardUsages" EntityType="MakeMakeModel.Store.tCardUsages" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="tClasses" EntityType="MakeMakeModel.Store.tClasses" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="tDropIns" EntityType="MakeMakeModel.Store.tDropIns" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="tMembers" EntityType="MakeMakeModel.Store.tMembers" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="tMonths" EntityType="MakeMakeModel.Store.tMonths" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="tStaffs" EntityType="MakeMakeModel.Store.tStaffs" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="tTickets" EntityType="MakeMakeModel.Store.tTickets" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="tCards" EntityType="MakeMakeModel.Store.tCards" store:Type="Tables" Schema="dbo" />
-  </EntityContainer>
-  <EntityType Name="tCardUsages">
-    <Key>
-      <PropertyRef Name="CUId" />
-    </Key>
-    <Property Name="CUId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CardId" Type="bigint" Nullable="false" />
-    <Property Name="EntranceDate" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="tClasses">
-    <Key>
-      <PropertyRef Name="ClassId" />
-    </Key>
-    <Property Name="ClassId" Type="bigint" Nullable="false" />
-    <Property Name="TypeId" Type="int" Nullable="true" />
-    <Property Name="ClassDate" Type="datetime" Nullable="false" />
-    <Property Name="MaxAttendance" Type="int" Nullable="true" />
-    <Property Name="Attendance" Type="int" Nullable="true" />
-  </EntityType>
-  <EntityType Name="tDropIns">
-    <Key>
-      <PropertyRef Name="DropInId" />
-    </Key>
-    <Property Name="DropInId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PriceId" Type="int" Nullable="true" />
-    <Property Name="Quantity" Type="int" Nullable="true" />
-  </EntityType>
-  <EntityType Name="tMembers">
-    <Key>
-      <PropertyRef Name="RUT" />
-    </Key>
-    <Property Name="RUT" Type="varchar" Nullable="false" MaxLength="10" />
-    <Property Name="Firstname" Type="varchar" Nullable="false" MaxLength="250" />
-    <Property Name="Lastname" Type="varchar" Nullable="false" MaxLength="250" />
-    <Property Name="Cellphone" Type="varchar" Nullable="false" MaxLength="10" />
-    <Property Name="MemberId" Type="bigint" Nullable="true" />
-  </EntityType>
-  <EntityType Name="tMonths">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CardId" Type="bigint" Nullable="false" />
-    <Property Name="Purchased" Type="datetime" Nullable="true" />
-    <Property Name="Amount" Type="bigint" Nullable="true" />
-  </EntityType>
-  <EntityType Name="tStaffs">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="RUT" Type="varchar" Nullable="true" MaxLength="10" />
-    <Property Name="Firstname" Type="varchar" Nullable="true" MaxLength="250" />
-    <Property Name="Lastname" Type="varchar" Nullable="true" MaxLength="250" />
-    <Property Name="Area" Type="varchar" Nullable="true" MaxLength="250" />
-  </EntityType>
-  <EntityType Name="tTickets">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CardNo" Type="bigint" Nullable="false" />
-    <Property Name="Quantity" Type="bigint" Nullable="true" />
-    <Property Name="Purchased" Type="datetime" Nullable="true" />
-    <Property Name="Amount" Type="bigint" Nullable="true" />
-  </EntityType>
-  <EntityType Name="tCards">
-    <Key>
-      <PropertyRef Name="CardId" />
-      <PropertyRef Name="Monthly" />
-      <PropertyRef Name="Changed" />
-    </Key>
-    <Property Name="CardId" Type="bigint" Nullable="false" />
-    <Property Name="Monthly" Type="bit" Nullable="false" />
-    <Property Name="StartDate" Type="datetime" Nullable="true" />
-    <Property Name="EndDate" Type="datetime" Nullable="true" />
-    <Property Name="Tickets" Type="int" Nullable="true" />
-    <Property Name="Changed" Type="datetime" Nullable="false" />
-  </EntityType>
-</Schema></edmx:StorageModels>
+    <Schema Namespace="MakeMakeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tAreas">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="int" Nullable="false" />
+          <Property Name="AreaDescription" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tCards">
+          <Key>
+            <PropertyRef Name="CardId" />
+            <PropertyRef Name="Monthly" />
+            <PropertyRef Name="Changed" />
+          </Key>
+          <Property Name="CardId" Type="bigint" Nullable="false" />
+          <Property Name="Monthly" Type="bit" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="Tickets" Type="int" />
+          <Property Name="Changed" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCardUsages">
+          <Key>
+            <PropertyRef Name="CUId" />
+          </Key>
+          <Property Name="CUId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="bigint" Nullable="false" />
+          <Property Name="EntranceDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tClasses">
+          <Key>
+            <PropertyRef Name="ClassId" />
+          </Key>
+          <Property Name="ClassId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="ClassDate" Type="datetime" Nullable="false" />
+          <Property Name="MaxAttendance" Type="int" />
+          <Property Name="Attendance" Type="int" />
+          <Property Name="StartTime" Type="varchar" MaxLength="5" />
+          <Property Name="EndTime" Type="varchar" MaxLength="5" />
+        </EntityType>
+        <EntityType Name="tDropIns">
+          <Key>
+            <PropertyRef Name="DropInId" />
+          </Key>
+          <Property Name="DropInId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PriceId" Type="int" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="tMembers">
+          <Key>
+            <PropertyRef Name="RUT" />
+          </Key>
+          <Property Name="RUT" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Lastname" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Cellphone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tMonths">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardId" Type="bigint" Nullable="false" />
+          <Property Name="Purchased" Type="datetime" />
+          <Property Name="Amount" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tStaffArea">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StaffId" Type="bigint" Nullable="false" />
+          <Property Name="AreaId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tStaffClass">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StaffId" Type="bigint" Nullable="false" />
+          <Property Name="ClassId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tStaffs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RUT" Type="varchar" MaxLength="10" />
+          <Property Name="Firstname" Type="varchar" MaxLength="250" />
+          <Property Name="Lastname" Type="varchar" MaxLength="250" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Adress" Type="varchar" MaxLength="150" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tTickets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardNo" Type="bigint" Nullable="false" />
+          <Property Name="Quantity" Type="bigint" />
+          <Property Name="Purchased" Type="datetime" />
+          <Property Name="Amount" Type="bigint" />
+        </EntityType>
+        <Association Name="FK_tStaffArea_tAreas">
+          <End Role="tAreas" Type="Self.tAreas" Multiplicity="1" />
+          <End Role="tStaffArea" Type="Self.tStaffArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAreas">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="tStaffArea">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStaffArea_tStaffs">
+          <End Role="tStaffs" Type="Self.tStaffs" Multiplicity="1" />
+          <End Role="tStaffArea" Type="Self.tStaffArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tStaffs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tStaffArea">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStaffClass_tClasses">
+          <End Role="tClasses" Type="Self.tClasses" Multiplicity="1" />
+          <End Role="tStaffClass" Type="Self.tStaffClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tClasses">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="tStaffClass">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStaffClass_tStaffs">
+          <End Role="tStaffs" Type="Self.tStaffs" Multiplicity="1" />
+          <End Role="tStaffClass" Type="Self.tStaffClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tStaffs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tStaffClass">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="MakeMakeModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tAreas" EntityType="Self.tAreas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCards" EntityType="Self.tCards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCardUsages" EntityType="Self.tCardUsages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tClasses" EntityType="Self.tClasses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tDropIns" EntityType="Self.tDropIns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMembers" EntityType="Self.tMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMonths" EntityType="Self.tMonths" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tStaffArea" EntityType="Self.tStaffArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tStaffClass" EntityType="Self.tStaffClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tStaffs" EntityType="Self.tStaffs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tTickets" EntityType="Self.tTickets" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tStaffArea_tAreas" Association="Self.FK_tStaffArea_tAreas">
+            <End Role="tAreas" EntitySet="tAreas" />
+            <End Role="tStaffArea" EntitySet="tStaffArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStaffArea_tStaffs" Association="Self.FK_tStaffArea_tStaffs">
+            <End Role="tStaffs" EntitySet="tStaffs" />
+            <End Role="tStaffArea" EntitySet="tStaffArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStaffClass_tClasses" Association="Self.FK_tStaffClass_tClasses">
+            <End Role="tClasses" EntitySet="tClasses" />
+            <End Role="tStaffClass" EntitySet="tStaffClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStaffClass_tStaffs" Association="Self.FK_tStaffClass_tStaffs">
+            <End Role="tStaffs" EntitySet="tStaffs" />
+            <End Role="tStaffClass" EntitySet="tStaffClass" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MakeMakeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MakeMakeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="MakeMakeModel.sysdiagram" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(MakeMakeModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(MakeMakeModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="tAreas" EntityType="MakeMakeModel.tArea" />
+          <EntitySet Name="tCards" EntityType="MakeMakeModel.tCard" />
+          <EntitySet Name="tCardUsages" EntityType="MakeMakeModel.tCardUsage" />
+          <EntitySet Name="tClasses" EntityType="MakeMakeModel.tClass" />
+          <EntitySet Name="tDropIns" EntityType="MakeMakeModel.tDropIn" />
+          <EntitySet Name="tMembers" EntityType="MakeMakeModel.tMember" />
+          <EntitySet Name="tMonths" EntityType="MakeMakeModel.tMonth" />
+          <EntitySet Name="tStaffAreas" EntityType="MakeMakeModel.tStaffArea" />
+          <EntitySet Name="tStaffs" EntityType="MakeMakeModel.tStaff" />
+          <EntitySet Name="tTickets" EntityType="MakeMakeModel.tTicket" />
+          <AssociationSet Name="FK_tStaffArea_tAreas" Association="MakeMakeModel.FK_tStaffArea_tAreas">
+            <End Role="tArea" EntitySet="tAreas" />
+            <End Role="tStaffArea" EntitySet="tStaffAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStaffArea_tStaffs" Association="MakeMakeModel.FK_tStaffArea_tStaffs">
+            <End Role="tStaff" EntitySet="tStaffs" />
+            <End Role="tStaffArea" EntitySet="tStaffAreas" />
+          </AssociationSet>
+          <EntitySet Name="tStaffClasses" EntityType="MakeMakeModel.tStaffClass" />
+          <AssociationSet Name="FK_tStaffClass_tStaffs" Association="MakeMakeModel.FK_tStaffClass_tStaffs">
+            <End Role="tStaff" EntitySet="tStaffs" />
+            <End Role="tStaffClass" EntitySet="tStaffClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStaffClass_tClasses" Association="MakeMakeModel.FK_tStaffClass_tClasses">
+            <End Role="tClass" EntitySet="tClasses" />
+            <End Role="tStaffClass" EntitySet="tStaffClasses" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="tArea">
+          <Key>
+            <PropertyRef Name="AreaId" />
+          </Key>
+          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <Property Name="AreaDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tStaffAreas" Relationship="MakeMakeModel.FK_tStaffArea_tAreas" FromRole="tArea" ToRole="tStaffArea" />
+        </EntityType>
+        <EntityType Name="tCard">
+          <Key>
+            <PropertyRef Name="CardId" />
+            <PropertyRef Name="Monthly" />
+            <PropertyRef Name="Changed" />
+          </Key>
+          <Property Name="CardId" Type="Int64" Nullable="false" />
+          <Property Name="Monthly" Type="Boolean" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="Tickets" Type="Int32" />
+          <Property Name="Changed" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         <EntityType Name="tCardUsage">
           <Key>
             <PropertyRef Name="CUId" />
@@ -114,6 +353,9 @@
           <Property Name="ClassDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MaxAttendance" Type="Int32" />
           <Property Name="Attendance" Type="Int32" />
+          <Property Name="StartTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="EndTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tStaffClasses" Relationship="MakeMakeModel.FK_tStaffClass_tClasses" FromRole="tClass" ToRole="tStaffClass" />
         </EntityType>
         <EntityType Name="tDropIn">
           <Key>
@@ -127,10 +369,10 @@
           <Key>
             <PropertyRef Name="RUT" />
           </Key>
-          <Property Name="RUT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Firstname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Lastname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Cellphone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RUT" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Cellphone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="MemberId" Type="Int64" />
         </EntityType>
         <EntityType Name="tMonth">
@@ -142,6 +384,16 @@
           <Property Name="Purchased" Type="DateTime" Precision="3" />
           <Property Name="Amount" Type="Int64" />
         </EntityType>
+        <EntityType Name="tStaffArea">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="StaffId" Type="Int64" Nullable="false" />
+          <Property Name="AreaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tArea" Relationship="MakeMakeModel.FK_tStaffArea_tAreas" FromRole="tStaffArea" ToRole="tArea" />
+          <NavigationProperty Name="tStaff" Relationship="MakeMakeModel.FK_tStaffArea_tStaffs" FromRole="tStaffArea" ToRole="tStaff" />
+        </EntityType>
         <EntityType Name="tStaff">
           <Key>
             <PropertyRef Name="Id" />
@@ -150,7 +402,12 @@
           <Property Name="RUT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Firstname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Lastname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Area" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tStaffAreas" Relationship="MakeMakeModel.FK_tStaffArea_tStaffs" FromRole="tStaff" ToRole="tStaffArea" />
+          <NavigationProperty Name="tStaffClasses" Relationship="MakeMakeModel.FK_tStaffClass_tStaffs" FromRole="tStaff" ToRole="tStaffClass" />
         </EntityType>
         <EntityType Name="tTicket">
           <Key>
@@ -162,119 +419,220 @@
           <Property Name="Purchased" Type="DateTime" Precision="3" />
           <Property Name="Amount" Type="Int64" />
         </EntityType>
-        <EntityType Name="tCard">
+        <Association Name="FK_tStaffArea_tAreas">
+          <End Type="MakeMakeModel.tArea" Role="tArea" Multiplicity="1" />
+          <End Type="MakeMakeModel.tStaffArea" Role="tStaffArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tArea">
+              <PropertyRef Name="AreaId" />
+            </Principal>
+            <Dependent Role="tStaffArea">
+              <PropertyRef Name="AreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStaffArea_tStaffs">
+          <End Type="MakeMakeModel.tStaff" Role="tStaff" Multiplicity="1" />
+          <End Type="MakeMakeModel.tStaffArea" Role="tStaffArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tStaff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tStaffArea">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tStaffClass">
           <Key>
-            <PropertyRef Name="CardId" />
-            <PropertyRef Name="Monthly" />
-            <PropertyRef Name="Changed" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="CardId" Type="Int64" Nullable="false" />
-          <Property Name="Monthly" Type="Boolean" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Precision="3" />
-          <Property Name="Tickets" Type="Int32" />
-          <Property Name="Changed" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="StaffId" Type="Int64" Nullable="false" />
+          <Property Name="ClassId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="tStaff" Relationship="MakeMakeModel.FK_tStaffClass_tStaffs" FromRole="tStaffClass" ToRole="tStaff" />
+          <NavigationProperty Name="tClass" Relationship="MakeMakeModel.FK_tStaffClass_tClasses" FromRole="tStaffClass" ToRole="tClass" />
         </EntityType>
-        <EntityContainer Name="MakeMakeEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tCardUsages" EntityType="Self.tCardUsage" />
-          <EntitySet Name="tClasses" EntityType="Self.tClass" />
-          <EntitySet Name="tDropIns" EntityType="Self.tDropIn" />
-          <EntitySet Name="tMembers" EntityType="Self.tMember" />
-          <EntitySet Name="tMonths" EntityType="Self.tMonth" />
-          <EntitySet Name="tStaffs" EntityType="Self.tStaff" />
-          <EntitySet Name="tTickets" EntityType="Self.tTicket" />
-          <EntitySet Name="tCards" EntityType="Self.tCard" />
-        </EntityContainer>
-      </Schema>
+        <Association Name="FK_tStaffClass_tStaffs">
+          <End Type="MakeMakeModel.tStaff" Role="tStaff" Multiplicity="1" />
+          <End Type="MakeMakeModel.tStaffClass" Role="tStaffClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tStaff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tStaffClass">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStaffClass_tClasses">
+          <End Type="MakeMakeModel.tClass" Role="tClass" Multiplicity="1" />
+          <End Type="MakeMakeModel.tStaffClass" Role="tStaffClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tClass">
+              <PropertyRef Name="ClassId" />
+            </Principal>
+            <Dependent Role="tStaffClass">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MakeMakeModelStoreContainer" CdmEntityContainer="MakeMakeEntities">
-    <EntitySetMapping Name="tCardUsages">
-      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tCardUsage)">
-        <MappingFragment StoreEntitySet="tCardUsages">
-          <ScalarProperty Name="CUId" ColumnName="CUId" />
-          <ScalarProperty Name="CardId" ColumnName="CardId" />
-          <ScalarProperty Name="EntranceDate" ColumnName="EntranceDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tClasses">
-      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tClass)">
-        <MappingFragment StoreEntitySet="tClasses">
-          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-          <ScalarProperty Name="ClassDate" ColumnName="ClassDate" />
-          <ScalarProperty Name="MaxAttendance" ColumnName="MaxAttendance" />
-          <ScalarProperty Name="Attendance" ColumnName="Attendance" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tDropIns">
-      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tDropIn)">
-        <MappingFragment StoreEntitySet="tDropIns">
-          <ScalarProperty Name="DropInId" ColumnName="DropInId" />
-          <ScalarProperty Name="PriceId" ColumnName="PriceId" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tMembers">
-      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tMember)">
-        <MappingFragment StoreEntitySet="tMembers">
-          <ScalarProperty Name="RUT" ColumnName="RUT" />
-          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-          <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
-          <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tMonths">
-      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tMonth)">
-        <MappingFragment StoreEntitySet="tMonths">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="CardId" ColumnName="CardId" />
-          <ScalarProperty Name="Purchased" ColumnName="Purchased" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tStaffs">
-      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tStaff)">
-        <MappingFragment StoreEntitySet="tStaffs">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="RUT" ColumnName="RUT" />
-          <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-          <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-          <ScalarProperty Name="Area" ColumnName="Area" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tTickets">
-      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tTicket)">
-        <MappingFragment StoreEntitySet="tTickets">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="CardNo" ColumnName="CardNo" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="Purchased" ColumnName="Purchased" />
-          <ScalarProperty Name="Amount" ColumnName="Amount" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tCards">
-      <EntityTypeMapping TypeName="IsTypeOf(MakeMakeModel.tCard)">
-        <MappingFragment StoreEntitySet="tCards">
-          <ScalarProperty Name="CardId" ColumnName="CardId" />
-          <ScalarProperty Name="Monthly" ColumnName="Monthly" />
-          <ScalarProperty Name="Changed" ColumnName="Changed" />
-          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
-          <ScalarProperty Name="Tickets" ColumnName="Tickets" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MakeMakeModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MakeMakeModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MakeMakeModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MakeMakeModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MakeMakeModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MakeMakeModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MakeMakeModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MakeMakeModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MakeMakeModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MakeMakeModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="tAreas">
+            <EntityTypeMapping TypeName="MakeMakeModel.tArea">
+              <MappingFragment StoreEntitySet="tAreas">
+                <ScalarProperty Name="AreaDescription" ColumnName="AreaDescription" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCards">
+            <EntityTypeMapping TypeName="MakeMakeModel.tCard">
+              <MappingFragment StoreEntitySet="tCards">
+                <ScalarProperty Name="Changed" ColumnName="Changed" />
+                <ScalarProperty Name="Tickets" ColumnName="Tickets" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Monthly" ColumnName="Monthly" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCardUsages">
+            <EntityTypeMapping TypeName="MakeMakeModel.tCardUsage">
+              <MappingFragment StoreEntitySet="tCardUsages">
+                <ScalarProperty Name="EntranceDate" ColumnName="EntranceDate" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="CUId" ColumnName="CUId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tClasses">
+            <EntityTypeMapping TypeName="MakeMakeModel.tClass">
+              <MappingFragment StoreEntitySet="tClasses">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Attendance" ColumnName="Attendance" />
+                <ScalarProperty Name="MaxAttendance" ColumnName="MaxAttendance" />
+                <ScalarProperty Name="ClassDate" ColumnName="ClassDate" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tDropIns">
+            <EntityTypeMapping TypeName="MakeMakeModel.tDropIn">
+              <MappingFragment StoreEntitySet="tDropIns">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+                <ScalarProperty Name="DropInId" ColumnName="DropInId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMembers">
+            <EntityTypeMapping TypeName="MakeMakeModel.tMember">
+              <MappingFragment StoreEntitySet="tMembers">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMonths">
+            <EntityTypeMapping TypeName="MakeMakeModel.tMonth">
+              <MappingFragment StoreEntitySet="tMonths">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Purchased" ColumnName="Purchased" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tStaffAreas">
+            <EntityTypeMapping TypeName="MakeMakeModel.tStaffArea">
+              <MappingFragment StoreEntitySet="tStaffArea">
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tStaffs">
+            <EntityTypeMapping TypeName="MakeMakeModel.tStaff">
+              <MappingFragment StoreEntitySet="tStaffs">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tTickets">
+            <EntityTypeMapping TypeName="MakeMakeModel.tTicket">
+              <MappingFragment StoreEntitySet="tTickets">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Purchased" ColumnName="Purchased" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tStaffClasses">
+            <EntityTypeMapping TypeName="MakeMakeModel.tStaffClass">
+              <MappingFragment StoreEntitySet="tStaffClass">
+                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

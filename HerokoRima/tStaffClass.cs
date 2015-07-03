@@ -12,21 +12,13 @@ namespace HerokoRima
     using System;
     using System.Collections.Generic;
     
-    public partial class tClass
+    public partial class tStaffClass
     {
-        public tClass()
-        {
-            this.tStaffClasses = new HashSet<tStaffClass>();
-        }
-    
+        public int ID { get; set; }
+        public long StaffId { get; set; }
         public long ClassId { get; set; }
-        public Nullable<int> TypeId { get; set; }
-        public System.DateTime ClassDate { get; set; }
-        public Nullable<int> MaxAttendance { get; set; }
-        public Nullable<int> Attendance { get; set; }
-        public string StartTime { get; set; }
-        public string EndTime { get; set; }
     
-        public virtual ICollection<tStaffClass> tStaffClasses { get; set; }
+        public virtual tStaff tStaff { get; set; }
+        public virtual tClass tClass { get; set; }
     }
 }
