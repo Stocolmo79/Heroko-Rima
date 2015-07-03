@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,7 +15,7 @@ namespace HerokoRima.Forms
 {
     public partial class FrmClasses : Form
     {
-        List<CalendarItem> calendarItems = new List<CalendarItem>();
+       
         public tClass tClass;
         public tArea area;
 
@@ -32,22 +33,22 @@ namespace HerokoRima.Forms
             calCalendar.CalendarDate = DateTime.Today;
             calCalendar.CalendarView = CalendarViews.Month;
             calCalendar.AllowEditingEvents = true;
-            var classes = Class.GetClasses();
-            var cls = Class.GetStaffClasses();
-            PlaceItems(cls);
+            var classes = Class.GetStaffClasses();
+            
+            PlaceItems(classes);
         }
 
         private void PlaceItems(IEnumerable<tStaffClass> classes)
         {
-
             foreach (var exerciseEvent in classes.Select(clss => new CustomEvent
                                                                        {
                                                                            Date = clss.tClass.ClassDate,
-                                                                           TooltipEnabled = true,
-
-                                                                           EventLengthInHours = Int32.Parse(clss.tClass.EndTime.Substring(0, 2)) - Int32.Parse(clss.tClass.StartTime.Substring(0, 2)),
-                                                                           EventText = clss.tStaff.tStaffAreas.FirstOrDefault().tArea.AreaDescription +" " +clss.tStaff.Firstname,
-                                                                           EventColor = clss.tStaff.tStaffAreas.FirstOrDefault().tArea.AreaId == 1 ? Color.Gray: Color.OrangeRed
+                                                                           TooltipEnabled =  true,
+                                                                           EndTime = clss.tClass.EndTime,
+                                                                           StartTime= clss.tClass.StartTime,
+                                                                           EventLengthInHours = Int32.Parse(clss.tClass.EndTime.Substring(0, 2)) - Int32.Parse(clss.tClass.EndTime.Substring(0, 2)),
+                                                                           EventText = clss.tStaff.tStaffAreas.FirstOrDefault().tArea.AreaDescription +" " + clss.tStaff.Firstname,
+                                                                           EventColor = clss.tStaff.tStaffAreas.FirstOrDefault().AreaId ==1 ? Color.Gray:Color.OrangeRed,
                                                                        }))
             {
                 calCalendar.AddEvent(exerciseEvent);

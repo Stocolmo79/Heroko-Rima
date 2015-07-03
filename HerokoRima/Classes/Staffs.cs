@@ -22,10 +22,6 @@ namespace HerokoRima.Classes
             return wrapper.getStaffsList();
         }
 
-        public static tStaff GetStaff(int staffId)
-        {
-          return  wrapper.GetStaff(staffId);
-        }
         public void SaveStaff(tStaff staff)
         {
             wrapper.SaveStaff(staff);

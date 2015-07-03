@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="fc001726270545dd8abab2ec5f99f8b7" Name="Diagram1">
+        <EntityTypeShape EntityType="MakeMakeModel.sysdiagram" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tArea" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tCard" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tCardUsage" Width="1.5" PointX="5.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tClass" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tDropIn" Width="1.5" PointX="4.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tMember" Width="1.5" PointX="6.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tMonth" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tStaffArea" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tStaffClass" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tStaff" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MakeMakeModel.tTicket" Width="1.5" PointX="7.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="MakeMakeModel.FK_tStaffArea_tAreas" ManuallyRouted="false" />
+        <AssociationConnector Association="MakeMakeModel.FK_tStaffClass_tClasses" ManuallyRouted="false" />
+        <AssociationConnector Association="MakeMakeModel.FK_tStaffArea_tStaffs" ManuallyRouted="false" />
+        <AssociationConnector Association="MakeMakeModel.FK_tStaffClass_tStaffs" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
