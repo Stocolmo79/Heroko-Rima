@@ -48,7 +48,7 @@ namespace HerokoRima.Forms
                                                                            StartTime= clss.tClass.StartTime,
                                                                            EventLengthInHours = Int32.Parse(clss.tClass.EndTime.Substring(0, 2)) - Int32.Parse(clss.tClass.EndTime.Substring(0, 2)),
                                                                            EventText = clss.tStaff.tStaffAreas.FirstOrDefault().tArea.AreaDescription +" " + clss.tStaff.Firstname,
-                                                                           EventColor = clss.tStaff.tStaffAreas.FirstOrDefault().AreaId ==1 ? Color.Gray:Color.OrangeRed,
+                                                                           EventColor = clss.tStaff.tStaffAreas.FirstOrDefault().AreaId ==1 ? Color.Gray:Color.OrangeRed
                                                                        }))
             {
                 calCalendar.AddEvent(exerciseEvent);
@@ -60,6 +60,12 @@ namespace HerokoRima.Forms
             cmbArea.DataSource = Combobox.LoadComboBoxAreas();
             cmbArea.DisplayMember = "AreaDescription";
             cmbArea.ValueMember = "AreaId";
+            cmbSearchByArea.DataSource = Combobox.LoadComboBoxAreas();
+            cmbSearchByArea.DisplayMember = "AreaDescription";
+            cmbSearchByArea.ValueMember = "AreaId";
+            cmbSearchByStaff.DataSource = Combobox.LoadComboBoxStaff(0);
+            cmbSearchByStaff.DisplayMember = "Firstname";
+            cmbSearchByStaff.ValueMember = "Id";
         }
 
         private void btnSaveClass_Click(object sender, EventArgs e)
@@ -100,6 +106,7 @@ namespace HerokoRima.Forms
             cmbProfessor.DataSource = Combobox.LoadComboBoxStaff(area.AreaId);
             cmbProfessor.DisplayMember = "Firstname";
             cmbProfessor.ValueMember = "Id";
+           
         }
 
         private void ResetInputs()

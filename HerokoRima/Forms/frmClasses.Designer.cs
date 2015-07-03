@@ -44,8 +44,16 @@
             this.lblArea = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.calCalendar = new Calendar.NET.Calendar();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cmbSearchByStaff = new System.Windows.Forms.ComboBox();
+            this.cmbSearchByArea = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.grNewClass.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // grNewClass
@@ -67,7 +75,7 @@
             this.grNewClass.Controls.Add(this.lblArea);
             this.grNewClass.Location = new System.Drawing.Point(12, 12);
             this.grNewClass.Name = "grNewClass";
-            this.grNewClass.Size = new System.Drawing.Size(428, 747);
+            this.grNewClass.Size = new System.Drawing.Size(428, 369);
             this.grNewClass.TabIndex = 0;
             this.grNewClass.TabStop = false;
             // 
@@ -261,9 +269,76 @@
             this.calCalendar.ShowDisabledEvents = false;
             this.calCalendar.ShowEventTooltips = true;
             this.calCalendar.ShowTodayButton = true;
-            this.calCalendar.Size = new System.Drawing.Size(1442, 725);
+            this.calCalendar.Size = new System.Drawing.Size(1442, 719);
             this.calCalendar.TabIndex = 0;
             this.calCalendar.TodayFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.cmbSearchByStaff);
+            this.groupBox2.Controls.Add(this.cmbSearchByArea);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Location = new System.Drawing.Point(13, 388);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(427, 371);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Visible = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 105);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(19, 17);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "O";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(128, 17);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Buscar classes por";
+            // 
+            // cmbSearchByStaff
+            // 
+            this.cmbSearchByStaff.FormattingEnabled = true;
+            this.cmbSearchByStaff.Location = new System.Drawing.Point(9, 154);
+            this.cmbSearchByStaff.Name = "cmbSearchByStaff";
+            this.cmbSearchByStaff.Size = new System.Drawing.Size(406, 24);
+            this.cmbSearchByStaff.TabIndex = 23;
+            // 
+            // cmbSearchByArea
+            // 
+            this.cmbSearchByArea.FormattingEnabled = true;
+            this.cmbSearchByArea.Location = new System.Drawing.Point(9, 70);
+            this.cmbSearchByArea.Name = "cmbSearchByArea";
+            this.cmbSearchByArea.Size = new System.Drawing.Size(406, 24);
+            this.cmbSearchByArea.TabIndex = 22;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 52);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(38, 17);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Area";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 134);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(62, 17);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "Profesor";
             // 
             // FrmClasses
             // 
@@ -272,6 +347,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1912, 771);
             this.ControlBox = false;
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.grNewClass);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -279,6 +355,8 @@
             this.grNewClass.ResumeLayout(false);
             this.grNewClass.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -301,5 +379,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
         private Calendar.NET.Calendar calCalendar;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cmbSearchByStaff;
+        private System.Windows.Forms.ComboBox cmbSearchByArea;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
