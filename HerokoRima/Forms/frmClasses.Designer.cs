@@ -28,11 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange6 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange7 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange8 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange9 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
-            System.Windows.Forms.Calendar.CalendarHighlightRange calendarHighlightRange10 = new System.Windows.Forms.Calendar.CalendarHighlightRange();
             this.grNewClass = new System.Windows.Forms.GroupBox();
             this.cmbMaxAttendance = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,8 +43,7 @@
             this.lblProfessor = new System.Windows.Forms.Label();
             this.lblArea = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.calClasses = new System.Windows.Forms.Calendar.Calendar();
-            this.mvClasses = new System.Windows.Forms.Calendar.MonthView();
+            this.calCalendar = new Calendar.NET.Calendar();
             this.grNewClass.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -237,64 +231,39 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.calClasses);
-            this.groupBox1.Controls.Add(this.mvClasses);
+            this.groupBox1.Controls.Add(this.calCalendar);
             this.groupBox1.Location = new System.Drawing.Point(446, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1454, 747);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
-            // calClasses
+            // calCalendar
             // 
-            this.calClasses.Font = new System.Drawing.Font("Segoe UI", 11.4F);
-            calendarHighlightRange6.DayOfWeek = System.DayOfWeek.Monday;
-            calendarHighlightRange6.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange6.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange7.DayOfWeek = System.DayOfWeek.Tuesday;
-            calendarHighlightRange7.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange7.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange8.DayOfWeek = System.DayOfWeek.Wednesday;
-            calendarHighlightRange8.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange8.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange9.DayOfWeek = System.DayOfWeek.Thursday;
-            calendarHighlightRange9.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange9.StartTime = System.TimeSpan.Parse("08:00:00");
-            calendarHighlightRange10.DayOfWeek = System.DayOfWeek.Friday;
-            calendarHighlightRange10.EndTime = System.TimeSpan.Parse("17:00:00");
-            calendarHighlightRange10.StartTime = System.TimeSpan.Parse("08:00:00");
-            this.calClasses.HighlightRanges = new System.Windows.Forms.Calendar.CalendarHighlightRange[] {
-        calendarHighlightRange6,
-        calendarHighlightRange7,
-        calendarHighlightRange8,
-        calendarHighlightRange9,
-        calendarHighlightRange10};
-            this.calClasses.Location = new System.Drawing.Point(6, 242);
-            this.calClasses.Name = "calClasses";
-            this.calClasses.Size = new System.Drawing.Size(75, 23);
-            this.calClasses.TabIndex = 2;
-            this.calClasses.Text = "calendar1";
-            this.calClasses.LoadItems += new System.Windows.Forms.Calendar.Calendar.CalendarLoadEventHandler(this.calClasses_LoadItems);
-            // 
-            // mvClasses
-            // 
-            this.mvClasses.ArrowsColor = System.Drawing.SystemColors.Window;
-            this.mvClasses.ArrowsSelectedColor = System.Drawing.Color.Gold;
-            this.mvClasses.DayBackgroundColor = System.Drawing.Color.Empty;
-            this.mvClasses.DayGrayedText = System.Drawing.SystemColors.GrayText;
-            this.mvClasses.DaySelectedBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.mvClasses.DaySelectedColor = System.Drawing.SystemColors.WindowText;
-            this.mvClasses.DaySelectedTextColor = System.Drawing.SystemColors.HighlightText;
-            this.mvClasses.ItemPadding = new System.Windows.Forms.Padding(2);
-            this.mvClasses.Location = new System.Drawing.Point(6, 21);
-            this.mvClasses.MonthTitleColor = System.Drawing.SystemColors.ActiveCaption;
-            this.mvClasses.MonthTitleColorInactive = System.Drawing.SystemColors.InactiveCaption;
-            this.mvClasses.MonthTitleTextColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.mvClasses.MonthTitleTextColorInactive = System.Drawing.SystemColors.InactiveCaptionText;
-            this.mvClasses.Name = "mvClasses";
-            this.mvClasses.Size = new System.Drawing.Size(1442, 217);
-            this.mvClasses.TabIndex = 1;
-            this.mvClasses.TodayBorderColor = System.Drawing.Color.Maroon;
+            this.calCalendar.AllowEditingEvents = true;
+            this.calCalendar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.calCalendar.CalendarDate = new System.DateTime(2015, 7, 3, 10, 47, 28, 22);
+            this.calCalendar.CalendarView = Calendar.NET.CalendarViews.Month;
+            this.calCalendar.DateHeaderFont = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.calCalendar.DayOfWeekFont = new System.Drawing.Font("Arial", 10F);
+            this.calCalendar.DaysFont = new System.Drawing.Font("Arial", 10F);
+            this.calCalendar.DayViewTimeFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.calCalendar.DimDisabledEvents = true;
+            this.calCalendar.HighlightCurrentDay = true;
+            this.calCalendar.LoadPresetHolidays = true;
+            this.calCalendar.Location = new System.Drawing.Point(6, 22);
+            this.calCalendar.Name = "calCalendar";
+            this.calCalendar.ShowArrowControls = true;
+            this.calCalendar.ShowDashedBorderOnDisabledEvents = true;
+            this.calCalendar.ShowDateInHeader = true;
+            this.calCalendar.ShowDisabledEvents = false;
+            this.calCalendar.ShowEventTooltips = true;
+            this.calCalendar.ShowTodayButton = true;
+            this.calCalendar.Size = new System.Drawing.Size(1442, 725);
+            this.calCalendar.TabIndex = 0;
+            this.calCalendar.TodayFont = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
             // 
             // FrmClasses
             // 
@@ -331,7 +300,6 @@
         private System.Windows.Forms.ComboBox cmbMaxAttendance;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Calendar.Calendar calClasses;
-        private System.Windows.Forms.Calendar.MonthView mvClasses;
+        private Calendar.NET.Calendar calCalendar;
     }
 }

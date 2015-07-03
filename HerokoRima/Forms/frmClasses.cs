@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
-using System.Windows.Forms.Calendar;
+
+using Calendar.NET;
 
 using HerokoRima.Classes;
 
-using CalendarItem = System.Windows.Forms.Calendar.CalendarItem;
+
 
 namespace HerokoRima.Forms
 {
@@ -14,17 +16,39 @@ namespace HerokoRima.Forms
         List<CalendarItem> calendarItems = new List<CalendarItem>();
         public tClass tClass;
         public tArea area;
+
+       
         public FrmClasses()
         {
             InitializeComponent();
             LoadAreas();
             GetCalendarItems();
-            MonthViews.LoadMonthView(mvClasses);
+         
         }
 
         private void GetCalendarItems()
         {
-                
+            calCalendar.CalendarDate = DateTime.Today;
+            calCalendar.CalendarView = CalendarViews.Month;
+            calCalendar.AllowEditingEvents = true;
+            var classes = Class.GetClasses();
+
+            PlaceItems(classes);
+        }
+
+        private void PlaceItems(IEnumerable<tClass> classes)
+        {
+            foreach (var exerciseEvent in classes.Select(@class => new CustomEvent
+                                                                       {
+                                                                           Date =@class.ClassDate,
+                                                                           TooltipEnabled =  true,
+                   
+                                                                           EventLengthInHours =2,
+                                                                           EventText = @class.MaxAttendance.ToString()
+                                                                       }))
+            {
+                calCalendar.AddEvent(exerciseEvent);
+            }
         }
 
         private void LoadAreas()
@@ -42,7 +66,7 @@ namespace HerokoRima.Forms
                                 {
                                     MaxAttendance = Int32.Parse(cmbMaxAttendance.Text),
                                     TypeId = area.AreaId,
-                                    ClassDate = dtpClassDate.Value,
+                                    ClassDate = new DateTime(dtpClassDate.Value.Year, dtpClassDate.Value.Month, dtpClassDate.Value.Day, Convert.ToInt32(cmbStart.Text.Substring(0,2)),0,0),
                                     EndTime = cmbEnd.Text,
                                     StartTime = cmbStart.Text
 
@@ -82,9 +106,5 @@ namespace HerokoRima.Forms
 
         }
 
-        private void calClasses_LoadItems(object sender, System.Windows.Forms.Calendar.CalendarLoadEventArgs e)
-        {
-        
-        }
     }
 }
