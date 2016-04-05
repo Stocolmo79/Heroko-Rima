@@ -886,13 +886,14 @@ namespace Calendar.NET
             Graphics g = Graphics.FromImage(bmp);
             e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-            SizeF sunSize = g.MeasureString("Sun", _dayOfWeekFont);
-            SizeF monSize = g.MeasureString("Mon", _dayOfWeekFont);
-            SizeF tueSize = g.MeasureString("Tue", _dayOfWeekFont);
-            SizeF wedSize = g.MeasureString("Wed", _dayOfWeekFont);
-            SizeF thuSize = g.MeasureString("Thu", _dayOfWeekFont);
-            SizeF friSize = g.MeasureString("Fri", _dayOfWeekFont);
-            SizeF satSize = g.MeasureString("Sat", _dayOfWeekFont);
+            
+            SizeF monSize = g.MeasureString("Lun", _dayOfWeekFont);
+            SizeF tueSize = g.MeasureString("Mar", _dayOfWeekFont);
+            SizeF wedSize = g.MeasureString("Mie", _dayOfWeekFont);
+            SizeF thuSize = g.MeasureString("Jue", _dayOfWeekFont);
+            SizeF friSize = g.MeasureString("Vie", _dayOfWeekFont);
+            SizeF satSize = g.MeasureString("Sab", _dayOfWeekFont);
+            SizeF sunSize = g.MeasureString("Dom", _dayOfWeekFont);
             SizeF dateHeaderSize = g.MeasureString(
                 _calendarDate.ToString("MMMM") + " " + _calendarDate.Year.ToString(CultureInfo.InvariantCulture), _dateHeaderFont);
             int headerSpacing = Max(sunSize.Height, monSize.Height, tueSize.Height, wedSize.Height, thuSize.Height, friSize.Height,

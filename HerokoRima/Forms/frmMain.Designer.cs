@@ -34,8 +34,8 @@
             this.profesoresMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoProfesorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miembrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.miembroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nuevoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.memberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tarjetasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevaTarjetaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buscarTarjetaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,6 +43,7 @@
             this.buscarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevaClaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,41 +76,44 @@
             this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
             this.personalToolStripMenuItem.Size = new System.Drawing.Size(90, 24);
             this.personalToolStripMenuItem.Text = "Profesores";
+            this.personalToolStripMenuItem.Visible = false;
             // 
             // profesoresMenuItem
             // 
             this.profesoresMenuItem.Name = "profesoresMenuItem";
-            this.profesoresMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.profesoresMenuItem.Size = new System.Drawing.Size(153, 26);
             this.profesoresMenuItem.Text = "Profesores";
             this.profesoresMenuItem.Click += new System.EventHandler(this.profesoresMenuItem_Click);
             // 
             // nuevoProfesorMenuItem
             // 
             this.nuevoProfesorMenuItem.Name = "nuevoProfesorMenuItem";
-            this.nuevoProfesorMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.nuevoProfesorMenuItem.Size = new System.Drawing.Size(153, 26);
             this.nuevoProfesorMenuItem.Text = "Nuevo";
             this.nuevoProfesorMenuItem.Click += new System.EventHandler(this.nuevoProfesorMenuItem_Click);
             // 
             // miembrosToolStripMenuItem
             // 
             this.miembrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miembroToolStripMenuItem,
-            this.nuevoToolStripMenuItem1});
+            this.memberToolStripMenuItem,
+            this.newMemberToolStripMenuItem});
             this.miembrosToolStripMenuItem.Name = "miembrosToolStripMenuItem";
             this.miembrosToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
             this.miembrosToolStripMenuItem.Text = "Miembros";
             // 
-            // miembroToolStripMenuItem
+            // memberToolStripMenuItem
             // 
-            this.miembroToolStripMenuItem.Name = "miembroToolStripMenuItem";
-            this.miembroToolStripMenuItem.Size = new System.Drawing.Size(145, 24);
-            this.miembroToolStripMenuItem.Text = "Miembros";
+            this.memberToolStripMenuItem.Name = "memberToolStripMenuItem";
+            this.memberToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.memberToolStripMenuItem.Text = "Miembros";
+            this.memberToolStripMenuItem.Click += new System.EventHandler(this.memberToolStripMenuItem_Click);
             // 
-            // nuevoToolStripMenuItem1
+            // newMemberToolStripMenuItem
             // 
-            this.nuevoToolStripMenuItem1.Name = "nuevoToolStripMenuItem1";
-            this.nuevoToolStripMenuItem1.Size = new System.Drawing.Size(145, 24);
-            this.nuevoToolStripMenuItem1.Text = "Nuevo";
+            this.newMemberToolStripMenuItem.Name = "newMemberToolStripMenuItem";
+            this.newMemberToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.newMemberToolStripMenuItem.Text = "Nuevo";
+            this.newMemberToolStripMenuItem.Click += new System.EventHandler(this.newMemberToolStripMenuItem_Click);
             // 
             // tarjetasToolStripMenuItem
             // 
@@ -117,19 +121,19 @@
             this.nuevaTarjetaToolStripMenuItem,
             this.buscarTarjetaToolStripMenuItem});
             this.tarjetasToolStripMenuItem.Name = "tarjetasToolStripMenuItem";
-            this.tarjetasToolStripMenuItem.Size = new System.Drawing.Size(73, 24);
+            this.tarjetasToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
             this.tarjetasToolStripMenuItem.Text = "Tarjetas";
             // 
             // nuevaTarjetaToolStripMenuItem
             // 
             this.nuevaTarjetaToolStripMenuItem.Name = "nuevaTarjetaToolStripMenuItem";
-            this.nuevaTarjetaToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.nuevaTarjetaToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.nuevaTarjetaToolStripMenuItem.Text = "Nueva tarjeta";
             // 
             // buscarTarjetaToolStripMenuItem
             // 
             this.buscarTarjetaToolStripMenuItem.Name = "buscarTarjetaToolStripMenuItem";
-            this.buscarTarjetaToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.buscarTarjetaToolStripMenuItem.Size = new System.Drawing.Size(174, 26);
             this.buscarTarjetaToolStripMenuItem.Text = "Buscar tarjeta";
             // 
             // clasesToolStripMenuItem
@@ -140,17 +144,18 @@
             this.clasesToolStripMenuItem.Name = "clasesToolStripMenuItem";
             this.clasesToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.clasesToolStripMenuItem.Text = "Clases";
+            this.clasesToolStripMenuItem.Visible = false;
             // 
             // buscarToolStripMenuItem
             // 
             this.buscarToolStripMenuItem.Name = "buscarToolStripMenuItem";
-            this.buscarToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.buscarToolStripMenuItem.Size = new System.Drawing.Size(164, 26);
             this.buscarToolStripMenuItem.Text = "Buscar clase";
             // 
             // nuevaClaseToolStripMenuItem
             // 
             this.nuevaClaseToolStripMenuItem.Name = "nuevaClaseToolStripMenuItem";
-            this.nuevaClaseToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.nuevaClaseToolStripMenuItem.Size = new System.Drawing.Size(164, 26);
             this.nuevaClaseToolStripMenuItem.Text = "Nueva clase";
             this.nuevaClaseToolStripMenuItem.Click += new System.EventHandler(this.nuevaClaseToolStripMenuItem_Click);
             // 
@@ -174,7 +179,8 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Heroko Rima Boulder e Yoga - Administración";
+            this.Text = "Gimnasio - Administración";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -195,10 +201,11 @@
         private System.Windows.Forms.ToolStripMenuItem nuevaClaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem profesoresMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevoProfesorMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem miembroToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem memberToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newMemberToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buscarTarjetaToolStripMenuItem;
         private System.Windows.Forms.Panel pnlMain;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

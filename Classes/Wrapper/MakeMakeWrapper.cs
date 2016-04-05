@@ -1,0 +1,172 @@
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+
+namespace Classes.Wrapper
+{
+    public class MakeMakeWrapper
+    {
+        private readonly MakeMakeEntities mmEntities;
+        public MakeMakeWrapper()
+        {
+            if (mmEntities == null)
+            {
+                mmEntities = new MakeMakeEntities();
+            }
+        }
+
+        public List<tStaff> GetStaffsList()
+        {
+            return mmEntities.tStaffs.Select(m => m).ToList();
+        }
+
+        public tStaff GetStaff(int staffId)
+        {
+            return mmEntities.tStaffs.FirstOrDefault(s => s.Id == staffId);
+        }
+        public List<tStaff> GetStaffByArea(int areaId)
+        {
+            return (from s in mmEntities.tStaffs
+                    from sa in mmEntities.tStaffAreas
+                    where s.Id == sa.StaffId && sa.AreaId == areaId
+                    select s).ToList<tStaff>();
+
+        }
+
+        public void SaveStaff(tStaff staff)
+        {
+            mmEntities.tStaffs.Add(staff);
+
+            mmEntities.SaveChanges();
+        }
+
+        public void SaveStaff()
+        {
+
+            mmEntities.SaveChanges();
+        }
+
+        public void DeleteStaffArea(tStaffArea tStaffArea)
+        {
+            mmEntities.tStaffAreas.Remove(tStaffArea);
+
+        }
+        public void SaveStaffArea(tStaffArea tStaffArea)
+        {
+            mmEntities.tStaffAreas.Add(tStaffArea);
+            mmEntities.SaveChanges();
+        }
+
+        #region Area
+
+        public List<tArea> GetAreas()
+        {
+            return mmEntities.tAreas.Select(a => a).ToList();
+        }
+
+        #endregion
+        #region Class
+
+        public long SaveClass(tClass tClass)
+        {
+            mmEntities.tClasses.Add(tClass);
+            mmEntities.SaveChanges();
+            return tClass.ClassId;
+
+        }
+
+        public void SaveStaffClass(tStaffClass tStaffClass)
+        {
+            mmEntities.tStaffClasses.Add(tStaffClass);
+            mmEntities.SaveChanges();
+        }
+
+        public DbSet<tClass> GetClasses()
+        {
+
+            return mmEntities.tClasses;
+        }
+
+        public DbSet<tStaffClass> GetStaffClasses()
+        {
+
+            return mmEntities.tStaffClasses;
+        }
+        #endregion
+
+
+        #region Members
+
+        public long SaveMember(tMember tMember)
+        {
+            mmEntities.tMembers.AddOrUpdate(tMember);
+            mmEntities.SaveChanges();
+            return tMember.MemberId;
+        }
+
+        public tMember GetMember(string input)
+        {
+            return (from m in mmEntities.tMembers where m.Firstname == input || m.MemberId.ToString() == input select m).FirstOrDefault();
+        }
+
+        #endregion
+
+        #region Cards
+
+        public void NewCard(tCard tCard)
+        {
+            mmEntities.tCards.Add(tCard);
+            mmEntities.SaveChanges();
+        }
+
+        public tCard GetCardInfo(long cardnumber)
+        {
+            return mmEntities.tCards.FirstOrDefault(s => s.CardId == cardnumber);
+        }
+
+        public void CardUsage(tCardUsage tCardUsage)
+        {
+            mmEntities.tCardUsages.Add(tCardUsage);
+            mmEntities.SaveChanges();
+        }
+
+        public tType GetCardType(int typeId)
+        {
+            return mmEntities.tTypes.FirstOrDefault(t => t.TypeId == typeId);
+        }
+
+        public DbSet<tType> GetCardTypes()
+        {
+            return mmEntities.tTypes;
+        }
+
+        public void SaveType(tType type)
+        {
+            mmEntities.tTypes.Add(type);
+            mmEntities.SaveChanges();
+        }
+        #endregion
+
+        public IQueryable<tCardUsage> GetCardUsage(long input)
+        {
+            var query = mmEntities.tCards// source
+   .Join(mmEntities.tCardUsages,         // target
+      c => c.CardId,          // FK
+      cm => cm.CardId,   // PK
+      (c, cm) => new { tCards = c, tCardUsages = cm }) // project result
+   .Select(x => x.tCardUsages);  // select result
+
+            return query;
+            
+            
+           // return mmEntities.tCardUsages.Where(u => u.CardId == input ) as DbSet<tCardUsage>;
+        }
+
+        public void SaveCardUsage(tCardUsage cardUsage)
+        {
+            mmEntities.tCardUsages.Add(cardUsage);
+            mmEntities.SaveChanges();
+        }
+    }
+}

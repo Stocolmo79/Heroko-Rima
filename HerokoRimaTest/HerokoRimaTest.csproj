@@ -61,10 +61,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HerokoRima\HerokoRimaAdministracion.csproj">
-      <Project>{488fc6b4-46ac-4976-ad94-c6dbd14f2ebe}</Project>
-      <Name>HerokoRimaAdministracion</Name>
+    <ProjectReference Include="..\Classes\Data.csproj">
+      <Project>{81dd26c6-dfce-4427-b718-ba7a509a634b}</Project>
+      <Name>Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HerokoRima\Administracion.csproj">
+      <Project>{488fc6b4-46ac-4976-ad94-c6dbd14f2ebe}</Project>
+      <Name>Administracion</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

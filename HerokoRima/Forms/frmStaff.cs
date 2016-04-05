@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+
+using Classes;
+using Classes.Classes;
+
 using HerokoRima.Classes;
-using HerokoRima.Wrapper;
+
 
 namespace HerokoRima.Forms
 {
@@ -54,9 +58,6 @@ namespace HerokoRima.Forms
             this.chkYoga.Checked = false;
         }
 
-        
-
-    
         private void cmbProfesores_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.ResetInputFields();

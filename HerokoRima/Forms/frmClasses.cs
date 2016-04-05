@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 using Calendar.NET;
 
+using Classes;
+using Classes.Classes;
+
 using HerokoRima.Classes;
 
 

@@ -8,7 +8,7 @@ namespace HerokoRima.Forms
         public FrmMain()
         {
             this.InitializeComponent();
-            LoadClasses();
+            LoadMembers(false);
         }
 
         private void profesoresMenuItem_Click(object sender, EventArgs e)
@@ -19,7 +19,7 @@ namespace HerokoRima.Forms
         private void LoadProfesores(bool newStaff)
         {
             this.pnlMain.Controls.Clear();
-            var profeForm = new FrmStaff { TopLevel = false, AutoScroll = true,Dock = DockStyle.Fill, newStaff = newStaff };
+            var profeForm = new FrmStaff { TopLevel = false, AutoScroll = true, Dock = DockStyle.Fill, newStaff = newStaff };
             this.pnlMain.Controls.Add(profeForm);
             profeForm.Show();
         }
@@ -41,9 +41,28 @@ namespace HerokoRima.Forms
             pnlMain.Controls.Add(classForm);
             classForm.Show();
         }
+
+        private void memberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.LoadMembers(false);
+        }
+
+        
+
+        private void newMemberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.LoadMembers(true);
+        }
+        private void LoadMembers(bool newMember)
+        {
+            this.pnlMain.Controls.Clear();
+            var memberForm = new frmMembers { TopLevel = false, AutoScroll = true, Dock = DockStyle.Fill, newMember = newMember };
+            pnlMain.Controls.Add(memberForm);
+            memberForm.Show();
+        }
     }
 
 
 
-    }
+}
 

@@ -1,6 +1,10 @@
 ﻿
 using System.Linq;
+
+using Classes;
+
 using HerokoRima;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace HerokoRimaTest
