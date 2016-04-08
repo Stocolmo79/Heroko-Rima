@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-
+using  HerokoRimaEntrada;
+using Cashier;
 namespace HerokoRima.Forms
 {
     public partial class FrmMain : Form
@@ -59,6 +60,23 @@ namespace HerokoRima.Forms
             var memberForm = new frmMembers { TopLevel = false, AutoScroll = true, Dock = DockStyle.Fill, newMember = newMember };
             pnlMain.Controls.Add(memberForm);
             memberForm.Show();
+        }
+
+        private void entranceMenuItem_Click(object sender, EventArgs e)
+        {
+            this.pnlMain.Controls.Clear();
+            var entranceForm  = new frmMain{ TopLevel = false, AutoScroll = true, Dock = DockStyle.Fill };
+            pnlMain.Controls.Add(entranceForm);
+            entranceForm.Show();
+        }
+
+        private void CashierMenuItem_Click(object sender, EventArgs e)
+        {
+            this.pnlMain.Controls.Clear();
+         
+            //new HerokoRima.Cashier.frmCashier { TopLevel = false, AutoScroll = true, Dock = DockStyle.Fill };
+            //pnlMain.Controls.Add(entranceForm);
+            //entranceForm.Show();
         }
     }
 

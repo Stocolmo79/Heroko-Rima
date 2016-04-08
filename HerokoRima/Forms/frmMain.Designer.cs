@@ -42,8 +42,10 @@
             this.clasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buscarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevaClaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.entranceMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.CashierMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +57,9 @@
             this.personalToolStripMenuItem,
             this.miembrosToolStripMenuItem,
             this.tarjetasToolStripMenuItem,
-            this.clasesToolStripMenuItem});
+            this.clasesToolStripMenuItem,
+            this.entranceMenuItem,
+            this.CashierMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1902, 28);
@@ -104,14 +108,14 @@
             // memberToolStripMenuItem
             // 
             this.memberToolStripMenuItem.Name = "memberToolStripMenuItem";
-            this.memberToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.memberToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.memberToolStripMenuItem.Text = "Miembros";
             this.memberToolStripMenuItem.Click += new System.EventHandler(this.memberToolStripMenuItem_Click);
             // 
             // newMemberToolStripMenuItem
             // 
             this.newMemberToolStripMenuItem.Name = "newMemberToolStripMenuItem";
-            this.newMemberToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
+            this.newMemberToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.newMemberToolStripMenuItem.Text = "Nuevo";
             this.newMemberToolStripMenuItem.Click += new System.EventHandler(this.newMemberToolStripMenuItem_Click);
             // 
@@ -123,6 +127,7 @@
             this.tarjetasToolStripMenuItem.Name = "tarjetasToolStripMenuItem";
             this.tarjetasToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
             this.tarjetasToolStripMenuItem.Text = "Tarjetas";
+            this.tarjetasToolStripMenuItem.Visible = false;
             // 
             // nuevaTarjetaToolStripMenuItem
             // 
@@ -159,6 +164,14 @@
             this.nuevaClaseToolStripMenuItem.Text = "Nueva clase";
             this.nuevaClaseToolStripMenuItem.Click += new System.EventHandler(this.nuevaClaseToolStripMenuItem_Click);
             // 
+            // entranceMenuItem
+            // 
+            this.entranceMenuItem.Name = "entranceMenuItem";
+            this.entranceMenuItem.Size = new System.Drawing.Size(78, 24);
+            this.entranceMenuItem.Text = "Entradas";
+            this.entranceMenuItem.Visible = false;
+            this.entranceMenuItem.Click += new System.EventHandler(this.entranceMenuItem_Click);
+            // 
             // pnlMain
             // 
             this.pnlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -168,6 +181,13 @@
             this.pnlMain.Name = "pnlMain";
             this.pnlMain.Size = new System.Drawing.Size(1902, 1004);
             this.pnlMain.TabIndex = 2;
+            // 
+            // CashierMenuItem
+            // 
+            this.CashierMenuItem.Name = "CashierMenuItem";
+            this.CashierMenuItem.Size = new System.Drawing.Size(50, 24);
+            this.CashierMenuItem.Text = "Caja";
+            this.CashierMenuItem.Click += new System.EventHandler(this.CashierMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -179,7 +199,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gimnasio - Administración";
+            this.Text = "Empresa - Administración";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -206,6 +226,8 @@
         private System.Windows.Forms.ToolStripMenuItem buscarTarjetaToolStripMenuItem;
         private System.Windows.Forms.Panel pnlMain;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripMenuItem entranceMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CashierMenuItem;
     }
 }
 

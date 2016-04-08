@@ -62,7 +62,7 @@
             this.Controls.Add(this.btnEntrance);
             this.Controls.Add(this.btnAdmin);
             this.Name = "Main";
-            this.Text = "Elige aplicación";
+            this.Text = "Empresa - Elige aplicación";
             this.ResumeLayout(false);
 
         }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -114,12 +115,13 @@ namespace Classes.Wrapper
 
         #region Cards
 
-        public void NewCard(tCard tCard)
+
+
+        public void SaveCard(tCard tCard)
         {
-            mmEntities.tCards.Add(tCard);
+            mmEntities.tCards.AddOrUpdate(tCard);
             mmEntities.SaveChanges();
         }
-
         public tCard GetCardInfo(long cardnumber)
         {
             return mmEntities.tCards.FirstOrDefault(s => s.CardId == cardnumber);
@@ -150,22 +152,24 @@ namespace Classes.Wrapper
 
         public IQueryable<tCardUsage> GetCardUsage(long input)
         {
-            var query = mmEntities.tCards// source
-   .Join(mmEntities.tCardUsages,         // target
-      c => c.CardId,          // FK
-      cm => cm.CardId,   // PK
-      (c, cm) => new { tCards = c, tCardUsages = cm }) // project result
-   .Select(x => x.tCardUsages);  // select result
-
+            var query = mmEntities.tCards.Join(mmEntities.tCardUsages, c => c.CardId,
+      cm => cm.CardId, (c, cm) => new { tCards = c, tCardUsages = cm }).Select(x => x.tCardUsages).Where( cu=>cu.CardId == input);
             return query;
-            
-            
-           // return mmEntities.tCardUsages.Where(u => u.CardId == input ) as DbSet<tCardUsage>;
         }
 
+       
         public void SaveCardUsage(tCardUsage cardUsage)
         {
             mmEntities.tCardUsages.Add(cardUsage);
+            mmEntities.SaveChanges();
+        }
+
+        public void SetCardsToDisabled()
+        {
+            mmEntities.tCards.Where(x => x.EndDate< DateTime.Now)
+      .ToList()
+      .ForEach(a => a.Enabled= false);
+
             mmEntities.SaveChanges();
         }
     }

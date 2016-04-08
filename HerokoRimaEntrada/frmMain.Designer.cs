@@ -35,6 +35,8 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.lblMembershipInfo = new System.Windows.Forms.Label();
             this.tGreetings = new System.Windows.Forms.Timer(this.components);
+            this.lblTime = new System.Windows.Forms.Label();
+            this.tTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // txtUserMember
@@ -94,11 +96,27 @@
             this.tGreetings.Interval = 5000;
             this.tGreetings.Tick += new System.EventHandler(this.tGreetings_Tick);
             // 
+            // lblTime
+            // 
+            this.lblTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Location = new System.Drawing.Point(12, 727);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(0, 39);
+            this.lblTime.TabIndex = 5;
+            // 
+            // tTimer
+            // 
+            this.tTimer.Interval = 1000;
+            this.tTimer.Tick += new System.EventHandler(this.tTimer_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1582, 834);
+            this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblMembershipInfo);
             this.Controls.Add(this.lblName);
@@ -107,6 +125,7 @@
             this.Name = "frmMain";
             this.Text = "Empresa - Entradas";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,6 +139,8 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblMembershipInfo;
         private System.Windows.Forms.Timer tGreetings;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Timer tTimer;
     }
 }
 

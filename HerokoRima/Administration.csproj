@@ -214,9 +214,17 @@
       <Project>{6cbc43b6-e950-49b2-b14a-563c50fcd5c3}</Project>
       <Name>Calendar.NET</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Cashier\Cashier.csproj">
+      <Project>{c4a80af1-aa29-4c38-9674-1ea8d51b6cf6}</Project>
+      <Name>Cashier</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Classes\Data.csproj">
       <Project>{81dd26c6-dfce-4427-b718-ba7a509a634b}</Project>
       <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HerokoRimaEntrada\Entrance.csproj">
+      <Project>{284b4517-17cd-4884-b9ec-2bdeeed53a5c}</Project>
+      <Name>Entrance</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -80,6 +80,33 @@
           <Property Name="Purchased" Type="datetime" />
           <Property Name="Amount" Type="bigint" />
         </EntityType>
+        <EntityType Name="tOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="bigint" />
+          <Property Name="TotalAmount" Type="bigint" />
+        </EntityType>
+        <EntityType Name="tOrderItem">
+          <Key>
+            <PropertyRef Name="OrderItemId" />
+          </Key>
+          <Property Name="OrderItemId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="PriceId" Type="int" Nullable="false" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="TotalAmount" Type="int" />
+        </EntityType>
+        <EntityType Name="tPrice">
+          <Key>
+            <PropertyRef Name="PriceId" />
+          </Key>
+          <Property Name="PriceId" Type="int" Nullable="false" />
+          <Property Name="PriceDescription" Type="varchar" MaxLength="250" />
+          <Property Name="PriceValue" Type="bigint" />
+        </EntityType>
         <EntityType Name="tStaffArea">
           <Key>
             <PropertyRef Name="ID" />
@@ -125,6 +152,7 @@
           </Key>
           <Property Name="TypeId" Type="int" Nullable="false" />
           <Property Name="TypeDescription" Type="varchar" MaxLength="250" />
+          <Property Name="Count" Type="int" />
         </EntityType>
         <Association Name="FK_tCards_tTypes">
           <End Role="tTypes" Type="Self.tTypes" Multiplicity="1" />
@@ -147,6 +175,30 @@
             </Principal>
             <Dependent Role="tCardUsages">
               <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderItem_tOrder">
+          <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
+          <End Role="tOrderItem" Type="Self.tOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrder">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="tOrderItem">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tOrderItem_tPrice">
+          <End Role="tPrice" Type="Self.tPrice" Multiplicity="1" />
+          <End Role="tOrderItem" Type="Self.tOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPrice">
+              <PropertyRef Name="PriceId" />
+            </Principal>
+            <Dependent Role="tOrderItem">
+              <PropertyRef Name="PriceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -207,6 +259,9 @@
           <EntitySet Name="tDropIns" EntityType="Self.tDropIns" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tMembers" EntityType="Self.tMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tMonths" EntityType="Self.tMonths" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrder" EntityType="Self.tOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tOrderItem" EntityType="Self.tOrderItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tPrice" EntityType="Self.tPrice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tStaffArea" EntityType="Self.tStaffArea" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tStaffClass" EntityType="Self.tStaffClass" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tStaffs" EntityType="Self.tStaffs" Schema="dbo" store:Type="Tables" />
@@ -219,6 +274,14 @@
           <AssociationSet Name="FK_tCardUsages_tCards" Association="Self.FK_tCardUsages_tCards">
             <End Role="tCards" EntitySet="tCards" />
             <End Role="tCardUsages" EntitySet="tCardUsages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderItem_tOrder" Association="Self.FK_tOrderItem_tOrder">
+            <End Role="tOrder" EntitySet="tOrder" />
+            <End Role="tOrderItem" EntitySet="tOrderItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tOrderItem_tPrice" Association="Self.FK_tOrderItem_tPrice">
+            <End Role="tPrice" EntitySet="tPrice" />
+            <End Role="tOrderItem" EntitySet="tOrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_tStaffArea_tAreas" Association="Self.FK_tStaffArea_tAreas">
             <End Role="tAreas" EntitySet="tAreas" />
@@ -373,6 +436,7 @@
           <Property Name="TypeId" Type="Int32" Nullable="false" />
           <Property Name="TypeDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tCards" Relationship="Self.FK_tCards_tTypes" FromRole="tTypes" ToRole="tCards" />
+          <Property Name="Count" Type="Int32" />
         </EntityType>
         <Association Name="FK_tStaffArea_tAreas">
           <End Role="tAreas" Type="Self.tArea" Multiplicity="1" />
@@ -472,6 +536,17 @@
             <End Role="tCard" EntitySet="tCards" />
             <End Role="tCardUsage" EntitySet="tCardUsages" />
           </AssociationSet>
+          <EntitySet Name="tPrices" EntityType="MakeMakeModel.tPrice" />
+          <EntitySet Name="tOrderItems" EntityType="MakeMakeModel.tOrderItem" />
+          <AssociationSet Name="FK_tOrderItem_tPrice" Association="MakeMakeModel.FK_tOrderItem_tPrice">
+            <End Role="tPrice" EntitySet="tPrices" />
+            <End Role="tOrderItem" EntitySet="tOrderItems" />
+          </AssociationSet>
+          <EntitySet Name="tOrders" EntityType="MakeMakeModel.tOrder" />
+          <AssociationSet Name="FK_tOrderItem_tOrder" Association="MakeMakeModel.FK_tOrderItem_tOrder">
+            <End Role="tOrder" EntitySet="tOrders" />
+            <End Role="tOrderItem" EntitySet="tOrderItems" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_tCardUsages_tCards">
           <End Type="MakeMakeModel.tCard" Role="tCard" Multiplicity="1" />
@@ -482,6 +557,61 @@
             </Principal>
             <Dependent Role="tCardUsage">
               <PropertyRef Name="CardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tPrice">
+          <Key>
+            <PropertyRef Name="PriceId" />
+          </Key>
+          <Property Name="PriceId" Type="Int32" Nullable="false" />
+          <Property Name="PriceDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PriceValue" Type="Int64" />
+          <NavigationProperty Name="tOrderItems" Relationship="MakeMakeModel.FK_tOrderItem_tPrice" FromRole="tPrice" ToRole="tOrderItem" />
+        </EntityType>
+        <EntityType Name="tOrderItem">
+          <Key>
+            <PropertyRef Name="OrderItemId" />
+          </Key>
+          <Property Name="OrderItemId" Type="Int32" Nullable="false" />
+          <Property Name="PriceId" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="TotalAmount" Type="Int32" />
+          <NavigationProperty Name="tPrice" Relationship="MakeMakeModel.FK_tOrderItem_tPrice" FromRole="tOrderItem" ToRole="tPrice" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tOrder" Relationship="MakeMakeModel.FK_tOrderItem_tOrder" FromRole="tOrderItem" ToRole="tOrder" />
+        </EntityType>
+        <Association Name="FK_tOrderItem_tPrice">
+          <End Type="MakeMakeModel.tPrice" Role="tPrice" Multiplicity="1" />
+          <End Type="MakeMakeModel.tOrderItem" Role="tOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPrice">
+              <PropertyRef Name="PriceId" />
+            </Principal>
+            <Dependent Role="tOrderItem">
+              <PropertyRef Name="PriceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int64" />
+          <Property Name="TotalAmount" Type="Int64" />
+          <NavigationProperty Name="tOrderItems" Relationship="MakeMakeModel.FK_tOrderItem_tOrder" FromRole="tOrder" ToRole="tOrderItem" />
+        </EntityType>
+        <Association Name="FK_tOrderItem_tOrder">
+          <End Type="MakeMakeModel.tOrder" Role="tOrder" Multiplicity="1" />
+          <End Type="MakeMakeModel.tOrderItem" Role="tOrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tOrder">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="tOrderItem">
+              <PropertyRef Name="OrderId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -620,8 +750,39 @@
           <EntitySetMapping Name="tTypes">
             <EntityTypeMapping TypeName="MakeMakeModel.tType">
               <MappingFragment StoreEntitySet="tTypes">
+                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="TypeId" ColumnName="TypeId" />
                 <ScalarProperty Name="TypeDescription" ColumnName="TypeDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tPrices">
+            <EntityTypeMapping TypeName="MakeMakeModel.tPrice">
+              <MappingFragment StoreEntitySet="tPrice">
+                <ScalarProperty Name="PriceValue" ColumnName="PriceValue" />
+                <ScalarProperty Name="PriceDescription" ColumnName="PriceDescription" />
+                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrderItems">
+            <EntityTypeMapping TypeName="MakeMakeModel.tOrderItem">
+              <MappingFragment StoreEntitySet="tOrderItem">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrders">
+            <EntityTypeMapping TypeName="MakeMakeModel.tOrder">
+              <MappingFragment StoreEntitySet="tOrder">
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
