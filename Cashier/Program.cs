@@ -16,7 +16,7 @@ namespace Cashier
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new btnCancel());
+            Application.Run(new frmCashier());
         }
     }
 }

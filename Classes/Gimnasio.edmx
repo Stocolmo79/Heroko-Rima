@@ -84,7 +84,7 @@
           <Key>
             <PropertyRef Name="OrderId" />
           </Key>
-          <Property Name="OrderId" Type="int" Nullable="false" />
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MemberId" Type="bigint" />
           <Property Name="TotalAmount" Type="bigint" />
         </EntityType>
@@ -97,7 +97,7 @@
           <Property Name="PriceId" Type="int" Nullable="false" />
           <Property Name="OrderDate" Type="date" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="TotalAmount" Type="int" />
+          <Property Name="TotalAmount" Type="bigint" />
         </EntityType>
         <EntityType Name="tPrice">
           <Key>
@@ -537,12 +537,12 @@
             <End Role="tCardUsage" EntitySet="tCardUsages" />
           </AssociationSet>
           <EntitySet Name="tPrices" EntityType="MakeMakeModel.tPrice" />
+          <EntitySet Name="tOrders" EntityType="MakeMakeModel.tOrder" />
           <EntitySet Name="tOrderItems" EntityType="MakeMakeModel.tOrderItem" />
           <AssociationSet Name="FK_tOrderItem_tPrice" Association="MakeMakeModel.FK_tOrderItem_tPrice">
             <End Role="tPrice" EntitySet="tPrices" />
             <End Role="tOrderItem" EntitySet="tOrderItems" />
           </AssociationSet>
-          <EntitySet Name="tOrders" EntityType="MakeMakeModel.tOrder" />
           <AssociationSet Name="FK_tOrderItem_tOrder" Association="MakeMakeModel.FK_tOrderItem_tOrder">
             <End Role="tOrder" EntitySet="tOrders" />
             <End Role="tOrderItem" EntitySet="tOrderItems" />
@@ -569,17 +569,26 @@
           <Property Name="PriceValue" Type="Int64" />
           <NavigationProperty Name="tOrderItems" Relationship="MakeMakeModel.FK_tOrderItem_tPrice" FromRole="tPrice" ToRole="tOrderItem" />
         </EntityType>
+        <EntityType Name="tOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int64" />
+          <Property Name="TotalAmount" Type="Int64" />
+          <NavigationProperty Name="tOrderItems" Relationship="MakeMakeModel.FK_tOrderItem_tOrder" FromRole="tOrder" ToRole="tOrderItem" />
+        </EntityType>
         <EntityType Name="tOrderItem">
           <Key>
             <PropertyRef Name="OrderItemId" />
           </Key>
           <Property Name="OrderItemId" Type="Int32" Nullable="false" />
+          <Property Name="OrderId" Type="Int32" Nullable="false" />
           <Property Name="PriceId" Type="Int32" Nullable="false" />
           <Property Name="OrderDate" Type="DateTime" Precision="0" />
           <Property Name="Quantity" Type="Int32" />
-          <Property Name="TotalAmount" Type="Int32" />
+          <Property Name="TotalAmount" Type="Int64" />
           <NavigationProperty Name="tPrice" Relationship="MakeMakeModel.FK_tOrderItem_tPrice" FromRole="tOrderItem" ToRole="tPrice" />
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tOrder" Relationship="MakeMakeModel.FK_tOrderItem_tOrder" FromRole="tOrderItem" ToRole="tOrder" />
         </EntityType>
         <Association Name="FK_tOrderItem_tPrice">
@@ -594,15 +603,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tOrder">
-          <Key>
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="OrderId" Type="Int32" Nullable="false" />
-          <Property Name="MemberId" Type="Int64" />
-          <Property Name="TotalAmount" Type="Int64" />
-          <NavigationProperty Name="tOrderItems" Relationship="MakeMakeModel.FK_tOrderItem_tOrder" FromRole="tOrder" ToRole="tOrderItem" />
-        </EntityType>
         <Association Name="FK_tOrderItem_tOrder">
           <End Type="MakeMakeModel.tOrder" Role="tOrder" Multiplicity="1" />
           <End Type="MakeMakeModel.tOrderItem" Role="tOrderItem" Multiplicity="*" />
@@ -765,24 +765,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tOrderItems">
-            <EntityTypeMapping TypeName="MakeMakeModel.tOrderItem">
-              <MappingFragment StoreEntitySet="tOrderItem">
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
-                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tOrders">
             <EntityTypeMapping TypeName="MakeMakeModel.tOrder">
               <MappingFragment StoreEntitySet="tOrder">
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="MemberId" ColumnName="MemberId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tOrderItems">
+            <EntityTypeMapping TypeName="MakeMakeModel.tOrderItem">
+              <MappingFragment StoreEntitySet="tOrderItem">
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

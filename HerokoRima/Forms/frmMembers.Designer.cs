@@ -33,6 +33,8 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.gbMember = new System.Windows.Forms.GroupBox();
+            this.txtTickets = new System.Windows.Forms.TextBox();
+            this.lblTickets = new System.Windows.Forms.Label();
             this.btnRenewDate = new System.Windows.Forms.Button();
             this.cmbCardType = new System.Windows.Forms.ComboBox();
             this.btnSave = new System.Windows.Forms.Button();
@@ -49,8 +51,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lvCardUsage = new System.Windows.Forms.ListView();
-            this.txtTickets = new System.Windows.Forms.TextBox();
-            this.lblTickets = new System.Windows.Forms.Label();
             this.gbSearchMember.SuspendLayout();
             this.gbMember.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -124,6 +124,25 @@
             this.gbMember.TabIndex = 2;
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Miembro";
+            // 
+            // txtTickets
+            // 
+            this.txtTickets.Enabled = false;
+            this.txtTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTickets.Location = new System.Drawing.Point(11, 521);
+            this.txtTickets.Name = "txtTickets";
+            this.txtTickets.Size = new System.Drawing.Size(518, 34);
+            this.txtTickets.TabIndex = 18;
+            // 
+            // lblTickets
+            // 
+            this.lblTickets.AutoSize = true;
+            this.lblTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTickets.Location = new System.Drawing.Point(6, 489);
+            this.lblTickets.Name = "lblTickets";
+            this.lblTickets.Size = new System.Drawing.Size(91, 29);
+            this.lblTickets.TabIndex = 19;
+            this.lblTickets.Text = "Tickets";
             // 
             // btnRenewDate
             // 
@@ -277,31 +296,13 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvCardUsage.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvCardUsage.FullRowSelect = true;
             this.lvCardUsage.GridLines = true;
             this.lvCardUsage.Location = new System.Drawing.Point(7, 22);
             this.lvCardUsage.Name = "lvCardUsage";
             this.lvCardUsage.Size = new System.Drawing.Size(1342, 1018);
             this.lvCardUsage.TabIndex = 0;
             this.lvCardUsage.UseCompatibleStateImageBehavior = false;
-            // 
-            // txtTickets
-            // 
-            this.txtTickets.Enabled = false;
-            this.txtTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTickets.Location = new System.Drawing.Point(11, 521);
-            this.txtTickets.Name = "txtTickets";
-            this.txtTickets.Size = new System.Drawing.Size(518, 34);
-            this.txtTickets.TabIndex = 18;
-            // 
-            // lblTickets
-            // 
-            this.lblTickets.AutoSize = true;
-            this.lblTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTickets.Location = new System.Drawing.Point(6, 489);
-            this.lblTickets.Name = "lblTickets";
-            this.lblTickets.Size = new System.Drawing.Size(91, 29);
-            this.lblTickets.TabIndex = 19;
-            this.lblTickets.Text = "Tickets";
             // 
             // frmMembers
             // 

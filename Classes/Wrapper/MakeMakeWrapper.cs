@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
+using System.Globalization;
 using System.Linq;
 
 namespace Classes.Wrapper
@@ -115,8 +116,6 @@ namespace Classes.Wrapper
 
         #region Cards
 
-
-
         public void SaveCard(tCard tCard)
         {
             mmEntities.tCards.AddOrUpdate(tCard);
@@ -148,16 +147,16 @@ namespace Classes.Wrapper
             mmEntities.tTypes.Add(type);
             mmEntities.SaveChanges();
         }
-        #endregion
+
 
         public IQueryable<tCardUsage> GetCardUsage(long input)
         {
             var query = mmEntities.tCards.Join(mmEntities.tCardUsages, c => c.CardId,
-      cm => cm.CardId, (c, cm) => new { tCards = c, tCardUsages = cm }).Select(x => x.tCardUsages).Where( cu=>cu.CardId == input);
+      cm => cm.CardId, (c, cm) => new { tCards = c, tCardUsages = cm }).Select(x => x.tCardUsages).Where(cu => cu.CardId == input);
             return query;
         }
 
-       
+
         public void SaveCardUsage(tCardUsage cardUsage)
         {
             mmEntities.tCardUsages.Add(cardUsage);
@@ -166,11 +165,51 @@ namespace Classes.Wrapper
 
         public void SetCardsToDisabled()
         {
-            mmEntities.tCards.Where(x => x.EndDate< DateTime.Now)
+            mmEntities.tCards.Where(x => x.EndDate < DateTime.Now)
       .ToList()
-      .ForEach(a => a.Enabled= false);
+      .ForEach(a => a.Enabled = false);
 
             mmEntities.SaveChanges();
         }
-    }
+        #endregion
+        #region Order
+        public void SaveOrder(tOrder order)
+        {
+            mmEntities.tOrders.Add(order);
+            mmEntities.SaveChanges();
+
+        }
+        public tOrder GetOrder(int input)
+        {
+            return mmEntities.tOrders.FirstOrDefault(s => s.OrderId == input);
+        }
+       
+
+        public void SaveOrderItem(tOrderItem orderItem)
+        {
+
+            mmEntities.tOrderItems.Add(orderItem);
+            mmEntities.SaveChanges();
+        }
+         public tOrderItem GetOrderItems(int input)
+        {
+            return mmEntities.tOrderItems.FirstOrDefault(oi => oi.OrderId == input);
+        }
+
+        #endregion
+
+         #region Price  
+
+         public tPrice GetPrice(int priceId)
+        {
+            return mmEntities.tPrices.FirstOrDefault(p => p.PriceId == priceId);
+        } 
+        public List<tPrice> GetPrices()
+        {
+            return new List<tPrice>(mmEntities.tPrices);
+        }
+#endregion
+
+     
+    } 
 }
