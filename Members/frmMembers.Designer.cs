@@ -1,4 +1,4 @@
-﻿namespace HerokoRima.Forms
+﻿namespace Members
 {
     partial class frmMembers
     {
@@ -33,6 +33,8 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.gbMember = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.chkValid = new System.Windows.Forms.CheckBox();
             this.txtTickets = new System.Windows.Forms.TextBox();
             this.lblTickets = new System.Windows.Forms.Label();
             this.btnRenewDate = new System.Windows.Forms.Button();
@@ -102,6 +104,8 @@
             // 
             this.gbMember.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbMember.Controls.Add(this.label7);
+            this.gbMember.Controls.Add(this.chkValid);
             this.gbMember.Controls.Add(this.txtTickets);
             this.gbMember.Controls.Add(this.lblTickets);
             this.gbMember.Controls.Add(this.btnRenewDate);
@@ -125,13 +129,35 @@
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Miembro";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(6, 518);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(351, 29);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Cantidad de tickets que quedan";
+            // 
+            // chkValid
+            // 
+            this.chkValid.AutoSize = true;
+            this.chkValid.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkValid.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkValid.Location = new System.Drawing.Point(11, 572);
+            this.chkValid.Name = "chkValid";
+            this.chkValid.Size = new System.Drawing.Size(103, 33);
+            this.chkValid.TabIndex = 20;
+            this.chkValid.Text = "Valido";
+            this.chkValid.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.chkValid.UseVisualStyleBackColor = true;
+            // 
             // txtTickets
             // 
-            this.txtTickets.Enabled = false;
             this.txtTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTickets.Location = new System.Drawing.Point(11, 521);
+            this.txtTickets.Location = new System.Drawing.Point(354, 521);
             this.txtTickets.Name = "txtTickets";
-            this.txtTickets.Size = new System.Drawing.Size(518, 34);
+            this.txtTickets.Size = new System.Drawing.Size(175, 34);
             this.txtTickets.TabIndex = 18;
             // 
             // lblTickets
@@ -147,7 +173,7 @@
             // btnRenewDate
             // 
             this.btnRenewDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRenewDate.Location = new System.Drawing.Point(315, 561);
+            this.btnRenewDate.Location = new System.Drawing.Point(11, 847);
             this.btnRenewDate.Name = "btnRenewDate";
             this.btnRenewDate.Size = new System.Drawing.Size(214, 39);
             this.btnRenewDate.TabIndex = 17;
@@ -158,6 +184,7 @@
             // 
             // cmbCardType
             // 
+            this.cmbCardType.Enabled = false;
             this.cmbCardType.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCardType.FormattingEnabled = true;
             this.cmbCardType.ItemHeight = 29;
@@ -352,5 +379,7 @@
         private System.Windows.Forms.Button btnRenewDate;
         private System.Windows.Forms.TextBox txtTickets;
         private System.Windows.Forms.Label lblTickets;
+        private System.Windows.Forms.CheckBox chkValid;
+        private System.Windows.Forms.Label label7;
     }
 }

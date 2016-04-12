@@ -17,6 +17,7 @@ namespace Classes
         public long CUId { get; set; }
         public long CardId { get; set; }
         public Nullable<System.DateTime> EntranceDate { get; set; }
+        public string Description { get; set; }
     
         public virtual tCard tCard { get; set; }
     }

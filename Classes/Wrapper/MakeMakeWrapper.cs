@@ -188,7 +188,7 @@ namespace Classes.Wrapper
         public void SaveOrderItem(tOrderItem orderItem)
         {
 
-            mmEntities.tOrderItems.Add(orderItem);
+            mmEntities.tOrderItems.AddOrUpdate(orderItem);
             mmEntities.SaveChanges();
         }
          public tOrderItem GetOrderItems(int input)

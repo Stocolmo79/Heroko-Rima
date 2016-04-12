@@ -27,7 +27,7 @@ namespace Classes
         public System.DateTime Changed { get; set; }
         public Nullable<bool> Enabled { get; set; }
     
-        public virtual tType tType { get; set; }
         public virtual ICollection<tCardUsage> tCardUsages { get; set; }
+        public virtual tPrice tPrice { get; set; }
     }
 }

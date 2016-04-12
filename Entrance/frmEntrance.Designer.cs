@@ -1,6 +1,6 @@
 ﻿namespace HerokoRimaEntrada
 {
-    partial class frmMain
+    partial class frmEntrance
     {
         /// <summary>
         /// Required designer variable.

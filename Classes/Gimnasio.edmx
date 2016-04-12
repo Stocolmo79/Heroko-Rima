@@ -41,6 +41,7 @@
           <Property Name="CUId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CardId" Type="bigint" Nullable="false" />
           <Property Name="EntranceDate" Type="datetime" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="tClasses">
           <Key>
@@ -92,7 +93,7 @@
           <Key>
             <PropertyRef Name="OrderItemId" />
           </Key>
-          <Property Name="OrderItemId" Type="int" Nullable="false" />
+          <Property Name="OrderItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OrderId" Type="int" Nullable="false" />
           <Property Name="PriceId" Type="int" Nullable="false" />
           <Property Name="OrderDate" Type="date" />
@@ -106,6 +107,7 @@
           <Property Name="PriceId" Type="int" Nullable="false" />
           <Property Name="PriceDescription" Type="varchar" MaxLength="250" />
           <Property Name="PriceValue" Type="bigint" />
+          <Property Name="Count" Type="int" />
         </EntityType>
         <EntityType Name="tStaffArea">
           <Key>
@@ -154,12 +156,12 @@
           <Property Name="TypeDescription" Type="varchar" MaxLength="250" />
           <Property Name="Count" Type="int" />
         </EntityType>
-        <Association Name="FK_tCards_tTypes">
-          <End Role="tTypes" Type="Self.tTypes" Multiplicity="1" />
+        <Association Name="FK_tCards_tPrice">
+          <End Role="tPrice" Type="Self.tPrice" Multiplicity="1" />
           <End Role="tCards" Type="Self.tCards" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="tTypes">
-              <PropertyRef Name="TypeId" />
+            <Principal Role="tPrice">
+              <PropertyRef Name="PriceId" />
             </Principal>
             <Dependent Role="tCards">
               <PropertyRef Name="TypeId" />
@@ -187,18 +189,6 @@
             </Principal>
             <Dependent Role="tOrderItem">
               <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tOrderItem_tPrice">
-          <End Role="tPrice" Type="Self.tPrice" Multiplicity="1" />
-          <End Role="tOrderItem" Type="Self.tOrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tPrice">
-              <PropertyRef Name="PriceId" />
-            </Principal>
-            <Dependent Role="tOrderItem">
-              <PropertyRef Name="PriceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -267,8 +257,8 @@
           <EntitySet Name="tStaffs" EntityType="Self.tStaffs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tTickets" EntityType="Self.tTickets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tTypes" EntityType="Self.tTypes" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_tCards_tTypes" Association="Self.FK_tCards_tTypes">
-            <End Role="tTypes" EntitySet="tTypes" />
+          <AssociationSet Name="FK_tCards_tPrice" Association="Self.FK_tCards_tPrice">
+            <End Role="tPrice" EntitySet="tPrice" />
             <End Role="tCards" EntitySet="tCards" />
           </AssociationSet>
           <AssociationSet Name="FK_tCardUsages_tCards" Association="Self.FK_tCardUsages_tCards">
@@ -277,10 +267,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_tOrderItem_tOrder" Association="Self.FK_tOrderItem_tOrder">
             <End Role="tOrder" EntitySet="tOrder" />
-            <End Role="tOrderItem" EntitySet="tOrderItem" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tOrderItem_tPrice" Association="Self.FK_tOrderItem_tPrice">
-            <End Role="tPrice" EntitySet="tPrice" />
             <End Role="tOrderItem" EntitySet="tOrderItem" />
           </AssociationSet>
           <AssociationSet Name="FK_tStaffArea_tAreas" Association="Self.FK_tStaffArea_tAreas">
@@ -332,9 +318,9 @@
           <Property Name="EndDate" Type="DateTime" Precision="3" />
           <Property Name="Tickets" Type="Int32" />
           <Property Name="Changed" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="tType" Relationship="Self.FK_tCards_tTypes" FromRole="tCards" ToRole="tTypes" />
           <NavigationProperty Name="tCardUsages" Relationship="MakeMakeModel.FK_tCardUsages_tCards" FromRole="tCard" ToRole="tCardUsage" />
           <Property Name="Enabled" Type="Boolean" />
+          <NavigationProperty Name="tPrice" Relationship="MakeMakeModel.FK_tCards_tPrice" FromRole="tCard" ToRole="tPrice" />
         </EntityType>
         <EntityType Name="tCardUsage">
           <Key>
@@ -344,6 +330,7 @@
           <Property Name="CardId" Type="Int64" Nullable="false" />
           <Property Name="EntranceDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="tCard" Relationship="MakeMakeModel.FK_tCardUsages_tCards" FromRole="tCardUsage" ToRole="tCard" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tClass">
           <Key>
@@ -435,7 +422,6 @@
           </Key>
           <Property Name="TypeId" Type="Int32" Nullable="false" />
           <Property Name="TypeDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tCards" Relationship="Self.FK_tCards_tTypes" FromRole="tTypes" ToRole="tCards" />
           <Property Name="Count" Type="Int32" />
         </EntityType>
         <Association Name="FK_tStaffArea_tAreas">
@@ -447,18 +433,6 @@
             </Principal>
             <Dependent Role="tStaffArea">
               <PropertyRef Name="AreaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tCards_tTypes">
-          <End Role="tTypes" Type="Self.tType" Multiplicity="1" />
-          <End Role="tCards" Type="Self.tCard" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tTypes">
-              <PropertyRef Name="TypeId" />
-            </Principal>
-            <Dependent Role="tCards">
-              <PropertyRef Name="TypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -516,10 +490,6 @@
             <End Role="tAreas" EntitySet="tAreas" />
             <End Role="tStaffArea" EntitySet="tStaffAreas" />
           </AssociationSet>
-          <AssociationSet Name="FK_tCards_tTypes" Association="Self.FK_tCards_tTypes">
-            <End Role="tTypes" EntitySet="tTypes" />
-            <End Role="tCards" EntitySet="tCards" />
-          </AssociationSet>
           <AssociationSet Name="FK_tStaffClass_tClasses" Association="Self.FK_tStaffClass_tClasses">
             <End Role="tClasses" EntitySet="tClasses" />
             <End Role="tStaffClass" EntitySet="tStaffClasses" />
@@ -539,13 +509,13 @@
           <EntitySet Name="tPrices" EntityType="MakeMakeModel.tPrice" />
           <EntitySet Name="tOrders" EntityType="MakeMakeModel.tOrder" />
           <EntitySet Name="tOrderItems" EntityType="MakeMakeModel.tOrderItem" />
-          <AssociationSet Name="FK_tOrderItem_tPrice" Association="MakeMakeModel.FK_tOrderItem_tPrice">
-            <End Role="tPrice" EntitySet="tPrices" />
-            <End Role="tOrderItem" EntitySet="tOrderItems" />
-          </AssociationSet>
           <AssociationSet Name="FK_tOrderItem_tOrder" Association="MakeMakeModel.FK_tOrderItem_tOrder">
             <End Role="tOrder" EntitySet="tOrders" />
             <End Role="tOrderItem" EntitySet="tOrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tCards_tPrice" Association="MakeMakeModel.FK_tCards_tPrice">
+            <End Role="tPrice" EntitySet="tPrices" />
+            <End Role="tCard" EntitySet="tCards" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK_tCardUsages_tCards">
@@ -567,7 +537,8 @@
           <Property Name="PriceId" Type="Int32" Nullable="false" />
           <Property Name="PriceDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="PriceValue" Type="Int64" />
-          <NavigationProperty Name="tOrderItems" Relationship="MakeMakeModel.FK_tOrderItem_tPrice" FromRole="tPrice" ToRole="tOrderItem" />
+          <Property Name="Count" Type="Int32" />
+          <NavigationProperty Name="tCards" Relationship="MakeMakeModel.FK_tCards_tPrice" FromRole="tPrice" ToRole="tCard" />
         </EntityType>
         <EntityType Name="tOrder">
           <Key>
@@ -588,21 +559,8 @@
           <Property Name="OrderDate" Type="DateTime" Precision="0" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="TotalAmount" Type="Int64" />
-          <NavigationProperty Name="tPrice" Relationship="MakeMakeModel.FK_tOrderItem_tPrice" FromRole="tOrderItem" ToRole="tPrice" />
           <NavigationProperty Name="tOrder" Relationship="MakeMakeModel.FK_tOrderItem_tOrder" FromRole="tOrderItem" ToRole="tOrder" />
         </EntityType>
-        <Association Name="FK_tOrderItem_tPrice">
-          <End Type="MakeMakeModel.tPrice" Role="tPrice" Multiplicity="1" />
-          <End Type="MakeMakeModel.tOrderItem" Role="tOrderItem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tPrice">
-              <PropertyRef Name="PriceId" />
-            </Principal>
-            <Dependent Role="tOrderItem">
-              <PropertyRef Name="PriceId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tOrderItem_tOrder">
           <End Type="MakeMakeModel.tOrder" Role="tOrder" Multiplicity="1" />
           <End Type="MakeMakeModel.tOrderItem" Role="tOrderItem" Multiplicity="*" />
@@ -612,6 +570,18 @@
             </Principal>
             <Dependent Role="tOrderItem">
               <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tCards_tPrice">
+          <End Type="MakeMakeModel.tPrice" Role="tPrice" Multiplicity="1" />
+          <End Type="MakeMakeModel.tCard" Role="tCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tPrice">
+              <PropertyRef Name="PriceId" />
+            </Principal>
+            <Dependent Role="tCard">
+              <PropertyRef Name="TypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -656,6 +626,7 @@
           <EntitySetMapping Name="tCardUsages">
             <EntityTypeMapping TypeName="MakeMakeModel.tCardUsage">
               <MappingFragment StoreEntitySet="tCardUsages">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CUId" ColumnName="CUId" />
                 <ScalarProperty Name="CardId" ColumnName="CardId" />
                 <ScalarProperty Name="EntranceDate" ColumnName="EntranceDate" />
@@ -759,6 +730,7 @@
           <EntitySetMapping Name="tPrices">
             <EntityTypeMapping TypeName="MakeMakeModel.tPrice">
               <MappingFragment StoreEntitySet="tPrice">
+                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="PriceValue" ColumnName="PriceValue" />
                 <ScalarProperty Name="PriceDescription" ColumnName="PriceDescription" />
                 <ScalarProperty Name="PriceId" ColumnName="PriceId" />

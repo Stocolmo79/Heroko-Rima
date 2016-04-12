@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 using HerokoRima.Classes;
 
@@ -12,18 +13,21 @@ namespace Classes.Classes
         public static Staffs staffs = new Staffs();
         public static Areas areas = new Areas();
         public static CardTypes cardTypes = new CardTypes();
-        public static Members members = new Members();
+        public static  Price price = new Price();
+
+        public static List<tPrice> priceList; 
+        public static Member members = new Member();
         public static List<tType> cardTypesList;
 
-        public static List<tType> LoadComboBoxCardTypes()
+        public static List<tPrice> LoadComboBoxCardTypes()
         {
 
-            cardTypesList = new List<tType>(CardTypes.GetCardTypes());
+            priceList = new List<tPrice>(price.GetPrices().Where(p=>p.PriceId<5));
             //add new item to the comboBox (on index 0; on top):
-            AddItemCardTypes(cardTypesList, typeof(tType), "TypeId", "TypeDescription", "<Porfavor seleccione un tipo de tarjeta>");
+            AddItemCardTypes(priceList, typeof(tPrice), "PriceId", "PriceDescription", "<Porfavor seleccione un tipo de tarjeta>");
 
             //bind the generic list:
-            return cardTypesList;
+            return priceList;
         }
 
         
@@ -68,14 +72,14 @@ namespace Classes.Classes
             valueProperty.SetValue(obj, -1, null);
             list.Insert(0, obj as tArea);
         }
-        private static void AddItemCardTypes(IList<tType> list, Type type, string valueMember, string displayMember, string displayText)
+        private static void AddItemCardTypes(IList<tPrice> list, Type type, string valueMember, string displayMember, string displayText)
         {
             var obj = Activator.CreateInstance(type);
             var displayProperty = type.GetProperty(displayMember);
             displayProperty.SetValue(obj, displayText, null);
             var valueProperty = type.GetProperty(valueMember);
             valueProperty.SetValue(obj, -1, null);
-            list.Insert(0, obj as tType);
+            list.Insert(0, obj as tPrice);
         }
     }
 }

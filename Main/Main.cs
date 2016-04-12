@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Classes;
 using Classes.Classes;
 using HerokoRima.Forms;
+
 using HerokoRimaEntrada;
 
 namespace Main
@@ -42,7 +43,7 @@ namespace Main
 
         private void btnEntrance_Click(object sender, EventArgs e)
         {
-            var entranceMain = new frmMain();
+            var entranceMain = new frmEntrance();
             entranceMain.ShowDialog();
         }
     }
