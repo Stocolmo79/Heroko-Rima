@@ -87,6 +87,7 @@ namespace Members
             this.btnNew.TabIndex = 4;
             this.btnNew.Text = "Nueva";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // frmAttachCard
             // 

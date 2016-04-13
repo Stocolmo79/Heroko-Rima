@@ -20,7 +20,11 @@ namespace Members
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            this.ReturnValue = Convert.ToInt32(txtMemberId.Text);
+            if (txtMemberId.Text.Length>0)
+            {
+                 this.ReturnValue = Convert.ToInt32(txtMemberId.Text);
+            }
+           
         }
 
         private void txtMemberId_KeyPress(object sender, KeyPressEventArgs e)
@@ -29,6 +33,23 @@ namespace Members
             {
                 e.Handled = true;
             }
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            var newMember = new frmNewMember
+                                {
+                                    TopLevel = true,
+                                    AutoScroll = true,
+                                    Dock = DockStyle.Fill,
+                                  
+                                    Tag = tag
+                                };
+            newMember.nro = tag;
+            newMember.ShowDialog();
+            
+
+
         }
     }
 

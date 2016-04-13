@@ -62,7 +62,7 @@ namespace HerokoRima
             members = new Member();
             cardUsage = new CardUsage();
             tCardUsage = new tCardUsage();
-
+            InitListView(true);
         }
 
         private void btnTicketAdult_Click(object sender, EventArgs e)
@@ -115,6 +115,13 @@ namespace HerokoRima
                         break;
                     case DialogResult.OK:
                         var value = attachCardForm.ReturnValue;
+                        if (value == 0)
+                        {
+                            RemoveRow((int)types);
+                            SetButtons(true, true, true, true);
+
+                            return;
+                        }
                         tCard = cards.GetCard(value);
                         tMember = members.GetMember(tCard.CardId.ToString());
                         lblName.Text = tMember.Firstname + " " + tMember.Lastname;
@@ -242,15 +249,8 @@ namespace HerokoRima
 
         private void ShowInListView(ICollection<tOrderItem> orderItems)
         {
-            lvViewPurchase.Clear();
-            lvViewPurchase.View = View.Details;
-            lvViewPurchase.FullRowSelect = true;
 
-            lvViewPurchase.Columns.Add("Cantidad");
-            lvViewPurchase.Columns.Add("Descripción");
-            lvViewPurchase.Columns.Add("Precio");
-            lvViewPurchase.Columns.Add("Total");
-            lvViewPurchase.Columns.Add("Quitar");
+            InitListView(false);
 
             if (orderItems.Any())
             {
@@ -265,12 +265,33 @@ namespace HerokoRima
                 }
             }
 
-            foreach (ColumnHeader column in lvViewPurchase.Columns)
-            {
-                column.Width = -2;
-            }
+
+
             var sum = tOrder.tOrderItems.Aggregate<tOrderItem, long?>(0, (current, item) => current + item.TotalAmount);
             lblTotalSum.Text = sum.ToString();
+        }
+
+        private void InitListView(bool b)
+        {
+            lvViewPurchase.Clear();
+            lvViewPurchase.View = View.Details;
+            lvViewPurchase.FullRowSelect = true;
+            var header = new ColumnHeader { Text = "Cantidad", Width = 200, TextAlign = HorizontalAlignment.Center };
+            lvViewPurchase.Columns.Add(header);
+            header = new ColumnHeader { Text = "Descripción", Width = 200, TextAlign = HorizontalAlignment.Center };
+            lvViewPurchase.Columns.Add(header);
+            header = new ColumnHeader { Text = "Precio", Width = 200, TextAlign = HorizontalAlignment.Center };
+            lvViewPurchase.Columns.Add(header);
+            header = new ColumnHeader { Text = "Total", Width = 200, TextAlign = HorizontalAlignment.Center };
+            lvViewPurchase.Columns.Add(header);
+            header = new ColumnHeader { Text = "Quitar", Width = 100, TextAlign = HorizontalAlignment.Center };
+            lvViewPurchase.Columns.Add(header);
+            if (!b)
+            {
+                return;
+            }
+            var item = new ListViewItem();
+            lvViewPurchase.Items.Add(item);
         }
 
         private void lblTotalDescription_Click(object sender, EventArgs e)
@@ -286,10 +307,7 @@ namespace HerokoRima
         public void RemoveRow(int tag)
         {
             var toi = tOrder.tOrderItems.FirstOrDefault(w => w.PriceId == tag);
-            if (toi == null)
-            {
-                return;
-            }
+            if (toi == null) return;
 
             if (toi.Quantity > 1)
             {
@@ -298,7 +316,12 @@ namespace HerokoRima
             }
             else
             {
-                tOrder.tOrderItems.Any(x => x.PriceId == tag);
+                foreach (var item in tOrder.tOrderItems.Where(item => item.PriceId == tag))
+                {
+                    tOrder.tOrderItems.Remove(item);
+                    break;
+                }
+
             }
             ShowInListView(tOrder.tOrderItems);
         }
@@ -328,6 +351,12 @@ namespace HerokoRima
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            if (tCard != null)
+            {
+                tCard.Enabled = false;
+                cards.SaveCard(tCard);
+            }
+
             ResetWindow();
         }
 
@@ -337,6 +366,7 @@ namespace HerokoRima
             lvViewPurchase.Clear();
             lblTotalSum.Text = "";
             ShowLabels(false);
+            InitListView(true);
         }
 
         private void btnAccept_Click(object sender, EventArgs e)

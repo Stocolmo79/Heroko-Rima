@@ -19,7 +19,7 @@ namespace Classes.Classes
         public static Member members = new Member();
         public static List<tType> cardTypesList;
 
-        public static List<tPrice> LoadComboBoxCardTypes()
+        public static List<tPrice>  LoadComboBoxCardTypes()
         {
 
             priceList = new List<tPrice>(price.GetPrices().Where(p=>p.PriceId<5));

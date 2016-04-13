@@ -33,8 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Infragistics4.Shared.v15.1, Version=15.1.20151.2179, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
+    <Reference Include="Infragistics4.Win.Misc.v15.1, Version=15.1.20151.2179, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb, processorArchitecture=MSIL" />
+    <Reference Include="Infragistics4.Win.v15.1, Version=15.1.20151.2179, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,6 +47,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="frmAttachCard.cs">
@@ -57,6 +63,12 @@
     <Compile Include="frmMembers.Designer.cs">
       <DependentUpon>frmMembers.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmNewMember.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewMember.Designer.cs">
+      <DependentUpon>frmNewMember.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmAttachCard.resx">
@@ -65,6 +77,10 @@
     <EmbeddedResource Include="frmMembers.resx">
       <DependentUpon>frmMembers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmNewMember.resx">
+      <DependentUpon>frmNewMember.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
