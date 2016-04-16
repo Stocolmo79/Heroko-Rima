@@ -12,12 +12,16 @@ namespace Classes
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class tHourType
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public tHourType()
+        {
+            this.tInCharges = new HashSet<tInCharge>();
+        }
+    
+        public int HourTypeId { get; set; }
+        public string HourTypeDescription { get; set; }
+    
+        public virtual ICollection<tInCharge> tInCharges { get; set; }
     }
 }

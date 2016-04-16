@@ -30,9 +30,9 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.personalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.profesoresMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nuevoProfesorMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.staffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.staffMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newStaffMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.miembrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newMemberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,9 +43,10 @@
             this.buscarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevaClaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entranceMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CashierMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.CashierMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
-            this.personalToolStripMenuItem,
+            this.staffToolStripMenuItem,
             this.miembrosToolStripMenuItem,
             this.tarjetasToolStripMenuItem,
             this.clasesToolStripMenuItem,
@@ -72,29 +73,29 @@
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
-            // personalToolStripMenuItem
+            // staffToolStripMenuItem
             // 
-            this.personalToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.profesoresMenuItem,
-            this.nuevoProfesorMenuItem});
-            this.personalToolStripMenuItem.Name = "personalToolStripMenuItem";
-            this.personalToolStripMenuItem.Size = new System.Drawing.Size(90, 24);
-            this.personalToolStripMenuItem.Text = "Profesores";
-            this.personalToolStripMenuItem.Visible = false;
+            this.staffToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.staffMenuItem,
+            this.newStaffMenuItem,
+            this.loginToolStripMenuItem});
+            this.staffToolStripMenuItem.Name = "staffToolStripMenuItem";
+            this.staffToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
+            this.staffToolStripMenuItem.Text = "Monitores";
             // 
-            // profesoresMenuItem
+            // staffMenuItem
             // 
-            this.profesoresMenuItem.Name = "profesoresMenuItem";
-            this.profesoresMenuItem.Size = new System.Drawing.Size(153, 26);
-            this.profesoresMenuItem.Text = "Profesores";
-            this.profesoresMenuItem.Click += new System.EventHandler(this.profesoresMenuItem_Click);
+            this.staffMenuItem.Name = "staffMenuItem";
+            this.staffMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.staffMenuItem.Text = "Monitores";
+            this.staffMenuItem.Click += new System.EventHandler(this.staffMenuItem_Click);
             // 
-            // nuevoProfesorMenuItem
+            // newStaffMenuItem
             // 
-            this.nuevoProfesorMenuItem.Name = "nuevoProfesorMenuItem";
-            this.nuevoProfesorMenuItem.Size = new System.Drawing.Size(153, 26);
-            this.nuevoProfesorMenuItem.Text = "Nuevo";
-            this.nuevoProfesorMenuItem.Click += new System.EventHandler(this.nuevoProfesorMenuItem_Click);
+            this.newStaffMenuItem.Name = "newStaffMenuItem";
+            this.newStaffMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.newStaffMenuItem.Text = "Nuevo";
+            this.newStaffMenuItem.Click += new System.EventHandler(this.newStaffMenuItem_Click);
             // 
             // miembrosToolStripMenuItem
             // 
@@ -108,14 +109,14 @@
             // memberToolStripMenuItem
             // 
             this.memberToolStripMenuItem.Name = "memberToolStripMenuItem";
-            this.memberToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.memberToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
             this.memberToolStripMenuItem.Text = "Miembros";
             this.memberToolStripMenuItem.Click += new System.EventHandler(this.memberToolStripMenuItem_Click);
             // 
             // newMemberToolStripMenuItem
             // 
             this.newMemberToolStripMenuItem.Name = "newMemberToolStripMenuItem";
-            this.newMemberToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.newMemberToolStripMenuItem.Size = new System.Drawing.Size(151, 26);
             this.newMemberToolStripMenuItem.Text = "Nuevo";
             this.newMemberToolStripMenuItem.Click += new System.EventHandler(this.newMemberToolStripMenuItem_Click);
             // 
@@ -172,6 +173,13 @@
             this.entranceMenuItem.Visible = false;
             this.entranceMenuItem.Click += new System.EventHandler(this.entranceMenuItem_Click);
             // 
+            // CashierMenuItem
+            // 
+            this.CashierMenuItem.Name = "CashierMenuItem";
+            this.CashierMenuItem.Size = new System.Drawing.Size(50, 24);
+            this.CashierMenuItem.Text = "Caja";
+            this.CashierMenuItem.Click += new System.EventHandler(this.CashierMenuItem_Click);
+            // 
             // pnlMain
             // 
             this.pnlMain.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -182,12 +190,12 @@
             this.pnlMain.Size = new System.Drawing.Size(1902, 1004);
             this.pnlMain.TabIndex = 2;
             // 
-            // CashierMenuItem
+            // loginToolStripMenuItem
             // 
-            this.CashierMenuItem.Name = "CashierMenuItem";
-            this.CashierMenuItem.Size = new System.Drawing.Size(50, 24);
-            this.CashierMenuItem.Text = "Caja";
-            this.CashierMenuItem.Click += new System.EventHandler(this.CashierMenuItem_Click);
+            this.loginToolStripMenuItem.Name = "loginToolStripMenuItem";
+            this.loginToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.loginToolStripMenuItem.Text = "Login";
+            this.loginToolStripMenuItem.Click += new System.EventHandler(this.loginToolStripMenuItem_Click);
             // 
             // FrmMain
             // 
@@ -201,6 +209,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Empresa - Administración";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -212,15 +221,15 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem personalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem staffToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem miembrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tarjetasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevaTarjetaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clasesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buscarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem nuevaClaseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem profesoresMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nuevoProfesorMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem staffMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newStaffMenuItem;
         private System.Windows.Forms.ToolStripMenuItem memberToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newMemberToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buscarTarjetaToolStripMenuItem;
@@ -228,6 +237,7 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolStripMenuItem entranceMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CashierMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loginToolStripMenuItem;
     }
 }
 

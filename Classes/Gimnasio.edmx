@@ -5,23 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MakeMakeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="tAreas">
-          <Key>
-            <PropertyRef Name="AreaId" />
-          </Key>
-          <Property Name="AreaId" Type="int" Nullable="false" />
-          <Property Name="AreaDescription" Type="varchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="tCards">
           <Key>
             <PropertyRef Name="CardId" />
@@ -55,13 +38,21 @@
           <Property Name="StartTime" Type="varchar" MaxLength="5" />
           <Property Name="EndTime" Type="varchar" MaxLength="5" />
         </EntityType>
-        <EntityType Name="tDropIns">
+        <EntityType Name="tHourType">
           <Key>
-            <PropertyRef Name="DropInId" />
+            <PropertyRef Name="HourTypeId" />
           </Key>
-          <Property Name="DropInId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PriceId" Type="int" />
-          <Property Name="Quantity" Type="int" />
+          <Property Name="HourTypeId" Type="int" Nullable="false" />
+          <Property Name="HourTypeDescription" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tInCharge">
+          <Key>
+            <PropertyRef Name="ICId" />
+          </Key>
+          <Property Name="ICId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StaffId" Type="bigint" Nullable="false" />
+          <Property Name="HourType" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="tMembers">
           <Key>
@@ -70,16 +61,16 @@
           <Property Name="MemberId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Firstname" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Lastname" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="Cellphone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cellphone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CardId" Type="bigint" />
+          <Property Name="MemberType" Type="int" />
         </EntityType>
-        <EntityType Name="tMonths">
+        <EntityType Name="tMemberType">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="MemberTypeId" />
           </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CardId" Type="bigint" Nullable="false" />
-          <Property Name="Purchased" Type="datetime" />
-          <Property Name="Amount" Type="bigint" />
+          <Property Name="MemberTypeId" Type="int" Nullable="false" />
+          <Property Name="MemberTypeDescription" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="tOrder">
           <Key>
@@ -109,13 +100,15 @@
           <Property Name="PriceValue" Type="bigint" />
           <Property Name="Count" Type="int" />
         </EntityType>
-        <EntityType Name="tStaffArea">
+        <EntityType Name="tStaff">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="StaffId" />
           </Key>
-          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StaffId" Type="bigint" Nullable="false" />
-          <Property Name="AreaId" Type="int" Nullable="false" />
+          <Property Name="StaffId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="250" />
+          <Property Name="Lastname" Type="varchar" MaxLength="250" />
+          <Property Name="Cellphone" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="tStaffClass">
           <Key>
@@ -124,29 +117,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StaffId" Type="bigint" Nullable="false" />
           <Property Name="ClassId" Type="bigint" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tStaffs">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RUT" Type="varchar" MaxLength="10" />
-          <Property Name="Firstname" Type="varchar" MaxLength="250" />
-          <Property Name="Lastname" Type="varchar" MaxLength="250" />
-          <Property Name="Phone" Type="varchar" MaxLength="50" />
-          <Property Name="Adress" Type="varchar" MaxLength="150" />
-          <Property Name="City" Type="varchar" MaxLength="50" />
-          <Property Name="Active" Type="bit" />
-        </EntityType>
-        <EntityType Name="tTickets">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CardNo" Type="bigint" Nullable="false" />
-          <Property Name="Quantity" Type="bigint" />
-          <Property Name="Purchased" Type="datetime" />
-          <Property Name="Amount" Type="bigint" />
         </EntityType>
         <EntityType Name="tTypes">
           <Key>
@@ -180,6 +150,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tInCharge_tHourType">
+          <End Role="tHourType" Type="Self.tHourType" Multiplicity="1" />
+          <End Role="tInCharge" Type="Self.tInCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tHourType">
+              <PropertyRef Name="HourTypeId" />
+            </Principal>
+            <Dependent Role="tInCharge">
+              <PropertyRef Name="HourType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tMembers_tMemberType">
+          <End Role="tMemberType" Type="Self.tMemberType" Multiplicity="0..1" />
+          <End Role="tMembers" Type="Self.tMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMemberType">
+              <PropertyRef Name="MemberTypeId" />
+            </Principal>
+            <Dependent Role="tMembers">
+              <PropertyRef Name="MemberType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tOrderItem_tOrder">
           <End Role="tOrder" Type="Self.tOrder" Multiplicity="1" />
           <End Role="tOrderItem" Type="Self.tOrderItem" Multiplicity="*" />
@@ -189,30 +183,6 @@
             </Principal>
             <Dependent Role="tOrderItem">
               <PropertyRef Name="OrderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tStaffArea_tAreas">
-          <End Role="tAreas" Type="Self.tAreas" Multiplicity="1" />
-          <End Role="tStaffArea" Type="Self.tStaffArea" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tAreas">
-              <PropertyRef Name="AreaId" />
-            </Principal>
-            <Dependent Role="tStaffArea">
-              <PropertyRef Name="AreaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tStaffArea_tStaffs">
-          <End Role="tStaffs" Type="Self.tStaffs" Multiplicity="1" />
-          <End Role="tStaffArea" Type="Self.tStaffArea" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tStaffs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tStaffArea">
-              <PropertyRef Name="StaffId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -228,34 +198,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tStaffClass_tStaffs">
-          <End Role="tStaffs" Type="Self.tStaffs" Multiplicity="1" />
-          <End Role="tStaffClass" Type="Self.tStaffClass" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tStaffs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tStaffClass">
-              <PropertyRef Name="StaffId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="MakeMakeModelStoreContainer">
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tAreas" EntityType="Self.tAreas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tCards" EntityType="Self.tCards" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tCardUsages" EntityType="Self.tCardUsages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tClasses" EntityType="Self.tClasses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tDropIns" EntityType="Self.tDropIns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tHourType" EntityType="Self.tHourType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tInCharge" EntityType="Self.tInCharge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tMembers" EntityType="Self.tMembers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tMonths" EntityType="Self.tMonths" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMemberType" EntityType="Self.tMemberType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tOrder" EntityType="Self.tOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tOrderItem" EntityType="Self.tOrderItem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tPrice" EntityType="Self.tPrice" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tStaffArea" EntityType="Self.tStaffArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tStaff" EntityType="Self.tStaff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tStaffClass" EntityType="Self.tStaffClass" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tStaffs" EntityType="Self.tStaffs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tTickets" EntityType="Self.tTickets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tTypes" EntityType="Self.tTypes" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tCards_tPrice" Association="Self.FK_tCards_tPrice">
             <End Role="tPrice" EntitySet="tPrice" />
@@ -265,24 +220,20 @@
             <End Role="tCards" EntitySet="tCards" />
             <End Role="tCardUsages" EntitySet="tCardUsages" />
           </AssociationSet>
+          <AssociationSet Name="FK_tInCharge_tHourType" Association="Self.FK_tInCharge_tHourType">
+            <End Role="tHourType" EntitySet="tHourType" />
+            <End Role="tInCharge" EntitySet="tInCharge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tMembers_tMemberType" Association="Self.FK_tMembers_tMemberType">
+            <End Role="tMemberType" EntitySet="tMemberType" />
+            <End Role="tMembers" EntitySet="tMembers" />
+          </AssociationSet>
           <AssociationSet Name="FK_tOrderItem_tOrder" Association="Self.FK_tOrderItem_tOrder">
             <End Role="tOrder" EntitySet="tOrder" />
             <End Role="tOrderItem" EntitySet="tOrderItem" />
           </AssociationSet>
-          <AssociationSet Name="FK_tStaffArea_tAreas" Association="Self.FK_tStaffArea_tAreas">
-            <End Role="tAreas" EntitySet="tAreas" />
-            <End Role="tStaffArea" EntitySet="tStaffArea" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tStaffArea_tStaffs" Association="Self.FK_tStaffArea_tStaffs">
-            <End Role="tStaffs" EntitySet="tStaffs" />
-            <End Role="tStaffArea" EntitySet="tStaffArea" />
-          </AssociationSet>
           <AssociationSet Name="FK_tStaffClass_tClasses" Association="Self.FK_tStaffClass_tClasses">
             <End Role="tClasses" EntitySet="tClasses" />
-            <End Role="tStaffClass" EntitySet="tStaffClass" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tStaffClass_tStaffs" Association="Self.FK_tStaffClass_tStaffs">
-            <End Role="tStaffs" EntitySet="tStaffs" />
             <End Role="tStaffClass" EntitySet="tStaffClass" />
           </AssociationSet>
         </EntityContainer>
@@ -290,24 +241,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MakeMakeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="tArea">
-          <Key>
-            <PropertyRef Name="AreaId" />
-          </Key>
-          <Property Name="AreaId" Type="Int32" Nullable="false" />
-          <Property Name="AreaDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tStaffAreas" Relationship="Self.FK_tStaffArea_tAreas" FromRole="tAreas" ToRole="tStaffArea" />
-        </EntityType>
         <EntityType Name="tCard">
           <Key>
             <PropertyRef Name="CardId" />
@@ -345,42 +278,6 @@
           <Property Name="EndTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tStaffClasses" Relationship="Self.FK_tStaffClass_tClasses" FromRole="tClasses" ToRole="tStaffClass" />
         </EntityType>
-        <EntityType Name="tDropIn">
-          <Key>
-            <PropertyRef Name="DropInId" />
-          </Key>
-          <Property Name="DropInId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PriceId" Type="Int32" />
-          <Property Name="Quantity" Type="Int32" />
-        </EntityType>
-        <EntityType Name="tMember">
-          <Key>
-            <PropertyRef Name="MemberId" />
-          </Key>
-          <Property Name="MemberId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Firstname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Lastname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Cellphone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tMonth">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CardId" Type="Int64" Nullable="false" />
-          <Property Name="Purchased" Type="DateTime" Precision="3" />
-          <Property Name="Amount" Type="Int64" />
-        </EntityType>
-        <EntityType Name="tStaffArea">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StaffId" Type="Int64" Nullable="false" />
-          <Property Name="AreaId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tArea" Relationship="Self.FK_tStaffArea_tAreas" FromRole="tStaffArea" ToRole="tAreas" />
-          <NavigationProperty Name="tStaff" Relationship="Self.FK_tStaffArea_tStaffs" FromRole="tStaffArea" ToRole="tStaffs" />
-        </EntityType>
         <EntityType Name="tStaffClass">
           <Key>
             <PropertyRef Name="ID" />
@@ -389,32 +286,6 @@
           <Property Name="StaffId" Type="Int64" Nullable="false" />
           <Property Name="ClassId" Type="Int64" Nullable="false" />
           <NavigationProperty Name="tClass" Relationship="Self.FK_tStaffClass_tClasses" FromRole="tStaffClass" ToRole="tClasses" />
-          <NavigationProperty Name="tStaff" Relationship="Self.FK_tStaffClass_tStaffs" FromRole="tStaffClass" ToRole="tStaffs" />
-        </EntityType>
-        <EntityType Name="tStaff">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RUT" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Firstname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Lastname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Adress" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Active" Type="Boolean" />
-          <NavigationProperty Name="tStaffAreas" Relationship="Self.FK_tStaffArea_tStaffs" FromRole="tStaffs" ToRole="tStaffArea" />
-          <NavigationProperty Name="tStaffClasses" Relationship="Self.FK_tStaffClass_tStaffs" FromRole="tStaffs" ToRole="tStaffClass" />
-        </EntityType>
-        <EntityType Name="tTicket">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CardNo" Type="Int64" Nullable="false" />
-          <Property Name="Quantity" Type="Int64" />
-          <Property Name="Purchased" Type="DateTime" Precision="3" />
-          <Property Name="Amount" Type="Int64" />
         </EntityType>
         <EntityType Name="tType">
           <Key>
@@ -424,18 +295,6 @@
           <Property Name="TypeDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Count" Type="Int32" />
         </EntityType>
-        <Association Name="FK_tStaffArea_tAreas">
-          <End Role="tAreas" Type="Self.tArea" Multiplicity="1" />
-          <End Role="tStaffArea" Type="Self.tStaffArea" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tAreas">
-              <PropertyRef Name="AreaId" />
-            </Principal>
-            <Dependent Role="tStaffArea">
-              <PropertyRef Name="AreaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tStaffClass_tClasses">
           <End Role="tClasses" Type="Self.tClass" Multiplicity="1" />
           <End Role="tStaffClass" Type="Self.tStaffClass" Multiplicity="*" />
@@ -448,58 +307,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tStaffArea_tStaffs">
-          <End Role="tStaffs" Type="Self.tStaff" Multiplicity="1" />
-          <End Role="tStaffArea" Type="Self.tStaffArea" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tStaffs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tStaffArea">
-              <PropertyRef Name="StaffId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_tStaffClass_tStaffs">
-          <End Role="tStaffs" Type="Self.tStaff" Multiplicity="1" />
-          <End Role="tStaffClass" Type="Self.tStaffClass" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tStaffs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="tStaffClass">
-              <PropertyRef Name="StaffId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="MakeMakeEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="tAreas" EntityType="Self.tArea" />
           <EntitySet Name="tCards" EntityType="Self.tCard" />
           <EntitySet Name="tCardUsages" EntityType="Self.tCardUsage" />
           <EntitySet Name="tClasses" EntityType="Self.tClass" />
-          <EntitySet Name="tDropIns" EntityType="Self.tDropIn" />
-          <EntitySet Name="tMembers" EntityType="Self.tMember" />
-          <EntitySet Name="tMonths" EntityType="Self.tMonth" />
-          <EntitySet Name="tStaffAreas" EntityType="Self.tStaffArea" />
           <EntitySet Name="tStaffClasses" EntityType="Self.tStaffClass" />
-          <EntitySet Name="tStaffs" EntityType="Self.tStaff" />
-          <EntitySet Name="tTickets" EntityType="Self.tTicket" />
           <EntitySet Name="tTypes" EntityType="Self.tType" />
-          <AssociationSet Name="FK_tStaffArea_tAreas" Association="Self.FK_tStaffArea_tAreas">
-            <End Role="tAreas" EntitySet="tAreas" />
-            <End Role="tStaffArea" EntitySet="tStaffAreas" />
-          </AssociationSet>
           <AssociationSet Name="FK_tStaffClass_tClasses" Association="Self.FK_tStaffClass_tClasses">
             <End Role="tClasses" EntitySet="tClasses" />
-            <End Role="tStaffClass" EntitySet="tStaffClasses" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tStaffArea_tStaffs" Association="Self.FK_tStaffArea_tStaffs">
-            <End Role="tStaffs" EntitySet="tStaffs" />
-            <End Role="tStaffArea" EntitySet="tStaffAreas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tStaffClass_tStaffs" Association="Self.FK_tStaffClass_tStaffs">
-            <End Role="tStaffs" EntitySet="tStaffs" />
             <End Role="tStaffClass" EntitySet="tStaffClasses" />
           </AssociationSet>
           <AssociationSet Name="FK_tCardUsages_tCards" Association="MakeMakeModel.FK_tCardUsages_tCards">
@@ -516,6 +331,23 @@
           <AssociationSet Name="FK_tCards_tPrice" Association="MakeMakeModel.FK_tCards_tPrice">
             <End Role="tPrice" EntitySet="tPrices" />
             <End Role="tCard" EntitySet="tCards" />
+          </AssociationSet>
+          <EntitySet Name="tMembers" EntityType="MakeMakeModel.tMember" />
+          <EntitySet Name="tMemberTypes" EntityType="MakeMakeModel.tMemberType" />
+          <AssociationSet Name="FK_tMembers_tMemberType" Association="MakeMakeModel.FK_tMembers_tMemberType">
+            <End Role="tMemberType" EntitySet="tMemberTypes" />
+            <End Role="tMember" EntitySet="tMembers" />
+          </AssociationSet>
+          <EntitySet Name="tHourTypes" EntityType="MakeMakeModel.tHourType" />
+          <EntitySet Name="tInCharges" EntityType="MakeMakeModel.tInCharge" />
+          <AssociationSet Name="FK_tInCharge_tHourType" Association="MakeMakeModel.FK_tInCharge_tHourType">
+            <End Role="tHourType" EntitySet="tHourTypes" />
+            <End Role="tInCharge" EntitySet="tInCharges" />
+          </AssociationSet>
+          <EntitySet Name="tStaffs" EntityType="MakeMakeModel.tStaff" />
+          <AssociationSet Name="FK_tInCharge_tStaff" Association="MakeMakeModel.FK_tInCharge_tStaff">
+            <End Role="tStaff" EntitySet="tStaffs" />
+            <End Role="tInCharge" EntitySet="tInCharges" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK_tCardUsages_tCards">
@@ -585,31 +417,98 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tMember">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Cellphone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CardId" Type="Int64" />
+          <Property Name="MemberType" Type="Int32" />
+          <NavigationProperty Name="tMemberType" Relationship="MakeMakeModel.FK_tMembers_tMemberType" FromRole="tMember" ToRole="tMemberType" />
+        </EntityType>
+        <EntityType Name="tMemberType">
+          <Key>
+            <PropertyRef Name="MemberTypeId" />
+          </Key>
+          <Property Name="MemberTypeId" Type="Int32" Nullable="false" />
+          <Property Name="MemberTypeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tMembers" Relationship="MakeMakeModel.FK_tMembers_tMemberType" FromRole="tMemberType" ToRole="tMember" />
+        </EntityType>
+        <Association Name="FK_tMembers_tMemberType">
+          <End Type="MakeMakeModel.tMemberType" Role="tMemberType" Multiplicity="0..1" />
+          <End Type="MakeMakeModel.tMember" Role="tMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMemberType">
+              <PropertyRef Name="MemberTypeId" />
+            </Principal>
+            <Dependent Role="tMember">
+              <PropertyRef Name="MemberType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tHourType">
+          <Key>
+            <PropertyRef Name="HourTypeId" />
+          </Key>
+          <Property Name="HourTypeId" Type="Int32" Nullable="false" />
+          <Property Name="HourTypeDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tInCharges" Relationship="MakeMakeModel.FK_tInCharge_tHourType" FromRole="tHourType" ToRole="tInCharge" />
+        </EntityType>
+        <EntityType Name="tInCharge">
+          <Key>
+            <PropertyRef Name="ICId" />
+          </Key>
+          <Property Name="ICId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StaffId" Type="Int64" Nullable="false" />
+          <Property Name="HourType" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="tHourType" Relationship="MakeMakeModel.FK_tInCharge_tHourType" FromRole="tInCharge" ToRole="tHourType" />
+          <NavigationProperty Name="tStaff" Relationship="MakeMakeModel.FK_tInCharge_tStaff" FromRole="tInCharge" ToRole="tStaff" />
+        </EntityType>
+        <Association Name="FK_tInCharge_tHourType">
+          <End Type="MakeMakeModel.tHourType" Role="tHourType" Multiplicity="1" />
+          <End Type="MakeMakeModel.tInCharge" Role="tInCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tHourType">
+              <PropertyRef Name="HourTypeId" />
+            </Principal>
+            <Dependent Role="tInCharge">
+              <PropertyRef Name="HourType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tStaff">
+          <Key>
+            <PropertyRef Name="StaffId" />
+          </Key>
+          <Property Name="StaffId" Type="Int64" Nullable="false" />
+          <Property Name="Firstname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Cellphone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tInCharges" Relationship="MakeMakeModel.FK_tInCharge_tStaff" FromRole="tStaff" ToRole="tInCharge" />
+        </EntityType>
+        <Association Name="FK_tInCharge_tStaff">
+          <End Type="MakeMakeModel.tStaff" Role="tStaff" Multiplicity="1" />
+          <End Type="MakeMakeModel.tInCharge" Role="tInCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tStaff">
+              <PropertyRef Name="StaffId" />
+            </Principal>
+            <Dependent Role="tInCharge">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MakeMakeModelStoreContainer" CdmEntityContainer="MakeMakeEntities">
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="MakeMakeModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tAreas">
-            <EntityTypeMapping TypeName="MakeMakeModel.tArea">
-              <MappingFragment StoreEntitySet="tAreas">
-                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
-                <ScalarProperty Name="AreaDescription" ColumnName="AreaDescription" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tCards">
             <EntityTypeMapping TypeName="MakeMakeModel.tCard">
               <MappingFragment StoreEntitySet="tCards">
@@ -646,75 +545,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tDropIns">
-            <EntityTypeMapping TypeName="MakeMakeModel.tDropIn">
-              <MappingFragment StoreEntitySet="tDropIns">
-                <ScalarProperty Name="DropInId" ColumnName="DropInId" />
-                <ScalarProperty Name="PriceId" ColumnName="PriceId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tMembers">
-            <EntityTypeMapping TypeName="MakeMakeModel.tMember">
-              <MappingFragment StoreEntitySet="tMembers">
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tMonths">
-            <EntityTypeMapping TypeName="MakeMakeModel.tMonth">
-              <MappingFragment StoreEntitySet="tMonths">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CardId" ColumnName="CardId" />
-                <ScalarProperty Name="Purchased" ColumnName="Purchased" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tStaffAreas">
-            <EntityTypeMapping TypeName="MakeMakeModel.tStaffArea">
-              <MappingFragment StoreEntitySet="tStaffArea">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
-                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tStaffClasses">
             <EntityTypeMapping TypeName="MakeMakeModel.tStaffClass">
               <MappingFragment StoreEntitySet="tStaffClass">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="StaffId" ColumnName="StaffId" />
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tStaffs">
-            <EntityTypeMapping TypeName="MakeMakeModel.tStaff">
-              <MappingFragment StoreEntitySet="tStaffs">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="RUT" ColumnName="RUT" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tTickets">
-            <EntityTypeMapping TypeName="MakeMakeModel.tTicket">
-              <MappingFragment StoreEntitySet="tTickets">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Purchased" ColumnName="Purchased" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -755,6 +591,55 @@
                 <ScalarProperty Name="PriceId" ColumnName="PriceId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="OrderItemId" ColumnName="OrderItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMembers">
+            <EntityTypeMapping TypeName="MakeMakeModel.tMember">
+              <MappingFragment StoreEntitySet="tMembers">
+                <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+                <ScalarProperty Name="CardId" ColumnName="CardId" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMemberTypes">
+            <EntityTypeMapping TypeName="MakeMakeModel.tMemberType">
+              <MappingFragment StoreEntitySet="tMemberType">
+                <ScalarProperty Name="MemberTypeDescription" ColumnName="MemberTypeDescription" />
+                <ScalarProperty Name="MemberTypeId" ColumnName="MemberTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tHourTypes">
+            <EntityTypeMapping TypeName="MakeMakeModel.tHourType">
+              <MappingFragment StoreEntitySet="tHourType">
+                <ScalarProperty Name="HourTypeDescription" ColumnName="HourTypeDescription" />
+                <ScalarProperty Name="HourTypeId" ColumnName="HourTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tInCharges">
+            <EntityTypeMapping TypeName="MakeMakeModel.tInCharge">
+              <MappingFragment StoreEntitySet="tInCharge">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="HourType" ColumnName="HourType" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="ICId" ColumnName="ICId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tStaffs">
+            <EntityTypeMapping TypeName="MakeMakeModel.tStaff">
+              <MappingFragment StoreEntitySet="tStaff">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

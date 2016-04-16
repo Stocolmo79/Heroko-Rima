@@ -12,12 +12,14 @@ namespace Classes
     using System;
     using System.Collections.Generic;
     
-    public partial class tTicket
+    public partial class tInCharge
     {
-        public long Id { get; set; }
-        public long CardNo { get; set; }
-        public Nullable<long> Quantity { get; set; }
-        public Nullable<System.DateTime> Purchased { get; set; }
-        public Nullable<long> Amount { get; set; }
+        public long ICId { get; set; }
+        public long StaffId { get; set; }
+        public int HourType { get; set; }
+        public System.DateTime Date { get; set; }
+    
+        public virtual tHourType tHourType { get; set; }
+        public virtual tStaff tStaff { get; set; }
     }
 }

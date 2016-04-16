@@ -33,6 +33,8 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.gbMember = new System.Windows.Forms.GroupBox();
+            this.txtMemberType = new System.Windows.Forms.TextBox();
+            this.lblMemberType = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.chkValid = new System.Windows.Forms.CheckBox();
             this.txtTickets = new System.Windows.Forms.TextBox();
@@ -64,9 +66,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(6, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(370, 29);
+            this.label1.Size = new System.Drawing.Size(304, 29);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Nombre o número de membresia";
+            this.label1.Text = "Número de tarjeta o celular";
             // 
             // gbSearchMember
             // 
@@ -104,6 +106,8 @@
             // 
             this.gbMember.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbMember.Controls.Add(this.txtMemberType);
+            this.gbMember.Controls.Add(this.lblMemberType);
             this.gbMember.Controls.Add(this.label7);
             this.gbMember.Controls.Add(this.chkValid);
             this.gbMember.Controls.Add(this.txtTickets);
@@ -129,11 +133,29 @@
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Miembro";
             // 
+            // txtMemberType
+            // 
+            this.txtMemberType.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemberType.Location = new System.Drawing.Point(11, 445);
+            this.txtMemberType.Name = "txtMemberType";
+            this.txtMemberType.Size = new System.Drawing.Size(518, 34);
+            this.txtMemberType.TabIndex = 22;
+            // 
+            // lblMemberType
+            // 
+            this.lblMemberType.AutoSize = true;
+            this.lblMemberType.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMemberType.Location = new System.Drawing.Point(6, 413);
+            this.lblMemberType.Name = "lblMemberType";
+            this.lblMemberType.Size = new System.Drawing.Size(63, 29);
+            this.lblMemberType.TabIndex = 23;
+            this.lblMemberType.Text = "Tipo";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(6, 518);
+            this.label7.Location = new System.Drawing.Point(6, 598);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(351, 29);
             this.label7.TabIndex = 21;
@@ -144,7 +166,7 @@
             this.chkValid.AutoSize = true;
             this.chkValid.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.chkValid.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkValid.Location = new System.Drawing.Point(11, 572);
+            this.chkValid.Location = new System.Drawing.Point(11, 652);
             this.chkValid.Name = "chkValid";
             this.chkValid.Size = new System.Drawing.Size(103, 33);
             this.chkValid.TabIndex = 20;
@@ -155,7 +177,7 @@
             // txtTickets
             // 
             this.txtTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTickets.Location = new System.Drawing.Point(354, 521);
+            this.txtTickets.Location = new System.Drawing.Point(354, 601);
             this.txtTickets.Name = "txtTickets";
             this.txtTickets.Size = new System.Drawing.Size(175, 34);
             this.txtTickets.TabIndex = 18;
@@ -164,7 +186,7 @@
             // 
             this.lblTickets.AutoSize = true;
             this.lblTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTickets.Location = new System.Drawing.Point(6, 489);
+            this.lblTickets.Location = new System.Drawing.Point(6, 569);
             this.lblTickets.Name = "lblTickets";
             this.lblTickets.Size = new System.Drawing.Size(91, 29);
             this.lblTickets.TabIndex = 19;
@@ -226,7 +248,7 @@
             // txtValidTo
             // 
             this.txtValidTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValidTo.Location = new System.Drawing.Point(11, 443);
+            this.txtValidTo.Location = new System.Drawing.Point(11, 523);
             this.txtValidTo.Name = "txtValidTo";
             this.txtValidTo.Size = new System.Drawing.Size(518, 34);
             this.txtValidTo.TabIndex = 6;
@@ -235,7 +257,7 @@
             // 
             this.lblValidTo.AutoSize = true;
             this.lblValidTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValidTo.Location = new System.Drawing.Point(6, 411);
+            this.lblValidTo.Location = new System.Drawing.Point(6, 491);
             this.lblValidTo.Name = "lblValidTo";
             this.lblValidTo.Size = new System.Drawing.Size(144, 29);
             this.lblValidTo.TabIndex = 11;
@@ -258,6 +280,7 @@
             this.txtCellphone.Name = "txtCellphone";
             this.txtCellphone.Size = new System.Drawing.Size(518, 34);
             this.txtCellphone.TabIndex = 4;
+            this.txtCellphone.Leave += new System.EventHandler(this.txtCellphone_Leave);
             // 
             // label4
             // 
@@ -330,6 +353,7 @@
             this.lvCardUsage.Size = new System.Drawing.Size(1342, 1018);
             this.lvCardUsage.TabIndex = 0;
             this.lvCardUsage.UseCompatibleStateImageBehavior = false;
+            this.lvCardUsage.SelectedIndexChanged += new System.EventHandler(this.lvCardUsage_SelectedIndexChanged);
             // 
             // frmMembers
             // 
@@ -381,5 +405,7 @@
         private System.Windows.Forms.Label lblTickets;
         private System.Windows.Forms.CheckBox chkValid;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtMemberType;
+        private System.Windows.Forms.Label lblMemberType;
     }
 }

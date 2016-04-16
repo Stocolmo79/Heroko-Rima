@@ -12,13 +12,10 @@ namespace Classes
     using System;
     using System.Collections.Generic;
     
-    public partial class tStaffArea
+    public partial class tType
     {
-        public long ID { get; set; }
-        public long StaffId { get; set; }
-        public int AreaId { get; set; }
-    
-        public virtual tArea tArea { get; set; }
-        public virtual tStaff tStaff { get; set; }
+        public int TypeId { get; set; }
+        public string TypeDescription { get; set; }
+        public Nullable<int> Count { get; set; }
     }
 }

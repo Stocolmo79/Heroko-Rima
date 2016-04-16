@@ -154,6 +154,12 @@
     <Compile Include="Forms\frmClasses.Designer.cs">
       <DependentUpon>frmClasses.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,26 +172,20 @@
     <Compile Include="Forms\frmStaff.Designer.cs">
       <DependentUpon>frmStaff.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\NewMember.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\NewMember.Designer.cs">
-      <DependentUpon>NewMember.cs</DependentUpon>
-    </Compile>
     <Compile Include="Mapper\CalendarItemMapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\frmClasses.resx">
       <DependentUpon>frmClasses.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmStaff.resx">
       <DependentUpon>frmStaff.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\NewMember.resx">
-      <DependentUpon>NewMember.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

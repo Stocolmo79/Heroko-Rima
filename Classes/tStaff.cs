@@ -16,20 +16,15 @@ namespace Classes
     {
         public tStaff()
         {
-            this.tStaffAreas = new HashSet<tStaffArea>();
-            this.tStaffClasses = new HashSet<tStaffClass>();
+            this.tInCharges = new HashSet<tInCharge>();
         }
     
-        public long Id { get; set; }
-        public string RUT { get; set; }
+        public long StaffId { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public string Phone { get; set; }
-        public string Adress { get; set; }
-        public string City { get; set; }
+        public string Cellphone { get; set; }
         public Nullable<bool> Active { get; set; }
     
-        public virtual ICollection<tStaffArea> tStaffAreas { get; set; }
-        public virtual ICollection<tStaffClass> tStaffClasses { get; set; }
+        public virtual ICollection<tInCharge> tInCharges { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace HerokoRima.Forms
 {
-    partial class NewMember
+    partial class frmNewMember
     {
         /// <summary>
         /// Required designer variable.

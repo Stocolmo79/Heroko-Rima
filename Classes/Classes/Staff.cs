@@ -7,7 +7,7 @@ using Classes.Wrapper;
 
 namespace HerokoRima.Classes
 {
-    public class Staffs
+    public class Staff
     {
         static readonly MakeMakeWrapper Wrapper = new MakeMakeWrapper();
         public void SaveStaff()
@@ -15,10 +15,10 @@ namespace HerokoRima.Classes
             Wrapper.SaveStaff();
         }
 
-        public List<tStaff> GetStaffsByArea(int areaId)
-        {
-            return Wrapper.GetStaffByArea(areaId);
-        }
+        //public List<tStaff> GetStaffsByArea(int areaId)
+        //{
+        //    return Wrapper.GetStaffByArea(areaId);
+        //}
 
         public static List<tStaff> GetStaffList()
         {
@@ -29,14 +29,18 @@ namespace HerokoRima.Classes
         {
             Wrapper.SaveStaff(staff);
         }
-        public void SaveStaffArea(tStaffArea staffArea)
-        {
-            Wrapper.SaveStaffArea(staffArea);
-        }
+        //public void SaveStaffArea(tStaffArea staffArea)
+        //{
+        //    Wrapper.SaveStaffArea(staffArea);
+        //}
 
-        public void DeleteStaffArea(tStaffArea tStaffArea)
+        //public void DeleteStaffArea(tStaffArea tStaffArea)
+        //{
+        //    Wrapper.DeleteStaffArea(tStaffArea);
+        //}
+        public tStaff GetStaff(int text)
         {
-            Wrapper.DeleteStaffArea(tStaffArea);
+            return Wrapper.GetStaff(text);
         }
     }
 }

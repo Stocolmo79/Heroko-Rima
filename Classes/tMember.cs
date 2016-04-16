@@ -18,5 +18,9 @@ namespace Classes
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string Cellphone { get; set; }
+        public Nullable<long> CardId { get; set; }
+        public Nullable<int> MemberType { get; set; }
+    
+        public virtual tMemberType tMemberType { get; set; }
     }
 }

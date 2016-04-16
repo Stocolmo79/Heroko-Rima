@@ -12,16 +12,17 @@ namespace Classes
     using System;
     using System.Collections.Generic;
     
-    public partial class tArea
+    public partial class tOrder
     {
-        public tArea()
+        public tOrder()
         {
-            this.tStaffAreas = new HashSet<tStaffArea>();
+            this.tOrderItems = new HashSet<tOrderItem>();
         }
     
-        public int AreaId { get; set; }
-        public string AreaDescription { get; set; }
+        public int OrderId { get; set; }
+        public Nullable<long> MemberId { get; set; }
+        public Nullable<long> TotalAmount { get; set; }
     
-        public virtual ICollection<tStaffArea> tStaffAreas { get; set; }
+        public virtual ICollection<tOrderItem> tOrderItems { get; set; }
     }
 }

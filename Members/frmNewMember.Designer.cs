@@ -29,10 +29,13 @@
         private void InitializeComponent()
         {
             this.gbMember = new System.Windows.Forms.GroupBox();
+            this.cmbMemberType = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.chkValid = new System.Windows.Forms.CheckBox();
             this.txtTickets = new System.Windows.Forms.TextBox();
             this.lblTickets = new System.Windows.Forms.Label();
+            this.cmbCardType = new System.Windows.Forms.ComboBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.txtLastNames = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -45,7 +48,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtMemberName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbCardType = new System.Windows.Forms.ComboBox();
             this.gbMember.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +55,8 @@
             // 
             this.gbMember.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbMember.Controls.Add(this.cmbMemberType);
+            this.gbMember.Controls.Add(this.label1);
             this.gbMember.Controls.Add(this.label7);
             this.gbMember.Controls.Add(this.chkValid);
             this.gbMember.Controls.Add(this.txtTickets);
@@ -78,11 +82,31 @@
             this.gbMember.Text = "Miembro";
             this.gbMember.Enter += new System.EventHandler(this.gbMember_Enter);
             // 
+            // cmbMemberType
+            // 
+            this.cmbMemberType.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbMemberType.FormattingEnabled = true;
+            this.cmbMemberType.ItemHeight = 29;
+            this.cmbMemberType.Location = new System.Drawing.Point(11, 365);
+            this.cmbMemberType.Name = "cmbMemberType";
+            this.cmbMemberType.Size = new System.Drawing.Size(518, 37);
+            this.cmbMemberType.TabIndex = 23;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(6, 333);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 29);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Tipo";
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(6, 518);
+            this.label7.Location = new System.Drawing.Point(5, 605);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(351, 29);
             this.label7.TabIndex = 21;
@@ -95,7 +119,7 @@
             this.chkValid.Checked = true;
             this.chkValid.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkValid.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkValid.Location = new System.Drawing.Point(11, 572);
+            this.chkValid.Location = new System.Drawing.Point(10, 659);
             this.chkValid.Name = "chkValid";
             this.chkValid.Size = new System.Drawing.Size(103, 33);
             this.chkValid.TabIndex = 20;
@@ -106,7 +130,7 @@
             // txtTickets
             // 
             this.txtTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTickets.Location = new System.Drawing.Point(377, 518);
+            this.txtTickets.Location = new System.Drawing.Point(376, 605);
             this.txtTickets.Name = "txtTickets";
             this.txtTickets.Size = new System.Drawing.Size(151, 34);
             this.txtTickets.TabIndex = 18;
@@ -115,11 +139,21 @@
             // 
             this.lblTickets.AutoSize = true;
             this.lblTickets.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTickets.Location = new System.Drawing.Point(6, 489);
+            this.lblTickets.Location = new System.Drawing.Point(5, 576);
             this.lblTickets.Name = "lblTickets";
             this.lblTickets.Size = new System.Drawing.Size(91, 29);
             this.lblTickets.TabIndex = 19;
             this.lblTickets.Text = "Tickets";
+            // 
+            // cmbCardType
+            // 
+            this.cmbCardType.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbCardType.FormattingEnabled = true;
+            this.cmbCardType.ItemHeight = 29;
+            this.cmbCardType.Location = new System.Drawing.Point(10, 453);
+            this.cmbCardType.Name = "cmbCardType";
+            this.cmbCardType.Size = new System.Drawing.Size(518, 37);
+            this.cmbCardType.TabIndex = 16;
             // 
             // btnSave
             // 
@@ -154,7 +188,7 @@
             // txtValidTo
             // 
             this.txtValidTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValidTo.Location = new System.Drawing.Point(11, 443);
+            this.txtValidTo.Location = new System.Drawing.Point(10, 530);
             this.txtValidTo.Name = "txtValidTo";
             this.txtValidTo.Size = new System.Drawing.Size(518, 34);
             this.txtValidTo.TabIndex = 6;
@@ -163,7 +197,7 @@
             // 
             this.lblValidTo.AutoSize = true;
             this.lblValidTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblValidTo.Location = new System.Drawing.Point(6, 411);
+            this.lblValidTo.Location = new System.Drawing.Point(5, 498);
             this.lblValidTo.Name = "lblValidTo";
             this.lblValidTo.Size = new System.Drawing.Size(144, 29);
             this.lblValidTo.TabIndex = 11;
@@ -173,7 +207,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 332);
+            this.label5.Location = new System.Drawing.Point(5, 421);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(169, 29);
             this.label5.TabIndex = 9;
@@ -186,6 +220,7 @@
             this.txtCellphone.Name = "txtCellphone";
             this.txtCellphone.Size = new System.Drawing.Size(518, 34);
             this.txtCellphone.TabIndex = 4;
+            this.txtCellphone.Leave += new System.EventHandler(this.txtCellphone_Leave);
             // 
             // label4
             // 
@@ -237,16 +272,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Nombres";
             // 
-            // cmbCardType
-            // 
-            this.cmbCardType.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbCardType.FormattingEnabled = true;
-            this.cmbCardType.ItemHeight = 29;
-            this.cmbCardType.Location = new System.Drawing.Point(11, 364);
-            this.cmbCardType.Name = "cmbCardType";
-            this.cmbCardType.Size = new System.Drawing.Size(518, 37);
-            this.cmbCardType.TabIndex = 16;
-            // 
             // frmNewMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -282,5 +307,7 @@
         private System.Windows.Forms.TextBox txtMemberName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbCardType;
+        private System.Windows.Forms.ComboBox cmbMemberType;
+        private System.Windows.Forms.Label label1;
     }
 }

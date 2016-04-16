@@ -12,10 +12,16 @@ namespace Classes
     using System;
     using System.Collections.Generic;
     
-    public partial class tDropIn
+    public partial class tMemberType
     {
-        public long DropInId { get; set; }
-        public Nullable<int> PriceId { get; set; }
-        public Nullable<int> Quantity { get; set; }
+        public tMemberType()
+        {
+            this.tMembers = new HashSet<tMember>();
+        }
+    
+        public int MemberTypeId { get; set; }
+        public string MemberTypeDescription { get; set; }
+    
+        public virtual ICollection<tMember> tMembers { get; set; }
     }
 }

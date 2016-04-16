@@ -19,6 +19,5 @@ namespace Classes
         public long ClassId { get; set; }
     
         public virtual tClass tClass { get; set; }
-        public virtual tStaff tStaff { get; set; }
     }
 }

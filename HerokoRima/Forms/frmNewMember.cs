@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace HerokoRima.Forms
 {
-    public partial class NewMember : Form
+    public partial class frmNewMember : Form
     {
-        public NewMember()
+        public frmNewMember()
         {
             InitializeComponent();
         }

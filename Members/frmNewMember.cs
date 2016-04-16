@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 using Classes;
@@ -24,7 +25,9 @@ namespace Members
         public tCard tCard;
         public Cards cards;
         public CardUsage cardUsage;
-      
+
+        public Int32 ReturnValue { get; set; }
+
         public frmNewMember()
         {
             InitializeComponent();
@@ -69,16 +72,18 @@ namespace Members
                 members.SaveMember(PopulateMember());
 
                 cards.SaveCard(PopulateCard());
+                ReturnValue = Convert.ToInt32(txtMemberId.Text);
+                this.Dispose();
                 }
         }
         private tCard PopulateCard()
         {
-            tCard.CardId = tMember.MemberId;
+            tCard.CardId = Convert.ToInt64(txtMemberId.Text);
             tCard.Changed = DateTime.Today;
             tCard.EndDate = Convert.ToDateTime(txtValidTo.Text);
             tCard.StartDate = DateTime.Today;
 
-            tCard.tPrice.PriceId = this.tPrice.PriceId;
+            tCard.TypeId= this.tPrice.PriceId;
             tCard.Tickets = Convert.ToInt32(txtTickets.Text);
             tCard.Enabled = chkValid.Checked;
             return tCard;
@@ -89,6 +94,8 @@ namespace Members
             tMember.Firstname = this.txtMemberName.Text;
             tMember.Lastname = this.txtLastNames.Text;
             tMember.Cellphone = this.txtCellphone.Text;
+            tMember.CardId = Convert.ToInt64(txtMemberId.Text);
+            tMember.MemberType = Tag as int?;
             return tMember;
         }
         private void LoadComboBox()
@@ -97,7 +104,19 @@ namespace Members
             cmbCardType.DisplayMember = "PriceDescription";
             cmbCardType.ValueMember = "PriceId";
 
+            cmbMemberType.DataSource = Combobox.LoadComboBoxMemberTypes();
+            cmbMemberType.DisplayMember = "MemberTypeDescription";
+            cmbMemberType.ValueMember = "MemberTypeId";
+
             cmbCardType.SelectedIndex = (int)this.Tag;
+            if (Tag.ToString().Equals("1") || Tag.ToString().Equals("3"))
+            {
+               cmbMemberType.SelectedIndex = 0;
+            }
+            else
+            {
+                cmbMemberType.SelectedIndex =1;
+            }
             txtTickets.Text = price.GetPrice((int)this.Tag).Count.ToString();
 
         }
@@ -111,6 +130,19 @@ namespace Members
         {
             LoadComboBox();
             txtValidTo.Text = DateTime.Now.ToShortDateString();
+        }
+
+        private void txtCellphone_Leave(object sender, EventArgs e)
+        {
+            var pattern = new Regex("^[- +()]?[1-9]{1}[0-9]{3,14}$");
+            if (pattern.IsMatch(txtCellphone.Text))
+            {
+
+            }
+            else
+            {
+                txtCellphone.Text = "Numero no valido";
+            }
         }
 
     }

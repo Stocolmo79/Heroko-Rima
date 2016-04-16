@@ -61,7 +61,7 @@ namespace HerokoRimaEntrada.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Este usario no existe..
+        ///   Looks up a localized string similar to Esta tarjeta no existe..
         /// </summary>
         internal static string frmMain_SearchMember_Este_usario_no_existe_ {
             get {

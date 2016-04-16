@@ -10,6 +10,7 @@ namespace Classes.Wrapper
     public class MakeMakeWrapper
     {
         private readonly MakeMakeEntities mmEntities;
+
         public MakeMakeWrapper()
         {
             if (mmEntities == null)
@@ -25,16 +26,17 @@ namespace Classes.Wrapper
 
         public tStaff GetStaff(int staffId)
         {
-            return mmEntities.tStaffs.FirstOrDefault(s => s.Id == staffId);
+            return mmEntities.tStaffs.FirstOrDefault(s => s.StaffId == staffId);
         }
-        public List<tStaff> GetStaffByArea(int areaId)
-        {
-            return (from s in mmEntities.tStaffs
-                    from sa in mmEntities.tStaffAreas
-                    where s.Id == sa.StaffId && sa.AreaId == areaId
-                    select s).ToList<tStaff>();
 
-        }
+        //public List<tStaff> GetStaffByArea(int areaId)
+        //{
+        //    return (from s in mmEntities.tStaffs
+        //            from sa in mmEntities.tStaffAreas
+        //            where s.Id == sa.StaffId && sa.AreaId == areaId
+        //            select s).ToList<tStaff>();
+
+        //}
 
         public void SaveStaff(tStaff staff)
         {
@@ -49,25 +51,26 @@ namespace Classes.Wrapper
             mmEntities.SaveChanges();
         }
 
-        public void DeleteStaffArea(tStaffArea tStaffArea)
-        {
-            mmEntities.tStaffAreas.Remove(tStaffArea);
+        //public void DeleteStaffArea(tStaffArea tStaffArea)
+        //{
+        //    mmEntities.tStaffAreas.Remove(tStaffArea);
 
-        }
-        public void SaveStaffArea(tStaffArea tStaffArea)
-        {
-            mmEntities.tStaffAreas.Add(tStaffArea);
-            mmEntities.SaveChanges();
-        }
+        //}
+        //public void SaveStaffArea(tStaffArea tStaffArea)
+        //{
+        //    mmEntities.tStaffAreas.Add(tStaffArea);
+        //    mmEntities.SaveChanges();
+        //}
 
         #region Area
 
-        public List<tArea> GetAreas()
-        {
-            return mmEntities.tAreas.Select(a => a).ToList();
-        }
+        //public List<tArea> GetAreas()
+        //{
+        //    return mmEntities.tAreas.Select(a => a).ToList();
+        //}
 
         #endregion
+
         #region Class
 
         public long SaveClass(tClass tClass)
@@ -95,6 +98,7 @@ namespace Classes.Wrapper
 
             return mmEntities.tStaffClasses;
         }
+
         #endregion
 
 
@@ -109,7 +113,11 @@ namespace Classes.Wrapper
 
         public tMember GetMember(string input)
         {
-            return (from m in mmEntities.tMembers where m.Firstname == input || m.MemberId.ToString() == input select m).FirstOrDefault();
+
+            return (from m in mmEntities.tMembers
+                    join t in mmEntities.tMemberTypes on m.MemberType equals t.MemberTypeId
+                    where m.CardId.ToString() == input || m.Cellphone == input
+                    select m).FirstOrDefault();
         }
 
         #endregion
@@ -121,6 +129,7 @@ namespace Classes.Wrapper
             mmEntities.tCards.AddOrUpdate(tCard);
             mmEntities.SaveChanges();
         }
+
         public tCard GetCardInfo(long cardnumber)
         {
             return mmEntities.tCards.FirstOrDefault(s => s.CardId == cardnumber);
@@ -151,8 +160,18 @@ namespace Classes.Wrapper
 
         public IQueryable<tCardUsage> GetCardUsage(long input)
         {
-            var query = mmEntities.tCards.Join(mmEntities.tCardUsages, c => c.CardId,
-      cm => cm.CardId, (c, cm) => new { tCards = c, tCardUsages = cm }).Select(x => x.tCardUsages).Where(cu => cu.CardId == input);
+            //return (from c in mmEntities.tCards
+            //        join cu in mmEntities.tCardUsages on c.CardId equals cu.CardId
+            //        join p in mmEntities.tPrices on cu.tCard.TypeId equals p.PriceId select cu
+            //);
+            var query =
+                mmEntities.tCards.Join(
+                    mmEntities.tCardUsages,
+                    c => c.CardId,
+                    cm => cm.CardId,
+                    (c, cm) => new { tCards = c, tCardUsages = cm })
+                    .Select(x => x.tCardUsages)
+                    .Where(cu => cu.CardId == input);
             return query;
         }
 
@@ -165,25 +184,27 @@ namespace Classes.Wrapper
 
         public void SetCardsToDisabled()
         {
-            mmEntities.tCards.Where(x => x.EndDate < DateTime.Now)
-      .ToList()
-      .ForEach(a => a.Enabled = false);
+            mmEntities.tCards.Where(x => x.EndDate < DateTime.Now).ToList().ForEach(a => a.Enabled = false);
 
             mmEntities.SaveChanges();
         }
+
         #endregion
+
         #region Order
+
         public void SaveOrder(tOrder order)
         {
             mmEntities.tOrders.Add(order);
             mmEntities.SaveChanges();
 
         }
+
         public tOrder GetOrder(int input)
         {
             return mmEntities.tOrders.FirstOrDefault(s => s.OrderId == input);
         }
-       
+
 
         public void SaveOrderItem(tOrderItem orderItem)
         {
@@ -191,25 +212,42 @@ namespace Classes.Wrapper
             mmEntities.tOrderItems.AddOrUpdate(orderItem);
             mmEntities.SaveChanges();
         }
-         public tOrderItem GetOrderItems(int input)
+
+        public tOrderItem GetOrderItems(int input)
         {
             return mmEntities.tOrderItems.FirstOrDefault(oi => oi.OrderId == input);
         }
 
         #endregion
 
-         #region Price  
+        #region Price  
 
-         public tPrice GetPrice(int priceId)
+        public tPrice GetPrice(int priceId)
         {
             return mmEntities.tPrices.FirstOrDefault(p => p.PriceId == priceId);
-        } 
+        }
+
         public List<tPrice> GetPrices()
         {
             return new List<tPrice>(mmEntities.tPrices);
         }
-#endregion
 
-     
-    } 
+        #endregion
+
+        public List<tMemberType> GetMemberTypes()
+        {
+            return mmEntities.tMemberTypes.ToList();
+        }
+
+        public void SaveInCharge(tInCharge inCharge)
+        {
+            mmEntities.tInCharges.Add(inCharge);
+            mmEntities.SaveChanges();
+        }
+
+        public tHourType GetHourType(int type)
+        {
+            return mmEntities.tHourTypes.FirstOrDefault(h => h.HourTypeId == type);
+        }
+    }
 }

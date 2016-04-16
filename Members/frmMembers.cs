@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 using Classes;
@@ -16,9 +17,9 @@ namespace Members
         public tMember tMember;
         public tCardUsage tCardUsage;
         public tType tType;
-        public  Member members;
+        public Member members;
 
-  
+
         public tPrice tPrice;
 
 
@@ -54,6 +55,10 @@ namespace Members
             txtMemberId.Text = "";
             txtMemberName.Text = "";
             txtLastNames.Text = "";
+            txtMemberType.Text = "";
+            cmbCardType.SelectedIndex = 0;
+            txtValidTo.Text = "";
+            chkValid.Checked = false;
             lvCardUsage.Clear();
         }
 
@@ -70,13 +75,14 @@ namespace Members
             {
                 foreach (var row in cardrows)
                 {
-                    var item = new ListViewItem { Text = row.tCard.tPrice.PriceDescription };
+                    var item = row.Description != null ? new ListViewItem { Text = row.Description } : new ListViewItem { Text = row.tCard.tPrice.PriceDescription };
+            
                     item.SubItems.Add(Convert.ToDateTime(row.EntranceDate).ToShortDateString() + " " + Convert.ToDateTime(row.EntranceDate).ToShortTimeString()); // 2nd column text
 
                     lvCardUsage.Items.Add(item);
                 }
             }
-            btnRenewDate.Visible = ((bool)!tCard.Enabled);
+            //    btnRenewDate.Visible = ((bool)!tCard.Enabled);
 
             foreach (ColumnHeader column in lvCardUsage.Columns)
             {
@@ -86,19 +92,21 @@ namespace Members
 
         private void SearchMember(string input)
         {
+            tMember = new tMember();
             tMember = members.GetMember(input);
             newMember = false;
             if (tMember == null) return;
 
-            tCard = cards.GetCardInfo(tMember.MemberId);
-            SetCardInfo(tMember.MemberId.ToString());
+            tCard = cards.GetCardInfo((long)tMember.CardId);
+            SetCardInfo(tMember.CardId.ToString());
 
             txtCellphone.Text = tMember.Cellphone;
             txtMemberId.Text = tMember.MemberId.ToString();
             txtMemberName.Text = tMember.Firstname;
             txtLastNames.Text = tMember.Lastname;
+            txtMemberType.Text = tMember.tMemberType.MemberTypeDescription;
 
-            if (tCard.EndDate != null)
+            if (tCard != null)
             {
                 txtValidTo.Text = tCard.EndDate.Value.ToShortDateString();
                 if (tCard.EndDate < DateTime.Now)
@@ -220,6 +228,24 @@ namespace Members
             if (e.KeyCode == Keys.Enter)
             {
                 SearchClick();
+            }
+        }
+
+        private void lvCardUsage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCellphone_Leave(object sender, EventArgs e)
+        {
+            var pattern = new Regex("^[- +()]?[1-9]{1}[0-9]{3,14}$");
+            if (pattern.IsMatch(txtCellphone.Text))
+            {
+               
+            }
+            else
+            {
+                txtCellphone.Text = "Numero no valido";
             }
         }
     }

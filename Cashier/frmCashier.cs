@@ -75,37 +75,44 @@ namespace HerokoRima
         }
         private void btnMonthlyStudent_Click(object sender, EventArgs e)
         {
+            SetButtons(true, false, false, false);
+            AttachToCard(Types.MonthStudent);
             AddPurchaseText(tPrices.FirstOrDefault(s => s.PriceId == (int)Types.MonthStudent));
-
-            SetButtons(true, false, false, false); AttachToCard(Types.MonthStudent);
         }
 
 
 
         private void btnMonthlyAdult_Click(object sender, EventArgs e)
         {
+
+            SetButtons(false, true, false, false);
+            AttachToCard(Types.MonthAdult);
             AddPurchaseText(tPrices.FirstOrDefault(s => s.PriceId == (int)Types.MonthAdult));
 
-            SetButtons(false, true, false, false); AttachToCard(Types.MonthAdult);
         }
 
         private void btnTicketsStudent_Click(object sender, EventArgs e)
         {
+            SetButtons(false, false, true, false);
+            AttachToCard(Types.SixTicketsStudent);
             AddPurchaseText(tPrices.FirstOrDefault(s => s.PriceId == (int)Types.SixTicketsStudent));
 
-            SetButtons(false, false, true, false); AttachToCard(Types.SixTicketsStudent);
+
         }
 
         private void btnTicketsAdult_Click(object sender, EventArgs e)
         {
+            SetButtons(false, false, false, true);
+            AttachToCard(Types.SixTicketsAdult);
             AddPurchaseText(tPrices.FirstOrDefault(s => s.PriceId == (int)Types.SixTicketsAdult));
 
-            SetButtons(false, false, false, true); AttachToCard(Types.SixTicketsAdult);
+
         }
         private void AttachToCard(Types types)
         {
             using (var attachCardForm = new frmAttachCard { TopLevel = true, AutoScroll = true, Dock = DockStyle.Fill, tag = (int)types })
             {
+                int value;
                 switch (attachCardForm.ShowDialog())
                 {
                     case DialogResult.Cancel:
@@ -114,34 +121,40 @@ namespace HerokoRima
                         ShowLabels(false);
                         break;
                     case DialogResult.OK:
-                        var value = attachCardForm.ReturnValue;
-                        if (value == 0)
-                        {
-                            RemoveRow((int)types);
-                            SetButtons(true, true, true, true);
-
-                            return;
-                        }
-                        tCard = cards.GetCard(value);
-                        tMember = members.GetMember(tCard.CardId.ToString());
-                        lblName.Text = tMember.Firstname + " " + tMember.Lastname;
-                        lblCardId.Text = tCard.CardId.ToString();
-                        ShowLabels(true);
-
-                        cards.SaveCard(UpdateCard(tCard, tPrices.Find(p => p.PriceId == (int)types)));
-                        tCardUsage.CardId = tCard.CardId;
-                        tCardUsage.EntranceDate = DateTime.Now;
-                        tCardUsage.Description = "Compra de: " + tCard.tPrice.PriceDescription;
-                        cardUsage.InsertCardUsage(tCardUsage);
+                        value = attachCardForm.ReturnValue;
+                        SaveOrder(types, value);
                         break;
                     default:
-                        SetButtons(true, true, true, true);
-                        int i = 4;
+
+                        value = attachCardForm.ReturnValue;
+                        SaveOrder(types, value);
                         break;
 
                 }
             }
 
+        }
+
+        private void SaveOrder(Types types, int value)
+        {
+            if (value == 0)
+            {
+                RemoveRow((int)types);
+                SetButtons(true, true, true, true);
+
+                return;
+            }
+            tCard = cards.GetCard(value);
+            tMember = members.GetMember(tCard.CardId.ToString());
+            lblName.Text = tMember.Firstname + " " + tMember.Lastname;
+            lblCardId.Text = tCard.CardId.ToString();
+            ShowLabels(true);
+
+            cards.SaveCard(UpdateCard(tCard, tPrices.Find(p => p.PriceId == (int)types)));
+            tCardUsage.CardId = tCard.CardId;
+            tCardUsage.EntranceDate = DateTime.Now;
+            tCardUsage.Description = "Compra de: " + tPrices.Find(p => p.PriceId == (int)types).PriceDescription;
+            cardUsage.InsertCardUsage(tCardUsage);
         }
 
         private void ShowLabels(bool show)
@@ -356,7 +369,7 @@ namespace HerokoRima
                 tCard.Enabled = false;
                 cards.SaveCard(tCard);
             }
-
+            tOrder = new tOrder();
             ResetWindow();
         }
 
@@ -379,8 +392,9 @@ namespace HerokoRima
                 tOrder.MemberId = tCard.CardId;
             }
 
+            
             order.SaveOrder(tOrder);
-
+            tOrder = new tOrder();
             ResetWindow();
         }
 

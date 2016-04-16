@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Classes;
@@ -64,16 +55,17 @@ namespace HerokoRimaEntrada
         private void SearchMember()
         {
             var m = members.GetMember(txtUserMember.Text);
+            
             if (m == null)
             {
                 lblGreeting.Text = Resources.frmMain_SearchMember_Este_usario_no_existe_;
             }
             else
             {
-                var c = cards.GetCardInfo(m.MemberId);
+                var c = cards.GetCardInfo((long)m.CardId);
 
                 if (c == null) return;
-                switch (c.tPrice.PriceId)
+                switch (c.TypeId)
                 {
                     case 1:
                         if (c.EndDate > DateTime.Now)
@@ -129,7 +121,7 @@ namespace HerokoRimaEntrada
         {
             lblGreeting.Text = "Hola";
             lblName.Text = m.Firstname + " " + m.Lastname;
-            lblMembershipInfo.Text = c.tPrice.PriceDescription;
+            lblMembershipInfo.Text = m.tMemberType.MemberTypeDescription;
         }
 
         private void SaveMonthly(tCard card)

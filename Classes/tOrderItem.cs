@@ -12,11 +12,15 @@ namespace Classes
     using System;
     using System.Collections.Generic;
     
-    public partial class tMonth
+    public partial class tOrderItem
     {
-        public long Id { get; set; }
-        public long CardId { get; set; }
-        public Nullable<System.DateTime> Purchased { get; set; }
-        public Nullable<long> Amount { get; set; }
+        public int OrderItemId { get; set; }
+        public int OrderId { get; set; }
+        public int PriceId { get; set; }
+        public Nullable<System.DateTime> OrderDate { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public Nullable<long> TotalAmount { get; set; }
+    
+        public virtual tOrder tOrder { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace Members
             // txtMemberId
             // 
             this.txtMemberId.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMemberId.Location = new System.Drawing.Point(13, 13);
+            this.txtMemberId.Location = new System.Drawing.Point(13, 14);
             this.txtMemberId.Name = "txtMemberId";
             this.txtMemberId.Size = new System.Drawing.Size(416, 34);
             this.txtMemberId.TabIndex = 0;
@@ -50,7 +50,7 @@ namespace Members
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(153, 99);
+            this.btnCancel.Location = new System.Drawing.Point(153, 54);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(135, 44);
             this.btnCancel.TabIndex = 1;
@@ -61,7 +61,7 @@ namespace Members
             // 
             this.btnAccept.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAccept.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAccept.Location = new System.Drawing.Point(294, 99);
+            this.btnAccept.Location = new System.Drawing.Point(294, 54);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(135, 44);
             this.btnAccept.TabIndex = 2;
@@ -81,7 +81,7 @@ namespace Members
             // btnNew
             // 
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNew.Location = new System.Drawing.Point(12, 99);
+            this.btnNew.Location = new System.Drawing.Point(12, 53);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(135, 44);
             this.btnNew.TabIndex = 4;
@@ -95,7 +95,7 @@ namespace Members
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(441, 156);
+            this.ClientSize = new System.Drawing.Size(441, 109);
             this.ControlBox = false;
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.lblName);
