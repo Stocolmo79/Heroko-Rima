@@ -162,6 +162,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_tInCharge_tStaff">
+          <End Role="tStaff" Type="Self.tStaff" Multiplicity="1" />
+          <End Role="tInCharge" Type="Self.tInCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tStaff">
+              <PropertyRef Name="StaffId" />
+            </Principal>
+            <Dependent Role="tInCharge">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tMembers_tMemberType">
           <End Role="tMemberType" Type="Self.tMemberType" Multiplicity="0..1" />
           <End Role="tMembers" Type="Self.tMembers" Multiplicity="*" />
@@ -222,6 +234,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_tInCharge_tHourType" Association="Self.FK_tInCharge_tHourType">
             <End Role="tHourType" EntitySet="tHourType" />
+            <End Role="tInCharge" EntitySet="tInCharge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tInCharge_tStaff" Association="Self.FK_tInCharge_tStaff">
+            <End Role="tStaff" EntitySet="tStaff" />
             <End Role="tInCharge" EntitySet="tInCharge" />
           </AssociationSet>
           <AssociationSet Name="FK_tMembers_tMemberType" Association="Self.FK_tMembers_tMemberType">

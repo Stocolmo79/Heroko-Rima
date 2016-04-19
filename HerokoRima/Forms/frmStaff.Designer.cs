@@ -44,8 +44,13 @@
             this.cmbMonitores = new System.Windows.Forms.ComboBox();
             this.tStaffBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gbCalendar = new System.Windows.Forms.GroupBox();
-            this.btnCalendar = new System.Windows.Forms.Button();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.lvDays = new System.Windows.Forms.ListView();
+            this.lblEnd = new System.Windows.Forms.Label();
+            this.lblStart = new System.Windows.Forms.Label();
+            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.dtpStart = new System.Windows.Forms.DateTimePicker();
+            this.btnSearchDates = new System.Windows.Forms.Button();
             this.grEditStaff.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -78,6 +83,11 @@
             // 
             this.grEditStaff.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.grEditStaff.Controls.Add(this.btnSearchDates);
+            this.grEditStaff.Controls.Add(this.dtpStart);
+            this.grEditStaff.Controls.Add(this.dtpEnd);
+            this.grEditStaff.Controls.Add(this.lblStart);
+            this.grEditStaff.Controls.Add(this.lblEnd);
             this.grEditStaff.Controls.Add(this.chkActive);
             this.grEditStaff.Controls.Add(this.btnUpdate);
             this.grEditStaff.Controls.Add(this.pictureBox1);
@@ -167,6 +177,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(465, 34);
             this.txtPhone.TabIndex = 6;
+            this.txtPhone.Leave += new System.EventHandler(this.txtPhone_Leave);
             // 
             // txtLastName
             // 
@@ -198,7 +209,7 @@
             this.cmbMonitores.Name = "cmbMonitores";
             this.cmbMonitores.Size = new System.Drawing.Size(345, 37);
             this.cmbMonitores.TabIndex = 1;
-            this.cmbMonitores.SelectedIndexChanged += new System.EventHandler(this.cmbProfesores_SelectedIndexChanged);
+            this.cmbMonitores.SelectedIndexChanged += new System.EventHandler(this.cmbMonitores_SelectedIndexChanged);
             // 
             // gbCalendar
             // 
@@ -206,21 +217,73 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbCalendar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.gbCalendar.Controls.Add(this.btnCalendar);
+            this.gbCalendar.Controls.Add(this.lvDays);
             this.gbCalendar.Location = new System.Drawing.Point(499, 13);
             this.gbCalendar.Name = "gbCalendar";
-            this.gbCalendar.Size = new System.Drawing.Size(1405, 1052);
+            this.gbCalendar.Size = new System.Drawing.Size(1423, 1052);
             this.gbCalendar.TabIndex = 5;
             this.gbCalendar.TabStop = false;
             // 
-            // btnCalendar
+            // lvDays
             // 
-            this.btnCalendar.Location = new System.Drawing.Point(1268, 1023);
-            this.btnCalendar.Name = "btnCalendar";
-            this.btnCalendar.Size = new System.Drawing.Size(131, 23);
-            this.btnCalendar.TabIndex = 18;
-            this.btnCalendar.Text = "Guardar";
-            this.btnCalendar.UseVisualStyleBackColor = true;
+            this.lvDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lvDays.Location = new System.Drawing.Point(6, 21);
+            this.lvDays.Name = "lvDays";
+            this.lvDays.Size = new System.Drawing.Size(1411, 1025);
+            this.lvDays.TabIndex = 19;
+            this.lvDays.UseCompatibleStateImageBehavior = false;
+            // 
+            // lblEnd
+            // 
+            this.lblEnd.AutoSize = true;
+            this.lblEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEnd.Location = new System.Drawing.Point(8, 353);
+            this.lblEnd.Name = "lblEnd";
+            this.lblEnd.Size = new System.Drawing.Size(47, 29);
+            this.lblEnd.TabIndex = 22;
+            this.lblEnd.Text = "Fin";
+            this.lblEnd.Visible = false;
+            // 
+            // lblStart
+            // 
+            this.lblStart.AutoSize = true;
+            this.lblStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStart.Location = new System.Drawing.Point(8, 312);
+            this.lblStart.Name = "lblStart";
+            this.lblStart.Size = new System.Drawing.Size(70, 29);
+            this.lblStart.TabIndex = 23;
+            this.lblStart.Text = "Inicio";
+            this.lblStart.Visible = false;
+            // 
+            // dtpEnd
+            // 
+            this.dtpEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEnd.Location = new System.Drawing.Point(84, 353);
+            this.dtpEnd.Name = "dtpEnd";
+            this.dtpEnd.Size = new System.Drawing.Size(390, 34);
+            this.dtpEnd.TabIndex = 24;
+            this.dtpEnd.Visible = false;
+            // 
+            // dtpStart
+            // 
+            this.dtpStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpStart.Location = new System.Drawing.Point(84, 312);
+            this.dtpStart.Name = "dtpStart";
+            this.dtpStart.Size = new System.Drawing.Size(390, 34);
+            this.dtpStart.TabIndex = 25;
+            this.dtpStart.Visible = false;
+            // 
+            // btnSearchDates
+            // 
+            this.btnSearchDates.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchDates.Location = new System.Drawing.Point(343, 393);
+            this.btnSearchDates.Name = "btnSearchDates";
+            this.btnSearchDates.Size = new System.Drawing.Size(131, 39);
+            this.btnSearchDates.TabIndex = 26;
+            this.btnSearchDates.Text = "Ver";
+            this.btnSearchDates.UseVisualStyleBackColor = true;
+            this.btnSearchDates.Visible = false;
+            this.btnSearchDates.Click += new System.EventHandler(this.btnSearchDates_Click);
             // 
             // FrmStaff
             // 
@@ -266,7 +329,12 @@
         private System.Windows.Forms.BindingSource tStaffBindingSource;
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.CheckBox chkActive;
-        private System.Windows.Forms.Button btnCalendar;
+        private System.Windows.Forms.ListView lvDays;
+        private System.Windows.Forms.DateTimePicker dtpEnd;
+        private System.Windows.Forms.Label lblStart;
+        private System.Windows.Forms.Label lblEnd;
+        private System.Windows.Forms.DateTimePicker dtpStart;
+        private System.Windows.Forms.Button btnSearchDates;
 
     }
 }

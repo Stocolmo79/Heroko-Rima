@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 
 using Classes;
+using Classes.Classes;
 
 using HerokoRimaEntrada;
 
@@ -14,7 +15,13 @@ namespace HerokoRima.Forms
     {
         public tStaff staff;
 
-    
+        public enum SearchBy
+        {
+            Week = 1,
+            Month = 2,
+            Choose = 3
+        }
+
         public FrmMain()
         {
             this.InitializeComponent();
@@ -109,8 +116,13 @@ namespace HerokoRima.Forms
             using (var loginForm = new frmLogin { TopLevel = true, AutoScroll = true, Dock = DockStyle.Fill })
             {
                 loginForm.ShowDialog();
+
                 staff = loginForm.tStaff;
-                this.Text = "Empresa - Administración - Monitor " + (GetTime() > 0 ? "Tarde: " : "Dia: ")  +staff.Firstname;
+                if (staff != null)
+                {
+                     this.Text = "Empresa - Administración - Monitor " + (GetTime() > 0 ? "Tarde: " : "Dia: ")  +staff.Firstname; 
+                }
+              
             }
         }
 
@@ -129,6 +141,35 @@ namespace HerokoRima.Forms
             var t2 = Convert.ToDateTime("16:00:00");
             var i = DateTime.Compare(dt, t2);
             return i;
+        }
+
+        private void weekToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowStaffForm((int)SearchBy.Week);
+        }
+
+        private void ShowStaffForm(int param)
+        {
+            this.pnlMain.Controls.Clear();
+            var staffForm = new FrmStaff
+                                {
+                                    TopLevel = false,
+                                    AutoScroll = true,
+                                    Dock = DockStyle.Fill,
+                                    searchBy = param 
+                                };
+            this.pnlMain.Controls.Add(staffForm);
+            staffForm.Show();
+        }
+
+        private void monthToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowStaffForm((int)SearchBy.Month);
+        }
+
+        private void chooseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowStaffForm((int)SearchBy.Choose);
         }
     }
 

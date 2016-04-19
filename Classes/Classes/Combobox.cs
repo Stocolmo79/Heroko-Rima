@@ -46,7 +46,7 @@ namespace Classes.Classes
             staffList =  new List<tStaff>(Staff.GetStaffList()) ;
 
             //add new item to the comboBox (on index 0; on top):
-            AddItemsStaff(staffList, typeof(tStaff), "StaffId", "Firstname", "<Porfavor seleccione un profesor>");
+            AddItemsStaff(staffList, typeof(tStaff), "StaffId", "Firstname", "<Porfavor seleccione un monitor>");
 
             //bind the generic list:
             return staffList;

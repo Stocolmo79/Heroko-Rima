@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Common.CommandTrees;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.Linq;
@@ -220,7 +222,7 @@ namespace Classes.Wrapper
 
         #endregion
 
-        #region Price  
+        #region Price
 
         public tPrice GetPrice(int priceId)
         {
@@ -248,6 +250,54 @@ namespace Classes.Wrapper
         public tHourType GetHourType(int type)
         {
             return mmEntities.tHourTypes.FirstOrDefault(h => h.HourTypeId == type);
+        }
+
+        public List<tInCharge> GetStaffDays(long id)
+        {
+            //return (from c in mmEntities.tCards
+            //        join cu in mmEntities.tCardUsages on c.CardId equals cu.CardId
+            //        join p in mmEntities.tPrices on cu.tCard.TypeId equals p.PriceId select cu
+            //);
+            return (from ic in mmEntities.tInCharges
+                    join ht in mmEntities.tHourTypes on ic.HourType equals ht.HourTypeId
+                    join s in mmEntities.tStaffs on ic.StaffId equals s.StaffId
+                    where ic.StaffId == id
+                    select ic).ToList();
+        }
+
+        public List<tInCharge> GetdaysByParam(int param)
+        {
+
+
+            DateTime pastDate;
+            if (param == 1)
+            {
+                pastDate = DateTime.Today.AddDays(-7);
+                return (from ic in mmEntities.tInCharges
+                        join ht in mmEntities.tHourTypes on ic.HourType equals ht.HourTypeId
+                        join s in mmEntities.tStaffs on ic.StaffId equals s.StaffId
+                        where ic.Date > pastDate
+                        select ic).ToList();
+            }
+            pastDate = DateTime.Today.AddMonths(-1);
+            return (from ic in mmEntities.tInCharges
+                    join ht in mmEntities.tHourTypes on ic.HourType equals ht.HourTypeId
+                    join s in mmEntities.tStaffs on ic.StaffId equals s.StaffId
+                    where ic.Date > pastDate
+                    select ic).ToList();
+
+
+        }
+
+        public List<tInCharge> GetdaysBetweenDates(DateTime d1, DateTime d2)
+        {
+
+            return (from ic in mmEntities.tInCharges
+                    join ht in mmEntities.tHourTypes on ic.HourType equals ht.HourTypeId
+                    join s in mmEntities.tStaffs on ic.StaffId equals s.StaffId
+                    where ic.Date > d1 && ic.Date < d2
+                    select ic).ToList();
+
         }
     }
 }
