@@ -22,5 +22,6 @@ namespace Classes
         public Nullable<long> TotalAmount { get; set; }
     
         public virtual tOrder tOrder { get; set; }
+        public virtual tPrice tPrice { get; set; }
     }
 }

@@ -22,5 +22,6 @@ namespace Classes
         public Nullable<int> MemberType { get; set; }
     
         public virtual tMemberType tMemberType { get; set; }
+        public virtual tCard tCard { get; set; }
     }
 }

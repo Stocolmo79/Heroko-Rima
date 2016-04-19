@@ -68,10 +68,10 @@ namespace Members
                 this.tPrice = (tPrice)this.cmbCardType.SelectedItem;
                 this.tMember = new tMember();
                 this.tCard = new tCard();
-                
-                members.SaveMember(PopulateMember());
+                  cards.SaveCard(PopulateCard());
+                //members.SaveMember(PopulateMember());
 
-                cards.SaveCard(PopulateCard());
+              
                 ReturnValue = Convert.ToInt32(txtMemberId.Text);
                 this.Dispose();
                 }
@@ -86,6 +86,12 @@ namespace Members
             tCard.TypeId= this.tPrice.PriceId;
             tCard.Tickets = Convert.ToInt32(txtTickets.Text);
             tCard.Enabled = chkValid.Checked;
+            tMember.Firstname = this.txtMemberName.Text;
+            tMember.Lastname = this.txtLastNames.Text;
+            tMember.Cellphone = this.txtCellphone.Text;
+            tMember.CardId = tCard.CardId;
+            tMember.MemberType = Tag as int?;
+            tCard.tMembers.Add(tMember);
             return tCard;
         }
 

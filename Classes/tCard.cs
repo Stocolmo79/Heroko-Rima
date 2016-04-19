@@ -17,6 +17,7 @@ namespace Classes
         public tCard()
         {
             this.tCardUsages = new HashSet<tCardUsage>();
+            this.tMembers = new HashSet<tMember>();
         }
     
         public long CardId { get; set; }
@@ -29,5 +30,6 @@ namespace Classes
     
         public virtual ICollection<tCardUsage> tCardUsages { get; set; }
         public virtual tPrice tPrice { get; set; }
+        public virtual ICollection<tMember> tMembers { get; set; }
     }
 }

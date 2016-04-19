@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Classes;
 using Classes.Wrapper;
@@ -41,6 +42,10 @@ namespace HerokoRima.Classes
         public tStaff GetStaff(int text)
         {
             return Wrapper.GetStaff(text);
+        }
+        public List<tInCharge> GetStaffByDate(DateTime today)
+        {
+            return Wrapper.GetStaffByDate(today);
         }
     }
 }

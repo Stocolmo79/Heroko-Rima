@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Windows.Forms;
 
+using Cashier;
+
 using Classes;
 using Classes.Classes;
 
@@ -113,7 +115,7 @@ namespace HerokoRima.Forms
             {
                 return;
             }
-            using (var loginForm = new frmLogin { TopLevel = true, AutoScroll = true, Dock = DockStyle.Fill })
+            using (var loginForm = new frmLogin { TopLevel =     true, AutoScroll = true, Dock = DockStyle.Fill })
             {
                 loginForm.ShowDialog();
 
@@ -170,6 +172,29 @@ namespace HerokoRima.Forms
         private void chooseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowStaffForm((int)SearchBy.Choose);
+        }
+
+        private void closeCashToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialogResult = MessageBox.Show("Esta seguro que quiere cerrar la caja?", "Cerrar caja", MessageBoxButtons.YesNo);
+            switch (dialogResult)
+            {
+                case DialogResult.Yes:
+                    this.pnlMain.Controls.Clear();
+                   var endDayForm = new frmEndDay
+                                {
+                                    TopLevel = false,
+                                    AutoScroll = true,
+                                    Dock = DockStyle.Fill
+                                  
+                                };
+                   this.pnlMain.Controls.Add(endDayForm);
+                   endDayForm.Show();
+                    break;
+                case DialogResult.No:
+                    //do something else
+                    break;
+            }
         }
     }
 

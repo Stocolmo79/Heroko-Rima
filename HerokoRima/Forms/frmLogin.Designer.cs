@@ -59,7 +59,9 @@
             this.ClientSize = new System.Drawing.Size(441, 120);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.txtStaffId);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Ingresa monitor";
             this.ResumeLayout(false);
             this.PerformLayout();

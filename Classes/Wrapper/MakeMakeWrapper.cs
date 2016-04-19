@@ -220,6 +220,15 @@ namespace Classes.Wrapper
             return mmEntities.tOrderItems.FirstOrDefault(oi => oi.OrderId == input);
         }
 
+        public List< tOrderItem>GetOrderItemsByDate(DateTime dateTime)
+        {
+            return (from oi in mmEntities.tOrderItems
+                    join p in mmEntities.tPrices on oi.PriceId  equals p.PriceId where oi.OrderDate == dateTime
+                    select oi
+            ).ToList();
+     
+                return mmEntities.tOrderItems.Where(oi => oi.OrderDate == dateTime).ToList();
+        }
         #endregion
 
         #region Price
@@ -298,6 +307,21 @@ namespace Classes.Wrapper
                     where ic.Date > d1 && ic.Date < d2
                     select ic).ToList();
 
+        }
+        #region endOfDay
+
+        //public List<tInCharge> GetdaysBetweenDates(DateTime d1, DateTime d2)
+        //{
+        //}
+
+        #endregion
+
+        public List<tInCharge> GetStaffByDate(DateTime today)
+        {
+            return
+                (from ic in mmEntities.tInCharges join s in mmEntities.tStaffs on ic.StaffId equals s.StaffId where ic.Date == today select ic )
+                    .ToList();
+         
         }
     }
 }
