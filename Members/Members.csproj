@@ -55,6 +55,12 @@
     <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmAttachNewCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAttachNewCard.Designer.cs">
+      <DependentUpon>frmAttachNewCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAttachCard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmAttachNewCard.resx">
+      <DependentUpon>frmAttachNewCard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAttachCard.resx">
       <DependentUpon>frmAttachCard.cs</DependentUpon>
     </EmbeddedResource>

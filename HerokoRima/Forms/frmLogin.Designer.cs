@@ -51,6 +51,7 @@
             this.txtStaffId.Name = "txtStaffId";
             this.txtStaffId.Size = new System.Drawing.Size(416, 34);
             this.txtStaffId.TabIndex = 3;
+            this.txtStaffId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtStaffId_KeyPress);
             // 
             // frmLogin
             // 

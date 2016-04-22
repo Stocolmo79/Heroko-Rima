@@ -131,7 +131,11 @@ namespace Classes.Wrapper
             mmEntities.tCards.AddOrUpdate(tCard);
             mmEntities.SaveChanges();
         }
-
+        public void SaveNewCard(tCard tCard)
+        {
+            mmEntities.tCards.Add(tCard);
+            mmEntities.SaveChanges();
+        }
         public tCard GetCardInfo(long cardnumber)
         {
             return mmEntities.tCards.FirstOrDefault(s => s.CardId == cardnumber);
@@ -227,7 +231,7 @@ namespace Classes.Wrapper
                     select oi
             ).ToList();
      
-                return mmEntities.tOrderItems.Where(oi => oi.OrderDate == dateTime).ToList();
+               // return mmEntities.tOrderItems.Where(oi => oi.OrderDate == dateTime).ToList();
         }
         #endregion
 
@@ -322,6 +326,20 @@ namespace Classes.Wrapper
                 (from ic in mmEntities.tInCharges join s in mmEntities.tStaffs on ic.StaffId equals s.StaffId where ic.Date == today select ic )
                     .ToList();
          
+        }
+
+        public void MoveCardUsage(long oldCardId, long newCardId)
+        {
+            mmEntities.tCardUsages.Where(x => x.CardId == oldCardId).ToList().ForEach(a => a.CardId = newCardId);
+
+            mmEntities.SaveChanges();
+        }
+
+        public void MoveCardMember(long oldCardId, long newCardId)
+        {
+            mmEntities.tMembers.Where(x => x.CardId == oldCardId).ToList().ForEach(a => a.CardId = newCardId);
+
+            mmEntities.SaveChanges();
         }
     }
 }

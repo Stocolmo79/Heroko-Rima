@@ -2,7 +2,7 @@
 
 namespace Members
 {
-    partial class frmAttachCard
+    partial class frmAttachNewCard
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,6 @@ namespace Members
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAccept = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
-            this.btnNew = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtMemberId
@@ -56,7 +55,6 @@ namespace Members
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAccept
             // 
@@ -79,18 +77,7 @@ namespace Members
             this.lblName.Size = new System.Drawing.Size(0, 29);
             this.lblName.TabIndex = 3;
             // 
-            // btnNew
-            // 
-            this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNew.Location = new System.Drawing.Point(12, 53);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(135, 44);
-            this.btnNew.TabIndex = 4;
-            this.btnNew.Text = "Nueva";
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // frmAttachCard
+            // frmAttachNewCard
             // 
             this.AcceptButton = this.btnAccept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -98,12 +85,11 @@ namespace Members
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(441, 109);
             this.ControlBox = false;
-            this.Controls.Add(this.btnNew);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtMemberId);
-            this.Name = "frmAttachCard";
+            this.Name = "frmAttachNewCard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingresa número de tarjeta";
             this.ResumeLayout(false);
@@ -117,7 +103,6 @@ namespace Members
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Button btnNew;
     }
 }
 

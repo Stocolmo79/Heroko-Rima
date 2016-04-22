@@ -56,17 +56,12 @@ namespace HerokoRima.Forms
             var cashierForm = new frmCashier { TopLevel = false, AutoScroll = true, Dock = DockStyle.Fill };
             pnlMain.Controls.Add(cashierForm);
             cashierForm.Show();
-
         }
-
-
 
         private void nuevaClaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             LoadClasses();
         }
-
-
 
         private void LoadCashier()
         {

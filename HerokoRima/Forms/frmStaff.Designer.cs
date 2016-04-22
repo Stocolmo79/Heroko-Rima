@@ -32,6 +32,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.grEditStaff = new System.Windows.Forms.GroupBox();
+            this.btnSearchDates = new System.Windows.Forms.Button();
+            this.dtpStart = new System.Windows.Forms.DateTimePicker();
+            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.lblStart = new System.Windows.Forms.Label();
+            this.lblEnd = new System.Windows.Forms.Label();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -44,13 +49,8 @@
             this.cmbMonitores = new System.Windows.Forms.ComboBox();
             this.tStaffBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gbCalendar = new System.Windows.Forms.GroupBox();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.lvDays = new System.Windows.Forms.ListView();
-            this.lblEnd = new System.Windows.Forms.Label();
-            this.lblStart = new System.Windows.Forms.Label();
-            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
-            this.dtpStart = new System.Windows.Forms.DateTimePicker();
-            this.btnSearchDates = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.grEditStaff.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -102,6 +102,58 @@
             this.grEditStaff.Size = new System.Drawing.Size(480, 942);
             this.grEditStaff.TabIndex = 3;
             this.grEditStaff.TabStop = false;
+            // 
+            // btnSearchDates
+            // 
+            this.btnSearchDates.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearchDates.Location = new System.Drawing.Point(343, 393);
+            this.btnSearchDates.Name = "btnSearchDates";
+            this.btnSearchDates.Size = new System.Drawing.Size(131, 39);
+            this.btnSearchDates.TabIndex = 26;
+            this.btnSearchDates.Text = "Ver";
+            this.btnSearchDates.UseVisualStyleBackColor = true;
+            this.btnSearchDates.Visible = false;
+            this.btnSearchDates.Click += new System.EventHandler(this.btnSearchDates_Click);
+            // 
+            // dtpStart
+            // 
+            this.dtpStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpStart.Location = new System.Drawing.Point(84, 312);
+            this.dtpStart.Name = "dtpStart";
+            this.dtpStart.Size = new System.Drawing.Size(390, 34);
+            this.dtpStart.TabIndex = 25;
+            this.dtpStart.Visible = false;
+            // 
+            // dtpEnd
+            // 
+            this.dtpEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpEnd.Location = new System.Drawing.Point(84, 353);
+            this.dtpEnd.Name = "dtpEnd";
+            this.dtpEnd.Size = new System.Drawing.Size(390, 34);
+            this.dtpEnd.TabIndex = 24;
+            this.dtpEnd.Visible = false;
+            // 
+            // lblStart
+            // 
+            this.lblStart.AutoSize = true;
+            this.lblStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStart.Location = new System.Drawing.Point(8, 312);
+            this.lblStart.Name = "lblStart";
+            this.lblStart.Size = new System.Drawing.Size(70, 29);
+            this.lblStart.TabIndex = 23;
+            this.lblStart.Text = "Inicio";
+            this.lblStart.Visible = false;
+            // 
+            // lblEnd
+            // 
+            this.lblEnd.AutoSize = true;
+            this.lblEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEnd.Location = new System.Drawing.Point(8, 353);
+            this.lblEnd.Name = "lblEnd";
+            this.lblEnd.Size = new System.Drawing.Size(47, 29);
+            this.lblEnd.TabIndex = 22;
+            this.lblEnd.Text = "Fin";
+            this.lblEnd.Visible = false;
             // 
             // chkActive
             // 
@@ -226,64 +278,15 @@
             // 
             // lvDays
             // 
+            this.lvDays.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvDays.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lvDays.Location = new System.Drawing.Point(6, 21);
             this.lvDays.Name = "lvDays";
             this.lvDays.Size = new System.Drawing.Size(1411, 1025);
             this.lvDays.TabIndex = 19;
             this.lvDays.UseCompatibleStateImageBehavior = false;
-            // 
-            // lblEnd
-            // 
-            this.lblEnd.AutoSize = true;
-            this.lblEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnd.Location = new System.Drawing.Point(8, 353);
-            this.lblEnd.Name = "lblEnd";
-            this.lblEnd.Size = new System.Drawing.Size(47, 29);
-            this.lblEnd.TabIndex = 22;
-            this.lblEnd.Text = "Fin";
-            this.lblEnd.Visible = false;
-            // 
-            // lblStart
-            // 
-            this.lblStart.AutoSize = true;
-            this.lblStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStart.Location = new System.Drawing.Point(8, 312);
-            this.lblStart.Name = "lblStart";
-            this.lblStart.Size = new System.Drawing.Size(70, 29);
-            this.lblStart.TabIndex = 23;
-            this.lblStart.Text = "Inicio";
-            this.lblStart.Visible = false;
-            // 
-            // dtpEnd
-            // 
-            this.dtpEnd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpEnd.Location = new System.Drawing.Point(84, 353);
-            this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.Size = new System.Drawing.Size(390, 34);
-            this.dtpEnd.TabIndex = 24;
-            this.dtpEnd.Visible = false;
-            // 
-            // dtpStart
-            // 
-            this.dtpStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpStart.Location = new System.Drawing.Point(84, 312);
-            this.dtpStart.Name = "dtpStart";
-            this.dtpStart.Size = new System.Drawing.Size(390, 34);
-            this.dtpStart.TabIndex = 25;
-            this.dtpStart.Visible = false;
-            // 
-            // btnSearchDates
-            // 
-            this.btnSearchDates.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchDates.Location = new System.Drawing.Point(343, 393);
-            this.btnSearchDates.Name = "btnSearchDates";
-            this.btnSearchDates.Size = new System.Drawing.Size(131, 39);
-            this.btnSearchDates.TabIndex = 26;
-            this.btnSearchDates.Text = "Ver";
-            this.btnSearchDates.UseVisualStyleBackColor = true;
-            this.btnSearchDates.Visible = false;
-            this.btnSearchDates.Click += new System.EventHandler(this.btnSearchDates_Click);
             // 
             // FrmStaff
             // 

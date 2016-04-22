@@ -40,6 +40,10 @@ namespace HerokoRima
             this.btnTicketsAdult = new System.Windows.Forms.Button();
             this.btnTicketsStudent = new System.Windows.Forms.Button();
             this.gbButtons = new System.Windows.Forms.GroupBox();
+            this.lblCardId = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.lblCardIdLabel = new System.Windows.Forms.Label();
+            this.lblNameLabel = new System.Windows.Forms.Label();
             this.txtDiscount = new System.Windows.Forms.TextBox();
             this.lblDiscount = new System.Windows.Forms.Label();
             this.lblTicketType = new System.Windows.Forms.Label();
@@ -49,10 +53,6 @@ namespace HerokoRima
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAccept = new System.Windows.Forms.Button();
             this.lvViewPurchase = new System.Windows.Forms.ListView();
-            this.lblNameLabel = new System.Windows.Forms.Label();
-            this.lblCardIdLabel = new System.Windows.Forms.Label();
-            this.lblCardId = new System.Windows.Forms.Label();
-            this.lblName = new System.Windows.Forms.Label();
             this.gbButtons.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -146,6 +146,54 @@ namespace HerokoRima
             this.gbButtons.TabIndex = 6;
             this.gbButtons.TabStop = false;
             // 
+            // lblCardId
+            // 
+            this.lblCardId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCardId.AutoSize = true;
+            this.lblCardId.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCardId.Location = new System.Drawing.Point(143, 386);
+            this.lblCardId.Name = "lblCardId";
+            this.lblCardId.Size = new System.Drawing.Size(131, 29);
+            this.lblCardId.TabIndex = 12;
+            this.lblCardId.Text = "Nro tarjeta:";
+            this.lblCardId.Visible = false;
+            // 
+            // lblName
+            // 
+            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(143, 357);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(107, 29);
+            this.lblName.TabIndex = 11;
+            this.lblName.Text = "Nombre:";
+            this.lblName.Visible = false;
+            // 
+            // lblCardIdLabel
+            // 
+            this.lblCardIdLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCardIdLabel.AutoSize = true;
+            this.lblCardIdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCardIdLabel.Location = new System.Drawing.Point(6, 386);
+            this.lblCardIdLabel.Name = "lblCardIdLabel";
+            this.lblCardIdLabel.Size = new System.Drawing.Size(131, 29);
+            this.lblCardIdLabel.TabIndex = 10;
+            this.lblCardIdLabel.Text = "Nro tarjeta:";
+            this.lblCardIdLabel.Visible = false;
+            // 
+            // lblNameLabel
+            // 
+            this.lblNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblNameLabel.AutoSize = true;
+            this.lblNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameLabel.Location = new System.Drawing.Point(6, 357);
+            this.lblNameLabel.Name = "lblNameLabel";
+            this.lblNameLabel.Size = new System.Drawing.Size(107, 29);
+            this.lblNameLabel.TabIndex = 9;
+            this.lblNameLabel.Text = "Nombre:";
+            this.lblNameLabel.Visible = false;
+            // 
             // txtDiscount
             // 
             this.txtDiscount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -154,6 +202,7 @@ namespace HerokoRima
             this.txtDiscount.Name = "txtDiscount";
             this.txtDiscount.Size = new System.Drawing.Size(100, 34);
             this.txtDiscount.TabIndex = 8;
+            this.txtDiscount.Visible = false;
             // 
             // lblDiscount
             // 
@@ -165,6 +214,7 @@ namespace HerokoRima
             this.lblDiscount.Size = new System.Drawing.Size(128, 29);
             this.lblDiscount.TabIndex = 2;
             this.lblDiscount.Text = "Descuento";
+            this.lblDiscount.Visible = false;
             // 
             // lblTicketType
             // 
@@ -192,11 +242,11 @@ namespace HerokoRima
             this.lblTotalDescription.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalDescription.AutoSize = true;
             this.lblTotalDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalDescription.Location = new System.Drawing.Point(1059, 847);
+            this.lblTotalDescription.Location = new System.Drawing.Point(1059, 850);
             this.lblTotalDescription.Name = "lblTotalDescription";
-            this.lblTotalDescription.Size = new System.Drawing.Size(81, 36);
+            this.lblTotalDescription.Size = new System.Drawing.Size(187, 36);
             this.lblTotalDescription.TabIndex = 0;
-            this.lblTotalDescription.Text = "Total";
+            this.lblTotalDescription.Text = "Total compra";
             this.lblTotalDescription.Click += new System.EventHandler(this.lblTotalDescription_Click);
             // 
             // lblTotalSum
@@ -204,7 +254,7 @@ namespace HerokoRima
             this.lblTotalSum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalSum.AutoSize = true;
             this.lblTotalSum.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalSum.Location = new System.Drawing.Point(1176, 847);
+            this.lblTotalSum.Location = new System.Drawing.Point(1255, 850);
             this.lblTotalSum.Name = "lblTotalSum";
             this.lblTotalSum.Size = new System.Drawing.Size(0, 46);
             this.lblTotalSum.TabIndex = 1;
@@ -254,54 +304,6 @@ namespace HerokoRima
             this.lvViewPurchase.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.lvViewPurchase_DrawColumnHeader);
             this.lvViewPurchase.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.lvViewPurchase_DrawSubItem);
             this.lvViewPurchase.DoubleClick += new System.EventHandler(this.lvViewPurchase_DoubleClick);
-            // 
-            // lblNameLabel
-            // 
-            this.lblNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblNameLabel.AutoSize = true;
-            this.lblNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNameLabel.Location = new System.Drawing.Point(6, 357);
-            this.lblNameLabel.Name = "lblNameLabel";
-            this.lblNameLabel.Size = new System.Drawing.Size(107, 29);
-            this.lblNameLabel.TabIndex = 9;
-            this.lblNameLabel.Text = "Nombre:";
-            this.lblNameLabel.Visible = false;
-            // 
-            // lblCardIdLabel
-            // 
-            this.lblCardIdLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCardIdLabel.AutoSize = true;
-            this.lblCardIdLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCardIdLabel.Location = new System.Drawing.Point(6, 386);
-            this.lblCardIdLabel.Name = "lblCardIdLabel";
-            this.lblCardIdLabel.Size = new System.Drawing.Size(131, 29);
-            this.lblCardIdLabel.TabIndex = 10;
-            this.lblCardIdLabel.Text = "Nro tarjeta:";
-            this.lblCardIdLabel.Visible = false;
-            // 
-            // lblCardId
-            // 
-            this.lblCardId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCardId.AutoSize = true;
-            this.lblCardId.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCardId.Location = new System.Drawing.Point(143, 386);
-            this.lblCardId.Name = "lblCardId";
-            this.lblCardId.Size = new System.Drawing.Size(131, 29);
-            this.lblCardId.TabIndex = 12;
-            this.lblCardId.Text = "Nro tarjeta:";
-            this.lblCardId.Visible = false;
-            // 
-            // lblName
-            // 
-            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblName.AutoSize = true;
-            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblName.Location = new System.Drawing.Point(143, 357);
-            this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(107, 29);
-            this.lblName.TabIndex = 11;
-            this.lblName.Text = "Nombre:";
-            this.lblName.Visible = false;
             // 
             // frmCashier
             // 

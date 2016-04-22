@@ -36,7 +36,7 @@ namespace Main
         private void btnAdmin_Click(object sender, EventArgs e)
         {
             var adminMain = new FrmMain();
-            adminMain.ShowDialog();
+            adminMain.Show();
 
 
         }
@@ -44,7 +44,7 @@ namespace Main
         private void btnEntrance_Click(object sender, EventArgs e)
         {
             var entranceMain = new frmEntrance();
-            entranceMain.ShowDialog();
+            entranceMain.Show();
         }
     }
 }

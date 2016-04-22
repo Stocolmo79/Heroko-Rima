@@ -138,7 +138,7 @@ namespace HerokoRima.Forms
             lvDays.Clear();
             lvDays.View = View.Details;
             lvDays.Columns.Add("Fecha");
-            lvDays.Columns.Add("Fecha");
+            lvDays.Columns.Add("Hora");
             if (staffDays.Any())
             {
                 foreach (var row in staffDays)

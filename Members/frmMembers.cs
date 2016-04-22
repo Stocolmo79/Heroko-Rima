@@ -41,12 +41,15 @@ namespace Members
         private void btnSearch_Click(object sender, EventArgs e)
         {
             SearchClick();
+          
+
         }
 
         private void SearchClick()
         {
             ClearScreen();
             SearchMember(txtInput.Text);
+            btnNewCard.Visible = true;
         }
 
         private void ClearScreen()
@@ -149,7 +152,7 @@ namespace Members
             txtMemberId.ForeColor = Color.Black;
             txtTickets.BackColor = Color.White;
             txtTickets.ForeColor = Color.Black;
-
+      
         }
 
         private void loadComboBox()
@@ -247,6 +250,17 @@ namespace Members
             {
                 txtCellphone.Text = "Numero no valido";
             }
+        }
+
+        private void btnNewCard_Click(object sender, EventArgs e)
+        {
+            using (var newCardForm = new frmAttachNewCard { TopLevel = true, AutoScroll = true, Dock = DockStyle.Fill, tag = Convert.ToInt32(txtInput.Text)})
+            {
+                newCardForm.ShowDialog();
+
+            
+
+            }   
         }
     }
 }

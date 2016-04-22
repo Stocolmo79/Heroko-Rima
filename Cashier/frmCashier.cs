@@ -77,7 +77,7 @@ namespace HerokoRima
         {
             SetButtons(true, false, false, false);
             AttachToCard(Types.MonthStudent);
-            AddPurchaseText(tPrices.FirstOrDefault(s => s.PriceId == (int)Types.MonthStudent));
+            
         }
 
 
@@ -87,7 +87,7 @@ namespace HerokoRima
 
             SetButtons(false, true, false, false);
             AttachToCard(Types.MonthAdult);
-            AddPurchaseText(tPrices.FirstOrDefault(s => s.PriceId == (int)Types.MonthAdult));
+           
 
         }
 
@@ -95,7 +95,7 @@ namespace HerokoRima
         {
             SetButtons(false, false, true, false);
             AttachToCard(Types.SixTicketsStudent);
-            AddPurchaseText(tPrices.FirstOrDefault(s => s.PriceId == (int)Types.SixTicketsStudent));
+          
 
 
         }
@@ -104,7 +104,7 @@ namespace HerokoRima
         {
             SetButtons(false, false, false, true);
             AttachToCard(Types.SixTicketsAdult);
-            AddPurchaseText(tPrices.FirstOrDefault(s => s.PriceId == (int)Types.SixTicketsAdult));
+        
 
 
         }
@@ -123,6 +123,7 @@ namespace HerokoRima
                     case DialogResult.OK:
                         value = attachCardForm.ReturnValue;
                         SaveOrder(types, value);
+                        AddPurchaseText(tPrices.FirstOrDefault(s => s.PriceId == (int)types));
                         break;
                     default:
 
@@ -210,7 +211,6 @@ namespace HerokoRima
                 {
                     foreach (var item in tOrder.tOrderItems.Where(w => w.PriceId == p.PriceId))
                     {
-
                         item.Quantity += 1;
                         item.TotalAmount = item.Quantity * p.PriceValue;
                     }
@@ -224,12 +224,8 @@ namespace HerokoRima
                     tOrderItem.PriceId = p.PriceId;
                     tOrderItem.Quantity = 1;
                     tOrderItem.TotalAmount = tOrderItem.Quantity * p.PriceValue;
-
                     tOrderItem.OrderItemId = 0;
-
-
                     tOrderItem.OrderDate = DateTime.Now;
-
                     tempOIs.Add(tOrderItem);
                 }
 

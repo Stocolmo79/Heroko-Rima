@@ -33,6 +33,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.gbMember = new System.Windows.Forms.GroupBox();
+            this.btnNewCard = new System.Windows.Forms.Button();
             this.txtMemberType = new System.Windows.Forms.TextBox();
             this.lblMemberType = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -106,6 +107,7 @@
             // 
             this.gbMember.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbMember.Controls.Add(this.btnNewCard);
             this.gbMember.Controls.Add(this.txtMemberType);
             this.gbMember.Controls.Add(this.lblMemberType);
             this.gbMember.Controls.Add(this.label7);
@@ -132,6 +134,18 @@
             this.gbMember.TabIndex = 2;
             this.gbMember.TabStop = false;
             this.gbMember.Text = "Miembro";
+            // 
+            // btnNewCard
+            // 
+            this.btnNewCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewCard.Location = new System.Drawing.Point(11, 705);
+            this.btnNewCard.Name = "btnNewCard";
+            this.btnNewCard.Size = new System.Drawing.Size(214, 39);
+            this.btnNewCard.TabIndex = 24;
+            this.btnNewCard.Text = "Nueva tarjeta";
+            this.btnNewCard.UseVisualStyleBackColor = true;
+            this.btnNewCard.Visible = false;
+            this.btnNewCard.Click += new System.EventHandler(this.btnNewCard_Click);
             // 
             // txtMemberType
             // 
@@ -407,5 +421,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtMemberType;
         private System.Windows.Forms.Label lblMemberType;
+        private System.Windows.Forms.Button btnNewCard;
     }
 }
