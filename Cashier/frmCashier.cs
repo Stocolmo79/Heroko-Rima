@@ -128,6 +128,7 @@ namespace HerokoRima
                     default:
 
                         value = attachCardForm.ReturnValue;
+                        AddPurchaseText(tPrices.FirstOrDefault(s => s.PriceId == (int)types));
                         SaveOrder(types, value);
                         break;
 

@@ -341,5 +341,18 @@ namespace Classes.Wrapper
 
             mmEntities.SaveChanges();
         }
+
+        public void SavePrice(tPrice price)
+        {
+          mmEntities.tPrices.AddOrUpdate(price);
+          mmEntities.SaveChanges();
+        }
+
+        public void DeltePrice(tPrice price)
+        {
+            mmEntities.tPrices.Remove(price);
+            mmEntities.SaveChanges();
+
+        }
     }
 }
